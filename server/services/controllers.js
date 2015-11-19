@@ -4,14 +4,14 @@ var objectify = require('./../classes/controllerClasses');
 
 module.exports = {
   user: {
-
+    // Returns all users from DB
     get: function () {
       return database.Users.findAll()
       .then(function (users) {
         return users;
       });
     },
-
+    // Creates new FB user in db
     post: function (data) {
       return database.Users.create({
         username: data.displayName,
