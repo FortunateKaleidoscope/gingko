@@ -3,7 +3,7 @@
 
 module.exports = {
 
-  Meal : function(body) {
+  Meal : function (body) {
     //this is just trying an object constructor that only allows certain data
     //and will throw an error if the data is not in this style.
     //With more time to be implemented across the board.
@@ -43,13 +43,13 @@ module.exports = {
     return obj;
   },
 
-  Join : function(body) {
+  Join : function (body) {
     this.firstName = body.firstName;
     this.lastName = body.lastName;
     this.description = body.description;
   },
 
-  AddUser: function(body) {
+  AddUser: function (body) {
     this.firstName = body.firstName;
     this.lastName = body.lastName;
     this.facebookId = body.facebookId;

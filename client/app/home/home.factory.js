@@ -1,5 +1,4 @@
-
-(function() {
+(function () {
   'use strict';
 
   angular.module('app')
@@ -7,12 +6,10 @@
 
   homeFactory.$inject = ['$http'];
 
-  function homeFactory($http) {
+  function homeFactory ($http) {
     var services = {
-      
       getMeals : getMeals,
       getEvent : getEvent
-
     };
 
     return services;
@@ -20,7 +17,7 @@
     function getEvent () {
       return $http({
       method: 'GET',
-      //hard coded in number(id as the meal id) for the minute need to work out how to get this id 
+      //hard coded in number(id as the meal id) for the minute need to work out how to get this id
       //number to be kept with the infor displayed on the events page
       //so that when it is clicked on to show the whole event you know what event to query from the db
       //this also wants moking to the meal view
@@ -40,9 +37,5 @@
         return response.data;
       });
     }
-
-
   }
-
 })();
-

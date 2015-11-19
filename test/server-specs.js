@@ -2,13 +2,13 @@ var Promise = require('bluebird');
 var request = require('supertest');
 var expect = require('chai').expect;
 
-describe("Meals and user insertion to database successful", function() {
+describe("Meals and user insertion to database successful", function () {
 
-  it("Should insert new user to user database", function(done) {
+  it("Should insert new user to user database", function (done) {
     done();
   });
 
-  it('Should retrieve new user from database', function(done){
+  it('Should retrieve new user from database', function (done) {
     done();
   });
 
@@ -16,13 +16,12 @@ describe("Meals and user insertion to database successful", function() {
     done();
   });
 
-  it('Should list out all of the meals associated to the user', function(done){
+  it('Should list out all of the meals associated to the user', function (done) {
     done();
   });
 
-  it('should list out all of the users associated to a meal', function(done){
+  it('should list out all of the users associated to a meal', function (done) {
     done();
   });
-
 
 });

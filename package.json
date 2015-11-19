@@ -53,6 +53,7 @@
     "grunt-docco": "^0.4.0",
     "grunt-nodemon": "^0.4.0",
     "nodemon": "^1.8.1",
+    "pre-commit": "^1.1.2",
     "supertest": "^1.1.0"
   }
 }

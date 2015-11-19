@@ -14,5 +14,4 @@ module.exports = {
     this.address = returnFromDb.meal.Restaurant.address;
 
   }
-  
 };

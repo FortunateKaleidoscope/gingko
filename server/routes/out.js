@@ -8,7 +8,7 @@ var Promise = require('bluebird');
 
 var auth = require('../services/auth.js');
 
-var request_yelp = function(set_parameters, callback) {
+var request_yelp = function (set_parameters, callback) {
   // set_parameters: object with params to search
   // callback: callback(error, response, body)
   var httpMethod = 'GET';
@@ -23,7 +23,7 @@ var request_yelp = function(set_parameters, callback) {
     oauth_consumer_key : auth.oauth.consumer_key,
     oauth_token : auth.oauth.token,
     oauth_nonce : n(),
-    oauth_timestamp : n().toString().substr(0,10),
+    oauth_timestamp : n().toString().substr(0, 10),
     oauth_signature_method : 'HMAC-SHA1',
     oauth_version : '1.0'
   };
@@ -39,18 +39,18 @@ var request_yelp = function(set_parameters, callback) {
   var signature = oauthSignature.generate(httpMethod, url, parameters, consumerSecret, tokenSecret, { encodeSignature: false});
   parameters.oauth_signature = signature;
   var paramURL = qs.stringify(parameters);
-  var apiURL = url+'?'+paramURL;
+  var apiURL = url + '?' + paramURL;
 
-  request(apiURL, function(error, response, body){
+  request(apiURL, function (error, response, body) {
     return callback(error, response, body);
   });
 
 };
 
-module.exports = function(db, passport, isLoggedIn) {
+module.exports = function (db, passport, isLoggedIn) {
 
   var router = express.Router();
-  
+
   // localhost:3000/api/out/login
   router.get('/login', passport.authenticate('facebook', { scope: 'email' }));
 
@@ -64,14 +64,14 @@ module.exports = function(db, passport, isLoggedIn) {
     res.redirect('/');
   });
 
-  router.get('/yelp', function(req, res) {
+  router.get('/yelp', function (req, res) {
     // set Yelp Search API params
     var params = {
       term: req.query.term,
       limit: "10"
     };
 
-    request_yelp(params, function(error, response, body) {
+    request_yelp(params, function (error, response, body) {
       if (error) {
         console.log("Error hitting Yelp's Search API: ");
       } else {
@@ -80,7 +80,7 @@ module.exports = function(db, passport, isLoggedIn) {
     });
   });
 
-  router.get('/', function(req, res) {
+  router.get('/', function (req, res) {
     //query google for google maps stuff
   });
 

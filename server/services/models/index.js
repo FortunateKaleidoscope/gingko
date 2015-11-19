@@ -1,18 +1,15 @@
 //This file would be used to use sequelize on heroku
-
 if (!global.hasOwnProperty('db')) {
-  var Sequelize = require('sequelize')
-    , sequelize = null
+  var Sequelize = require('sequelize');
+  var sequelize = null;
 
-
-  //figure out database color--
   if (process.env.DATABASE_URL) {
     // the application is executed on Heroku ... use the postgres database
     sequelize = new Sequelize(process.env.DATABASE_URL, {
-      dialect:  'postgres',
+      dialect: 'postgres',
       protocol: 'postgres',
-      logging:  true //false
-    })
+      logging: true //false
+    });
   } else {
     // the application is executed on the local machine ... use mysql
     sequelize = new Sequelize("tablesurfer", "admin", "admin", {
@@ -21,14 +18,12 @@ if (!global.hasOwnProperty('db')) {
     });
   }
 
-
   var Users = sequelize.define("Users", {
   //here we will have to figure out the data from facebook on authentication
     username: {
       type: Sequelize.STRING,
       allowNull: false
     }
-    
   });
 
   var Meals = sequelize.define("Meals", {
@@ -52,7 +47,6 @@ if (!global.hasOwnProperty('db')) {
   //create Users Users foreign key for meal
   Users.hasOne(Meals);
   Meals.belongsTo(Users);
-
 
   var Restaurants = sequelize.define("Restaurants", {
     name: {
@@ -116,9 +110,8 @@ if (!global.hasOwnProperty('db')) {
     Meals: Meals,
     Restaurants: Restaurants,
     Attendees: Attendees
-
     // add your other models here
-  }
+  };
 }
 
-module.exports = global.db
+module.exports = global.db;

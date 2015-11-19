@@ -6,10 +6,8 @@
 
   UserCtrl.$inject = [];
 
-  function UserCtrl() {
+  function UserCtrl () {
     var self = this;
-
-
   }
 
 })();

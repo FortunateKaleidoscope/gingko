@@ -1,5 +1,5 @@
 // Placeholder for any sort of search factory
-(function() {
+(function () {
   'use strict';
 
   angular.module('app')
@@ -7,7 +7,7 @@
 
   searchFactory.$inject = ['$http', '$window'];
 
-  function searchFactory($http, $window) {
+  function searchFactory ($http, $window) {
     var services = {
 
       activate : activate,
@@ -22,7 +22,6 @@
     }
 
     function postMeal (data) {
-      console.log(data);
       return $http({
         method: 'POST',
         url: '/api/in/meals',
@@ -34,6 +33,4 @@
       });
     }
   }
-
-
 })();

@@ -10,8 +10,12 @@ module.exports = function (passport) {
   });
 
   passport.deserializeUser(function (user, done) {
-    database.Users.find({ where: {id: user.id} })
-      .then(function(user) {
+    database.Users.find({
+      where: {
+        id: user.id
+      }
+    })
+      .then(function (user) {
         done(err, user);
       });
   });
@@ -25,8 +29,8 @@ module.exports = function (passport) {
   }, function (token, refreshToken, profile, done) {
     console.log(profile);
     process.nextTick(function () {
-      database.Users.findOrCreate({ where:
-        {
+      database.Users.findOrCreate({
+        where: {
           facebookId: profile.id,
           username: profile.displayName
         }
