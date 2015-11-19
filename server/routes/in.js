@@ -85,7 +85,8 @@ module.exports = function (dbController, passport, isLoggedIn) {
 
   // params usage
   router.get('/user/:id', function (req, res) {
-
+    //TODO: find user
+    res.send('OK');
   });
 
 
