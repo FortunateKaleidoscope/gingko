@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // using 'use strict' will prevent variable declaration errors
   'use strict';
 
@@ -26,7 +26,7 @@
       .state('user', {
         url: '/user',
         templateUrl: 'app/user/user.html',
-        controller: 'UserCtrl',
+        controller: 'UserCtrl'
       })
       // When you're linked to a unique id in a meal, we render the page
       .state('meal', {

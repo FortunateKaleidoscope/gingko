@@ -17,7 +17,7 @@ var Users = db.define("Users", {
     type: Sequelize.STRING,
     allowNull: true
   }
-  
+
 });
 
 var Meals = db.define("Meals", {
@@ -84,8 +84,8 @@ Restaurants.belongsTo(Genres);
 var Attendees = db.define("Attendees", {
 });
 
-Users.belongsToMany(Meals, {through: 'Attendees'});
-Meals.belongsToMany(Users, {through: 'Attendees'});
+Users.belongsToMany(Meals, { through: 'Attendees' });
+Meals.belongsToMany(Users, { through: 'Attendees' });
 
 
 
