@@ -26,7 +26,7 @@
 
       return $http({
         url: path + '?term=' + query,
-        method: 'GET',
+        method: 'GET'
       }).
         then(function (response) {
           self.status = response.status;
@@ -55,7 +55,7 @@
         })
         .then(function (response) {
           return self.data;
-        })
+        });
 
     };
 

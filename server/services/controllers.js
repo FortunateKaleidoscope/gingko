@@ -64,8 +64,8 @@ module.exports = {
       })
         .then(function (meals) {
           //use the bluebird promise functions
-          return Promise.map(meals, function(meal) {
-            return meal.getUsers().then(function(result) {
+          return Promise.map(meals, function (meal) {
+            return meal.getUsers().then(function (result) {
               var mealObj = {
                 meal: meal,
                 attendees: result
@@ -73,7 +73,7 @@ module.exports = {
               return mealObj;
             });
           });
-        }).then(function(meals) {
+        }).then(function (meals) {
           //make an object to send back
           var obj = [];
           meals.map(function (meal, i) {
