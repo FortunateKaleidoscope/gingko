@@ -50,9 +50,11 @@ var request_yelp = function(set_parameters, callback) {
 module.exports = function(db, passport, isLoggedIn) {
 
   var router = express.Router();
-
+  
+  // localhost:3000/api/out/login
   router.get('/login', passport.authenticate('facebook', { scope: 'email' }));
 
+  // localhost:3000/api/out/login/callback?dfaf
   router.get('/login/callback', passport.authenticate('facebook', { failureRedirect: '/' }), function (req, res) {
     res.redirect('/?' + JSON.stringify(req.user.dataValues.username));
   });

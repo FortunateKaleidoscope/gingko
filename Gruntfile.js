@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.JSON'),
     concat: {
       src: [],
-      dest: 
+      dest:
     },
     mochaTest: {
       test: {
