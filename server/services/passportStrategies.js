@@ -27,7 +27,7 @@ module.exports = function (passport) {
     callbackURL: configAuth.facebookAuth.callbackURL
 
   }, function (token, refreshToken, profile, done) {
-    console.log(profile);
+
     process.nextTick(function () {
       database.Users.findOrCreate({
         where: {
@@ -43,6 +43,7 @@ module.exports = function (passport) {
         done(err);
       });
     });
+
   }));
 
 };
