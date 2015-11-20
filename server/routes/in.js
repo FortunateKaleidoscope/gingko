@@ -46,11 +46,12 @@ module.exports = function (dbController, passport, isLoggedIn) {
     .then(function (data) {
       res.status(200).send(data);
     })
-    .catch(function (err) {
-      console.log('err posting meal data', err);
-      res.status(500).send(err);
-    });
-
+    // .catch(function (err) {
+    //   console.log('err posting meal data', err);
+    //   res.status(500).send(err);
+    // });
+    // console.log(req)
+    // res.send("OK");
   });
 
   router.post('/meal/join', function (req, res) {
