@@ -14,14 +14,15 @@
 
     return services;
 
-    function getEvent () {
+    function getEvent (id) {
+      console.log("id", id);
       return $http({
       method: 'GET',
       //hard coded in number(id as the meal id) for the minute need to work out how to get this id
       //number to be kept with the infor displayed on the events page
       //so that when it is clicked on to show the whole event you know what event to query from the db
       //this also wants moking to the meal view
-      url: '/api/in/meals/1'
+      url: '/api/in/meals/' + id
       })
       .then(function (response) {
         return response.data;

@@ -16,14 +16,15 @@
         self.events = data;
       });
     };
-    self.routeToEvent = function () {
-      homeFactory.getEvent()
+    self.routeToEvent = function (id) {
+      homeFactory.getEvent(id)
       .then(function (data) {
         console.log('hello');
         //this badly written function is to manually routoe to the meail of id one(written in a last minute panic to try and get it working)
         //it would be better to change the viw using ui-sref? in the view and then from
         //that controller call the function to get the correct data from the database!
-        $window.location.href = "/#/meals/1";
+        $window.location.href = "/#/meals/" + id;
+
       });
     };
 
