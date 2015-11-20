@@ -72,16 +72,6 @@ var Restaurants = db.define("Restaurants", {
 Restaurants.hasOne(Meals);
 Meals.belongsTo(Restaurants);
 
-var Genres = db.define("Genres", {
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
-});
-
-Genres.hasOne(Restaurants);
-Restaurants.belongsTo(Genres);
-
 var Attendees = db.define("Attendees", {
 });
 
