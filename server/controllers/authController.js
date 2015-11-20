@@ -1,4 +1,3 @@
-var passport = require('passport');
 module.exports = {
   logout: function (req, res) {
     res.send("OK");
