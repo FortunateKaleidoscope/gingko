@@ -1,4 +1,3 @@
-var express = require('express');
 var usersController = require('../controllers/usersController');
 var mealsController = require('../controllers/mealsController');
 
