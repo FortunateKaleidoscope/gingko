@@ -10,7 +10,6 @@ module.exports = function (app, express) {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
   app.use(express.static(path.join(__dirname, '/../client')));
-  
 
   // Uses sessions
   app.use(session({
@@ -30,7 +29,7 @@ module.exports = function (app, express) {
 
   app.use('/api', apiRoute);
   require('../routes/apiRoute')(apiRoute);
-  
+
   app.use('/auth', authRoute);
   require('../routes/authRoute')(authRoute);
 
