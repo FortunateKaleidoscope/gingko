@@ -32,14 +32,6 @@ module.exports = {
       return false;
     }
 
-    // if (typeof body.lastName === "string" && body.firstName.length >0) {
-    //   obj.lastName = body.lastName;
-    // } else {
-    //   return false;
-    // }
-
-
-
     return obj;
   },
 
