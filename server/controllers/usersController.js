@@ -1,7 +1,7 @@
-var helper = require('../lib/usersHelper');
+var users = require('../lib/usersHelper');
 module.exports = {
   getUserById: function (req, res) {
-    helper.getUserById(req.body).then(function (user) {
+    users.getUserById(req.body).then(function (user) {
       res.json(user);
     })
     .catch(function (err) {
@@ -9,7 +9,7 @@ module.exports = {
     });
   },
   getUsers: function (req, res) {
-    helper.getUsers().then(function (users) {
+    users.getUsers().then(function (users) {
       res.json(users);
     })
     .catch(function (err) {
