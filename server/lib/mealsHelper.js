@@ -39,7 +39,7 @@ module.exports = {
     })
     .then(function (meals) {
       //return all meals with their user and restaurant data
-      return Promise.map(meals, function(meal) {
+      return Promise.map(meals, function (meal) {
         return buildMeal(meal);
       });
     })
