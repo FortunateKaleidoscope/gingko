@@ -6,6 +6,7 @@ var dbController = require('./services/controllers');
 var path = require('path');
 var passport = require('passport');
 var facebookStrategy = require('./services/passportStrategies');
+var bodyParser = require('body-parser');
 
 // require the routes file
 var inRouter = require('./routes/in');
@@ -23,22 +24,21 @@ facebookStrategy(passport);
  *  		- WHY USE SAME FUCKING VARIABLE NAME?!
  */
 // Spits out premade express.Router()
-inRoutes = inRouter(dbController, passport, isLoggedIn);
-outRoutes = outRouter(dbController, passport, isLoggedIn);
+var inRoutes = inRouter(dbController, passport, isLoggedIn);
+var outRoutes = outRouter(dbController, passport, isLoggedIn);
 
-var bodyParser = require('body-parser');
 
 var app = express();
 
 app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-app.use('/api/in', inRoutes);
 //these need to be above the route where they are used I think?
 //http://stackoverflow.com/questions/29600759/passport-initialize-middleware-not-in-use-for-express-4-10-for-custom-callback
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/api/in', inRoutes);
 app.use('/api/out', outRoutes);
 
 app.use(express.static(path.join(__dirname, '/../client')));

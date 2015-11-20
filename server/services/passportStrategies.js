@@ -14,10 +14,11 @@ module.exports = function (passport) {
       where: {
         id: user.id
       }
-    })
-      .then(function (user) {
-        done(err, user);
-      });
+    }).then(function (userObj) {
+      done(null, userObj);
+    }).catch(function (err) {
+      console.log(err);
+    });
   });
 
   passport.use(new FacebookStrategy({
