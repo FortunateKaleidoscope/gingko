@@ -1,6 +1,5 @@
 var database = require('./db');
 var Promise = require('bluebird');
-var objectify = require('./../classes/controllerClasses');
 
 module.exports = {
   user: {
