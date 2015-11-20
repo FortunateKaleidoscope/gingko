@@ -14,6 +14,7 @@ Icon
 .Trashes
 node_modules/
 server/services/authKeys.js
+server/config/authKeys.js
 bower_components/
 client/lib
 
