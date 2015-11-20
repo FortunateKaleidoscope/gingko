@@ -2,7 +2,7 @@ var Promise = require('bluebird');
 var request = require('supertest');
 var expect = require('chai').expect;
 
-describe("Meals and user insertion to database successful", function () {
+xdescribe("Meals and user insertion to database successful", function () {
 
   it("Should insert new user to user database", function (done) {
     done();

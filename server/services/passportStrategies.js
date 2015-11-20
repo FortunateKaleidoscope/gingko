@@ -14,10 +14,11 @@ module.exports = function (passport) {
       where: {
         id: user.id
       }
-    })
-      .then(function (user) {
-        done(err, user);
-      });
+    }).then(function (userObj) {
+      done(null, userObj);
+    }).catch(function (err) {
+      console.log(err);
+    });
   });
 
   passport.use(new FacebookStrategy({
@@ -27,7 +28,7 @@ module.exports = function (passport) {
     callbackURL: configAuth.facebookAuth.callbackURL
 
   }, function (token, refreshToken, profile, done) {
-    console.log(profile);
+
     process.nextTick(function () {
       database.Users.findOrCreate({
         where: {
@@ -43,6 +44,7 @@ module.exports = function (passport) {
         done(err);
       });
     });
+
   }));
 
 };
