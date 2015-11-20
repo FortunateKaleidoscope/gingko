@@ -2,25 +2,28 @@ var Promise = require('bluebird');
 var request = require('supertest');
 var expect = require('chai').expect;
 
-xdescribe("Meals and user insertion to database successful", function () {
+xdescribe("Server Integration tests", function () {
 
-  it("Should insert new user to user database", function (done) {
+  it('should return all meals', function (done) {
+
+  });
+  it('should create new meal', function (done) {
+
+  });
+  it('get a meal by id', function (done) {
+
+  });
+  it('should add user to meal', function (done) {
+
+  });
+  it('should return a users meals', function (done) {
+
+  });
+  // TODO: Finish these tests
+  xit('should search for stuff on yelp', function (done) {
     done();
   });
-
-  it('Should retrieve new user from database', function (done) {
-    done();
-  });
-
-  it('Should add attendee to a meal', function (done) {
-    done();
-  });
-
-  it('Should list out all of the meals associated to the user', function (done) {
-    done();
-  });
-
-  it('should list out all of the users associated to a meal', function (done) {
+  xit('should search for stuff on googleMaps', function (done) {
     done();
   });
 
