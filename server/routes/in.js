@@ -49,7 +49,7 @@ module.exports = function (dbController, passport, isLoggedIn) {
       res.status(200).send(data.map(function (d) {
         return d.meal.toJSON();
       }));
-    })
+    });
     // .catch(function (err) {
     //   console.log('err posting meal data', err);
     //   res.status(500).send(err);

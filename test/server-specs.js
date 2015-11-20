@@ -7,7 +7,7 @@ var restaurants = require('./restaurants');
 
 xdescribe("Server Integration tests", function () {
   before(function (done) {
-    db.Users.bulkCreate(users)
+    db.Users.bulkCreate(users);
   });
 
   it('should create new meal', function (done) {
