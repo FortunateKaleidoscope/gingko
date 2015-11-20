@@ -28,8 +28,13 @@
               </md-tab>
 
               <md-tab class="" id="facebook" aria-controls="Tab 4">
-                <a href="/api/out/login">
+                <a href="/auth/login">
                   <img class="facebook-img" src="http://i.stack.imgur.com/LKMP7.png" alt="" />
+                </a>
+              </md-tab>
+              <md-tab class="" id="facebook" aria-controls="Tab 5">
+                <a href="/auth/logout">
+                  <p>Logout</p>
                 </a>
               </md-tab>
 
@@ -43,6 +48,119 @@
     <!-- adding site and application content here -->
     <!-- TODO: Remember we are using state based ui-routing vs default ng-route -->
     <div ui-view></div>
+    <script>
+      window.dummyMeals = [
+                            {
+                              "meal": {
+                                "id":1,
+                                "title":"aljablja",
+                                "date":"2015-11-19T08:00:00.000Z",
+                                "time":"1970-01-01T08:10:00.000Z",
+                                "description":"asfljaksdf",
+                                "createdAt":"2015-11-19T23:25:42.349Z",
+                                "updatedAt":"2015-11-19T23:25:42.349Z",
+                                "UserId":2,
+                                "RestaurantId":4,
+                                "User":{
+                                  "id":2,
+                                  "username":"Lauren Mendoza",
+                                  "facebookId":"168517196831846",
+                                  "createdAt":"2015-11-20T00:41:31.169Z",
+                                  "updatedAt":"2015-11-20T00:41:31.169Z"
+                                },
+                                "Restaurant":{
+                                  "id":4,
+                                  "name":"Trax",
+                                  "address":[
+                                    "1437 Haight St",
+                                    "The Haight",
+                                    "San Francisco, CA 94117"
+                                  ],
+                                  "contact":"4158644213",
+                                  "lat":37.770053,
+                                  "lng":-122.446106,
+                                  "createdAt":"2015-11-19T23:25:42.333Z",
+                                  "updatedAt":"2015-11-19T23:25:42.333Z"
+                                }
+                              },
+                              "user":{
+                                "id":2,
+                                "username":"Lauren Mendoza",
+                                "facebookId":"168517196831846",
+                                "createdAt":"2015-11-20T00:41:31.169Z",
+                                "updatedAt":"2015-11-20T00:41:31.169Z"
+                              },
+                              "restaurant":{
+                                "id":4,
+                                "name":"Trax",
+                                "address":[
+                                  "1437 Haight St",
+                                  "The Haight",
+                                  "San Francisco, CA 94117"
+                                ],
+                                "contact":"4158644213",
+                                "lat": 37.770053,
+                                "lng": -122.446106,
+                                "createdAt":"2015-11-19T23:25:42.333Z",
+                                "updatedAt":"2015-11-19T23:25:42.333Z"}
+                              },
+                            {
+                              "meal":{
+                                  "id":2,
+                                  "title":"Test Event 2",
+                                  "date":"2015-11-19T08:00:00.000Z",
+                                  "time":"1970-01-01T08:00:00.000Z",
+                                  "description":"THis is a test 2",
+                                  "createdAt":"2015-11-20T00:44:14.816Z",
+                                  "updatedAt":"2015-11-20T00:44:14.816Z",
+                                  "UserId":3,
+                                  "RestaurantId":5,
+                                  "User":{
+                                    "id":3,
+                                    "username":"aackerman",
+                                    "facebookId":null,
+                                    "createdAt":"2015-11-20T00:44:14.784Z",
+                                    "updatedAt":"2015-11-20T00:44:14.784Z"
+                                  },
+                                "Restaurant":{
+                                  "id":5,
+                                  "name":"Liholiho Yacht Club",
+                                  "address":[
+                                    "871 Sutter St",
+                                    "Lower Nob Hill",
+                                    "San Francisco, CA 94109"
+                                  ],
+                                  "contact":"4154405446",
+                                  "lat":37.7883678084094,
+                                  "lng":-122.414625026286,
+                                  "createdAt":"2015-11-20T00:44:14.808Z",
+                                  "updatedAt":"2015-11-20T00:44:14.808Z"
+                                }
+                              },
+                              "user":{
+                                "id":3,
+                                "username":"aackerman",
+                                "facebookId":null,
+                                "createdAt":"2015-11-20T00:44:14.784Z",
+                                "updatedAt":"2015-11-20T00:44:14.784Z"
+                              },
+                              "restaurant":{
+                                "id":5,
+                                "name":"Liholiho Yacht Club",
+                                "address":[
+                                  "871 Sutter St",
+                                  "Lower Nob Hill",
+                                  "San Francisco,CA 94109"
+                                ],
+                                "contact":"4154405446",
+                                "lat":37.7883678084094,
+                                "lng":-122.414625026286,
+                                "createdAt":"2015-11-20T00:44:14.808Z",
+                                "updatedAt":"2015-11-20T00:44:14.808Z"
+                              }
+                            }
+                          ];
+    </script>
 
     <!-- bower start -->
     <script src="lib/jquery/dist/jquery.js"></script>

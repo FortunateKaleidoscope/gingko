@@ -17,10 +17,9 @@
 //     getMeal();
 //
 //     function getMeal(cb) {
-//       var path = '/api/in/users';
-//       console.log('Getting users from DB, path is: ', path + $location.path());
+//       var path = '/api/users/1';
 //       return $http({
-//         url: path + $location.path(),
+//         url: path,
 //         method: 'GET'
 //       })
 //       .then(function(response) {
