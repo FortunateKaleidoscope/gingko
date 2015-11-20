@@ -6,6 +6,7 @@ var database = require('./db.js');
 module.exports = function (passport) {
 
   passport.serializeUser(function (user, done) {
+    console.log("user inside serialize", user);
     done(null, user);
   });
 
@@ -27,7 +28,7 @@ module.exports = function (passport) {
     callbackURL: configAuth.facebookAuth.callbackURL
 
   }, function (token, refreshToken, profile, done) {
-    console.log(profile);
+    console.log("inside passport strategy", profile);
     process.nextTick(function () {
       database.Users.findOrCreate({
         where: {
