@@ -8,7 +8,6 @@ module.exports = {
       limit: "10"
     };
     external.requestYelp(params).then(function (data) {
-      console.log(data);
       res.json(data);
     })
     .catch(function (err) {
