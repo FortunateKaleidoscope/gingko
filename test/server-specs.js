@@ -1,21 +1,36 @@
 var Promise = require('bluebird');
 var request = require('supertest');
 var expect = require('chai').expect;
+var db = require('../server/services/db');
+var users = require('./users');
+var restaurants = require('./restaurants');
 
 xdescribe("Server Integration tests", function () {
-
-  it('should return all meals', function (done) {
-
+  before(function (done) {
+    db.Users.bulkCreate(users)
   });
+
   it('should create new meal', function (done) {
 
   });
+
+  it('should return all meals', function (done) {
+    request(app)
+      .get('/api/meals')
+      .expect(200)
+      .end(function (res) {
+        // expect()
+      });
+  });
+
   it('get a meal by id', function (done) {
 
   });
+
   it('should add user to meal', function (done) {
 
   });
+
   it('should return a users meals', function (done) {
 
   });

@@ -1,3 +1,4 @@
+var Promise = require('bluebird');
 var Sequelize = require('sequelize');
 module.exports = {
   clearTable: function (model, done) {
