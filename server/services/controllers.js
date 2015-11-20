@@ -75,11 +75,12 @@ module.exports = {
           });
         }).then(function (meals) {
           //make an object to send back
-          var obj = [];
-          meals.map(function (meal, i) {
-            obj.push(new objectify.restaurantData(meal));
-          });
-          return obj;
+          // var obj = [];
+          // meals.map(function (meal, i) {
+          //   obj.push(new objectify.restaurantData(meal));
+          // });
+
+          return meals;
         });
     },
 
