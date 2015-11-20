@@ -24,7 +24,7 @@ module.exports = {
   },
   getMealById: function (req, res) {
     //Pass id to helper function to find it in db
-    meals.getMealById(req.body).then(function (meal) {
+    meals.getMealById(req.params.id).then(function (meal) {
       //on success, respond with the meal
       res.json(meal);
     })

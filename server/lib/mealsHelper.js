@@ -2,6 +2,31 @@ var Meals = require('../config/db.js').Meals;
 var Promise = require('bluebird');
 var db = require('../config/db.js');
 
+var buildMeal = function (meal) {
+  return db.Users.findOne({
+        where: {
+          id: meal.UserId
+        }
+      })
+      .then(function (user) {
+        return db.Restaurants.findOne({
+          where: {
+            id: meal.RestaurantId
+          }
+        })
+        .then(function (restaurant) {
+          return {
+            meal: meal,
+            user: user,
+            restaurant: restaurant
+          };
+        })
+        .catch(function (err) {
+          console.log("Error building a meal ", err);
+        });
+  });
+};
+
 module.exports = {
   getAll : function () {
     //fetch all meals from db
@@ -14,7 +39,9 @@ module.exports = {
     })
     .then(function (meals) {
       //return all meals with their user and restaurant data
-      return meals;
+      return Promise.map(meals, function(meal) {
+        return buildMeal(meal);
+      });
     })
     .catch(function (err) {
       console.log('Error retrieving all meals', err);
@@ -65,10 +92,10 @@ module.exports = {
       }
     })
     .then(function (meal) {
-      return meal;
+      return buildMeal(meal);
     })
     .catch(function (err) {
       console.log("Error retrieving meal by Id ", err);
     });
-  }
+}
 };
