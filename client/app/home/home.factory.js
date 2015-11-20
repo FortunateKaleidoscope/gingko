@@ -25,6 +25,7 @@
       url: '/api/in/meals/' + id
       })
       .then(function (response) {
+        console.log(response.data);
         return response.data;
       });
     }

@@ -1,6 +1,7 @@
 var express = require('express');
 var request = require('request');
 var classes = require('./../classes/classes');
+var _ = require('lodash');
 
 
 module.exports = function (dbController, passport, isLoggedIn) {
@@ -44,7 +45,10 @@ module.exports = function (dbController, passport, isLoggedIn) {
     console.log('routing to db');
     dbController.meals.get()
     .then(function (data) {
-      res.status(200).send(data);
+      // console.log(data[0].meal.toJSON());
+      res.status(200).send(data.map(function (d) {
+        return d.meal.toJSON();
+      }));
     })
     // .catch(function (err) {
     //   console.log('err posting meal data', err);
