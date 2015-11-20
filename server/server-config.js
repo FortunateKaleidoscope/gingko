@@ -7,6 +7,7 @@ var path = require('path');
 var passport = require('passport');
 var facebookStrategy = require('./services/passportStrategies');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 // require the routes file
 var inRouter = require('./routes/in');
@@ -21,7 +22,7 @@ facebookStrategy(passport);
 /**
  *
  *  (╯°□°)╯︵ ┻━┻
- *  		- WHY USE SAME VARIABLE NAME?!
+ *		- WHY USE SAME VARIABLE NAME?!
  */
 // Spits out premade express.Router()
 var inRoutes = inRouter(dbController, passport, isLoggedIn);
@@ -33,6 +34,11 @@ var app = express();
 app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(session({
+  secret: "KittyCat",
+  resave: true,
+  saveUninitialized: false
+}));
 //these need to be above the route where they are used I think?
 //http://stackoverflow.com/questions/29600759/passport-initialize-middleware-not-in-use-for-express-4-10-for-custom-callback
 app.use(passport.initialize());
