@@ -1,8 +1,8 @@
-var helpers = require('../lib/helpers');
+var helper = require('../lib/mealsHelper');
 module.exports = {
   getMeals: function (req, res) {
     //call helper functions
-    helpers.getAll().then(function (meals) {
+    helper.getAll().then(function (meals) {
       //on success, respond with meals
       res.json(meals);
     })
@@ -12,7 +12,7 @@ module.exports = {
     });
   },
   postMeal: function (req, res) {
-    helpers.addMeal(req.body).then(function () {
+    helper.addMeal(req.body).then(function () {
       res.sendStatus(201);
     })
     .catch(function (err) {
@@ -20,7 +20,7 @@ module.exports = {
     });
   },
   getMealById: function (req, res) {
-    helpers.getMealById(req.body).then(function (meal) {
+    helper.getMealById(req.body).then(function (meal) {
       res.json(meal);
     })
     .catch(function (err) {
