@@ -29,10 +29,6 @@ module.exports = function (passport) {
     callbackURL: configAuth.facebookAuth.callbackURL
 
   }, function (token, refreshToken, profile, done) {
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     process.nextTick(function () {
       database.Users.findOrCreate({
         where: {
