@@ -21,7 +21,7 @@ facebookStrategy(passport);
 /**
  *
  *  (╯°□°)╯︵ ┻━┻
- *  		- WHY USE SAME FUCKING VARIABLE NAME?!
+ *  		- WHY USE SAME VARIABLE NAME?!
  */
 // Spits out premade express.Router()
 var inRoutes = inRouter(dbController, passport, isLoggedIn);
