@@ -50,11 +50,12 @@ module.exports = function (dbController, passport, isLoggedIn) {
         return d.meal.toJSON();
       }));
     })
-    .catch(function (err) {
-      console.log('err posting meal data', err);
-      res.status(500).send(err);
-    });
-
+    // .catch(function (err) {
+    //   console.log('err posting meal data', err);
+    //   res.status(500).send(err);
+    // });
+    // console.log(req)
+    // res.send("OK");
   });
 
   router.post('/meal/join', function (req, res) {

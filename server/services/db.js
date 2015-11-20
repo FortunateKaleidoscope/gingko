@@ -4,7 +4,8 @@ var Sequelize = require("sequelize");
 
 var db = new Sequelize("tablesurfer", "admin", "admin", {
   dialect: "postgres", // or 'sqlite', mysql', 'mariadb'
-  port: 5432 //(for postgres)
+  port: 5432,
+  logging: false //(for postgres)
 });
 
 var Users = db.define("Users", {
