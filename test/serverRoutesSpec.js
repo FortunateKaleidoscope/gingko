@@ -3,7 +3,7 @@ var request = require('supertest');
 var expect = require('chai').expect;
 var app = require('../server/server-config');
 
-xdescribe("Routes to /api/in", function () {
+describe("Routes to /api/in", function () {
 
   var meal = {
     username: "Bob",
@@ -34,36 +34,72 @@ xdescribe("Routes to /api/in", function () {
       .get('/')
       .expect(200, done);
   });
-  it('should get /api/in/meals', function (done) {
+  it('should get /api/meals', function (done) {
     request(app)
-      .get('/api/in/meals')
+      .get('/api/meals')
       .expect(200, done);
   });
-  it('should post /api/in/meals', function (done) {
+  it('should post /api/meals', function (done) {
     request(app)
-      .post('/api/in/meals')
+      .post('/api/meals')
       .send(meal)
       .expect(200, done);
   });
-  it('should get /api/in/meals/1', function (done) {
+  it('should get /api/meals/1', function (done) {
     request(app)
-      .get('/api/in/meals/1')
+      .get('/api/meals/1')
       .expect(200, done);
   });
-  it('should get /api/in/user', function (done) {
+  it('should get /api/meals/1', function (done) {
     request(app)
-      .get('/api/in/user')
+      .post('/api/meals/1')
+      .send({facebookId: 232424232})
       .expect(200, done);
   });
-  it('should get /api/in/user/1', function (done) {
+  it('should get /api/users', function (done) {
     request(app)
-      .get('/api/in/user/1')
+      .get('/api/users')
       .expect(200, done);
   });
-  it('should post to /api/in/user', function (done) {
+  it('should get /api/users/1', function (done) {
     request(app)
-      .post('/api/in/user')
-      .send(user)
+      .get('/api/users/1')
+      .expect(200, done);
+  });
+  it('should route to /api/auth/login', function (done) {
+    request(app)
+      .get('/api/auth/login')
+      .expect(302, done);
+  });
+  it('should route to /api/auth/login/callback', function (done) {
+    request(app)
+      .get('/api/auth/login/callback')
+      .expect(302, done);
+  });
+  it('should 404', function (done) {
+    request(app)
+      .get('/dasfsad')
+      .expect(404, done);
+  });
+  it('should route to /api/yelp', function (done) {
+    request(app)
+      .get('/api/yelp?term=hello') // This takes a param
+      .expect(200, done);
+  });
+  it('should route to /api/googleMaps', function (done) {
+    request(app)
+      .get('/api/googleMaps')
+      .expect(200, done);
+  });
+
+  xit('should route to a user\'s open table', function (done) {
+    request(app)
+      .get('/api/users/1/opentable')
+      .expect(200, done);
+  });
+  xit('should take a post request to an opentable', function (done) {
+    request(app)
+      .post('/api/opentable')
       .expect(200, done);
   });
 });

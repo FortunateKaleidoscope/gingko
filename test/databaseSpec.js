@@ -23,7 +23,7 @@ var clearTable = function (model, done) {
   });
 };
 
-describe('DBConfig user table', function (done) {
+xdescribe('DBConfig user table', function (done) {
   beforeEach(function (done) {
     clearTable(db.Users, done);
   });
