@@ -1,8 +1,8 @@
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var passport = require('passport');
+// var passport = require('passport');
 var session = require('express-session');
-var facebookStrategy = require('../services/passportStrategies');
+// var facebookStrategy = require('../services/passportStrategies');
 var path = require('path');
 
 module.exports = function (app, express) {
@@ -18,10 +18,10 @@ module.exports = function (app, express) {
     saveUninitialized: false
   }));
 
-  facebookStrategy(passport);
+  // facebookStrategy(passport);
 
-  app.use(passport.initialize());
-  app.use(passport.session());
+  // app.use(passport.initialize());
+  // app.use(passport.session());
 
   //Set up routers
   var authRoute = express.Router();
