@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular.module('app')
@@ -6,10 +6,8 @@
 
   UserCtrl.$inject = [];
 
-  function UserCtrl() {
+  function UserCtrl () {
     var self = this;
-
-
   }
 
 })();

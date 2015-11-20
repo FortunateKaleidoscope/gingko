@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // using 'use strict' will prevent variable declaration errors
   'use strict';
 

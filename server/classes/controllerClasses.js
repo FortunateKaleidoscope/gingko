@@ -5,7 +5,7 @@ module.exports = {
   restaurantData : function (returnFromDb) {
     var date = returnFromDb.meal.date;
     var time = returnFromDb.meal.date;
-
+    this.id = returnFromDb.meal.id;
     this.title = returnFromDb.meal.title;
     this.host = returnFromDb.meal.User.firstName + ' ' + returnFromDb.meal.User.lastName;
     this.date = moment(date).format('LL');
@@ -14,5 +14,4 @@ module.exports = {
     this.address = returnFromDb.meal.Restaurant.address;
 
   }
-  
 };

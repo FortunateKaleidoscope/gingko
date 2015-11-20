@@ -2,42 +2,44 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.JSON'),
-    concat: {
-      src: [],
-      dest: 
-    },
     mochaTest: {
       test: {
         options: {
           reporter: 'spec'
         },
-        src: []
+        src: ['test/**/*.js']
       }
     },
-    uglify: {
-      build: {
-        src: '',
-        dest: ''
+    nodemon: {
+      dev: {
+        script: 'server/server.js'
+      }
+    },
+    docco: {
+      debug: {
+        src: ['client/*.js', 'server/**/*.js'],
+        options: {
+          output: 'docs/'
+        }
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-docco');
 
   grunt.registerTask('test', [
-      'mochaTest'
-    ]);
+    'mochaTest'
+  ]);
 
-  grunt.registerTask('build', [
-      'concat',
-      'uglify'
-    ]);
+  grunt.registerTask('run', [
+    'nodemon'
+  ]);
 
   grunt.registerTask('deploy', [
-      'test',
-      'build'
-    ]);
+    'test',
+    'run'
+  ]);
 
 };
