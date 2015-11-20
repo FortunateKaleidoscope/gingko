@@ -3,7 +3,7 @@ var request = require('supertest');
 var expect = require('chai').expect;
 var app = require('../server/server-config');
 
-describe("Routes to /api/in", function () {
+xdescribe("Routes to /api/in", function () {
 
   var meal = {
     username: "Bob",
