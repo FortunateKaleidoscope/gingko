@@ -42,7 +42,8 @@ var Meals = db.define("Meals", {
 
 //users should hasmany meals ?
 //change this later
-Users.hasOne(Meals);
+// Player.belongsTo(Team); // Will add a TeamId attribute to Player to hold the primary key value for Team
+Users.hasMany(Meals);
 Meals.belongsTo(Users);
 
 
@@ -53,6 +54,14 @@ var Restaurants = db.define("Restaurants", {
   },
   address: {
     type: Sequelize.ARRAY(Sequelize.STRING),
+    allowNull: false
+  },
+  city: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  zipCode: {
+    type: Sequelize.STRING,
     allowNull: false
   },
   contact: {
@@ -72,7 +81,7 @@ var Restaurants = db.define("Restaurants", {
 
 //this creates restaurant foreign key for meal
 //this is also wrong
-Restaurants.hasOne(Meals);
+Restaurants.hasMany(Meals);
 Meals.belongsTo(Restaurants);
 /**
   *
@@ -91,7 +100,7 @@ Meals.belongsToMany(Users, { through: 'Attendees' });
 
 
 //LAUREN
-Users.hasMany(Users, {
+Users.belongsToMany(Users, {
   as: 'Followers',
   through: 'Followers_join'
 });
