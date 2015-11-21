@@ -19,10 +19,9 @@ passport.use(new FacebookStrategy({
   process.nextTick(function () {
     console.log(profile);
     usersHelper.findOrCreateUser(profile)
-    .spread( function (user) {
-      console.log(user.toJSON());
-      done(null, user.toJSON());
-    });
+      .then( function (user) {
+        done(null, user.toJSON());
+      });
   });
 
 }));
