@@ -11,7 +11,7 @@ module.exports = function (app) {
   app.get('/yelp', externalController.getYelpData);
   app.get('/googleMaps', externalController.getGoogleMaps);
   //lauren's friend routes below:
-  app.post('/users/:id/friends', usersController.addFriend);
-  app.delete('/users/:id/friends', usersController.deleteFriend);
-  app.get('users/:id/friends', usersController.getAllFriends);
+  // app.post('/users/:id/friends', usersController.addFriend);
+  // app.delete('/users/:id/friends', usersController.deleteFriend);
+  app.get('/users/:id/friends', usersController.getAllFriends);
 };
