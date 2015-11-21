@@ -49,9 +49,9 @@ module.exports = {
   },
   addMeal: function (req) {
     //save meal to db
-    // console.log('INSIDE MEAL HELPER ', meal);
     var meal = req.body;
     var user = req.user;
+    console.log(user.username + " is trying to make a meal");
     return db.Users.findOne({
       where: {
         username: user.username
@@ -59,11 +59,9 @@ module.exports = {
     })
     .then(function (userObj) {
       var restaurantObj = meal.restaurant;
+      console.log("At this restaurant, ", restaurantObj.name);
       return db.Restaurants.findOrCreate({
         where: {
-          contact: restaurantObj.phone
-        },
-        defaults: {
           name: restaurantObj.name,
           address: restaurantObj.display_address,
           contact: restaurantObj.phone,
@@ -72,7 +70,9 @@ module.exports = {
         }
       })
       .spread(function (restaurant) {
-        console.log(userObj);
+        console.log(restaurant.toJSON().name, " now exists in db");
+        console.log('Making meal now, ', meal.title);
+        console.log('this is the hosts id', userObj.toJSON().id);
         return Meals.create({
           title: meal.title,
           date: meal.date,

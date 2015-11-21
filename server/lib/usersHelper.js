@@ -25,16 +25,13 @@ module.exports = {
     });
   },
   findOrCreateUser: function (user) {
+    console.log(user);
     return db.Users.findOrCreate({
       where: {
-        facebookId: user.id
-      },
-      defaults: {
         username: user.displayName,
         facebookId: user.id
       }
-    }).spread(function (users) {
-      console.log(users);
+    }).spread(function (users, created) {
       return users;
     });
   }
