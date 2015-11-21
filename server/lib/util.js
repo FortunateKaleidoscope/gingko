@@ -1,14 +1,15 @@
 var db = require('../config/db');
 exports.searchBy = {
   city: function (searchTerm) {
+    searchTerm = searchTerm.toString();
     return {
       include: [{
         model: db.Restaurants,
         where: {
           address: {
-            $contains: searchTerm
+            $iLike: 'test'
+            }
           }
-        }
       },
         db.Users
       ]

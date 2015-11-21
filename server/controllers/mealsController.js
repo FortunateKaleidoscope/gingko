@@ -34,9 +34,8 @@ module.exports = {
       res.sendStatus(501, err);
     });
   },
-  getMealsBySearch: function (req, res) {
-    console.log(searchBy[req.body.searchBy](req.body.searchTerm));
-    meals.getMealsBySearch(searchBy[req.body.searchBy](req.body.searchTerm)).then(function (meals) {
+  getMealsByCity: function (req, res) {
+    meals.getMealsByCity(req.body.searchTerm).then(function (meals) {
       res.json(meal);
     })
     .catch(function (err) {

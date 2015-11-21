@@ -104,14 +104,21 @@ module.exports = {
       console.log("Error retrieving meal by Id ", err);
     });
   },
-  getMealsBySearch: function (searchObj) {
-    return Meals.findAll(searchObj).then(function (meals) {
-      return Promise.map(meals, function (meal) {
-        return buildMeal(meal);
-      });
-    })
+  getMealsByCity: function (city) {
+    console.log("My object is ", city );
+    return db.Restaurants.findAll({
+      attributes: ['id'],
+      where: {
+        id: '1'
+      }
+    }).then(function (restaurants) {
+      console.log(restaurants);
+      // return Promise.map(meals, function (meal) {
+      //   return buildMeal(meal);
+      })
     .catch(function (err) {
       console.log('Error retrieving all meals', err);
     });
   }
+
 };
