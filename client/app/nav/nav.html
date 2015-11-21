@@ -1,0 +1,30 @@
+<div ng-controller="navCtrl">
+<md-toolbar id="nav" layout="row" layout-align="center end" class="md-tall">
+       <div flex flex-sm="100" flex-gt-sm="95" flex-gt-md="80" layout="column">
+           <h1>TableSurfers</h1>
+           <span flex></span>
+           <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-2">
+              <!-- nav tab button for home view -->
+              <md-tab ui-sref="home" id="home/home.html" aria-controls="Tab 1">
+                <md-tab-label>Home</md-tab-label>
+              </md-tab>
+              <!-- nav tab button for search/add page -->
+              <md-tab ui-sref="search" id="search/search.html" aria-controls="Tab 2">
+                <md-tab-label>Add</md-tab-label>
+              </md-tab>
+              <!-- nav tab button for user profile -->
+              <md-tab ui-sref="user" id="user/user.html" aria-controls="Tab 3">
+                <md-tab-label>Account</md-tab-label>
+              </md-tab>
+
+              <md-tab md-on-select="login()"class="" id="facebook" aria-controls="Tab 4">
+                 <md-tab-label>Login</md-tab-label>
+              </md-tab>
+              <md-tab md-on-select="logout()" class="" id="facebook" aria-controls="Tab 5">'
+                <md-tab-label>Logout</md-tab-label>
+              </md-tab>
+
+           </md-tabs>
+       </div>
+    </md-toolbar>
+  </div>
