@@ -1,7 +1,7 @@
 module.exports = {
   logout: function (req, res) {
     req.logout();
-    res.send("OK");
+    res.redirect("/");
   },
   loginCallback: function (req, res) {
     // TODO: We can do JWT here dude.

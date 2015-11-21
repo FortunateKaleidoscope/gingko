@@ -34,7 +34,7 @@
             templateUrl: 'app/search/search.html',
             controller: 'SearchCtrl'
           }
-        },
+        }
       })
       // TODO: perhaps use URL params '/:username' to grab account details
       .state('user', {
