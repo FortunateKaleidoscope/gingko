@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('app')
-  .controller('UserCtrl', UserCtrl);
+  .controller('LandingCtrl', LandingCtrl);
 
-  UserCtrl.$inject = [];
+  LandingCtrl.$inject = [];
 
-  function UserCtrl () {
+  function LandingCtrl () {
     var self = this;
   }
 
