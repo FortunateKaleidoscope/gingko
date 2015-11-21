@@ -36,7 +36,7 @@ module.exports = {
   },
   getMealsByCity: function (req, res) {
     meals.getMealsByCity(req.body.searchTerm).then(function (meals) {
-      res.json(meal);
+      res.json(meals);
     })
     .catch(function (err) {
       //error handling
