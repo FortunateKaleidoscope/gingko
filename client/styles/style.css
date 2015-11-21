@@ -1,4 +1,4 @@
-#user, #home, #meal {
+/*#user, #home, #meal {
   padding-top: 20px;
   text-align: center;
   padding-right: 10%;
@@ -36,4 +36,39 @@
 
 .map, #map {
   position: relative;
+}
+
+/* Meals */
+
+#filters, #meal-cards, #google-maps {
+  margin:0;
+}
+
+#filters {
+
+}
+
+#meal-cards {
+  min-height:500px;
+  overflow-y: auto;
+}
+
+#google-maps {
+  min-height:800px;
+  padding:0;
+}
+
+#meals-right {
+  min-height:800px;
+  padding-left:0px;
+  padding-right:0px;
+}
+
+#meals-left {
+  min-height:800px;
+  padding:0;
+}
+
+#filters {
+  min-height:300px;
 }

@@ -1,28 +1,15 @@
-<div id="home" ng-controller='HomeCtrl as home' ng-cloak>
-<!-- in order to use the self properties, you must specify controller as a variable   -->
-  <span>
-    <h3>Upcoming TableSurfers Meals in San Francisco, CA</h3>
-  </span>
-
-  <div ng-repeat="event in home.events">
-    <md-card class="colour">
-      <md-card-content>
-        <h2 class="md-title">{{event.title}}</h2>
-        <p>
-          {{event.description}}
-        </p>
-        <p>
-          {{event.date}}
-        </p>
-         <p>
-          {{event.time}}
-        </p>
-      </md-card-content>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="home.routeToEvent(event.id);">View More</md-button>
-      </md-card-actions>
-    </md-card>
-
+<div class="row" ng-controller="MealsCtrl">
+  <div class="col s6 dark-primary-color" id="meals-right">
+    <div class="col s12 light-primary-color" id="filters">
+    </div>
+    <div class="col s12 accent-color" id="meal-cards">
+      <div class="col s6 dark-primary-color" id="meal-card" ng-repeat="meal in meals">
+        <h1>{{meal.meal.title}}</h1>
+      </div>
+    </div>
   </div>
-
+  <div class="col s6" id="meals-left">
+    <div class="col s12 default-primary-color" id="google-maps">
+    </div>
+  </div>
 </div>

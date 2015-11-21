@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('app')
-  .factory('homeFactory', homeFactory);
+  .factory('MealsFactory', MealsFactory);
 
-  homeFactory.$inject = ['$http'];
+  MealsFactory.$inject = ['$http'];
 
-  function homeFactory ($http) {
+  function MealsFactory ($http) {
     var services = {
       getMeals : getMeals,
       getEvent : getEvent
@@ -34,10 +34,6 @@
       .then(function (response) {
         return response.data;
       });
-      // .catch(function (err) {
-      //
-      //   return window.dummyMeals;
-      // });
     }
   }
 })();
