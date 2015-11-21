@@ -71,6 +71,14 @@ var Restaurants = db.define("Restaurants", {
 //this creates restaurant foreign key for meal
 Restaurants.hasOne(Meals);
 Meals.belongsTo(Restaurants);
+/**
+  *
+  *
+  *  ¯\_(ツ)_/¯ - Is this the correct way to do associations?
+  *
+  *
+  */
+// Meals.hasOne(Restaurants);
 
 var Attendees = db.define("Attendees", {
 });

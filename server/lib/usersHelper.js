@@ -23,5 +23,19 @@ module.exports = {
     .catch(function (err) {
       console.log("Error retrieving all users ", err);
     });
+  },
+  findOrCreateUser: function (user) {
+    return db.Users.findOrCreate({
+      where: {
+        facebookId: user.id
+      },
+      defaults: {
+        username: user.displayName,
+        facebookId: user.id
+      }
+    }).spread(function (users) {
+      console.log(users);
+      return users;
+    });
   }
 };

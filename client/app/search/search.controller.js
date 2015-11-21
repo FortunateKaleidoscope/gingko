@@ -13,9 +13,9 @@
     // below are settings for the md-autocomplete directive
     self.simulateQuery = false;
     self.isDisabled = false;
-    //below is a hack for testing, we are struggling to access facebook auth username from client side
+    // below is a hack for testing, we are struggling to access facebook auth username from client side
     self.meal = {
-      username: 'aackerman'
+      username: 'Cory'
     };
 
     self.attendees = [1,2,3,4,5,6,7,8,9];
