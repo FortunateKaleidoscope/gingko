@@ -1,4 +1,5 @@
 var meals = require('../lib/mealsHelper');
+var searchBy = require('../lib/util').searchBy;
 module.exports = {
   getMeals: function (req, res) {
     //call helper functions to get all meals
@@ -30,6 +31,16 @@ module.exports = {
     })
     .catch(function (err) {
       // error handling
+      res.sendStatus(501, err);
+    });
+  },
+  getMealsBySearch: function (req, res) {
+    console.log(searchBy[req.body.searchBy](req.body.searchTerm));
+    meals.getMealsBySearch(searchBy[req.body.searchBy](req.body.searchTerm)).then(function (meals) {
+      res.json(meal);
+    })
+    .catch(function (err) {
+      //error handling
       res.sendStatus(501, err);
     });
   }
