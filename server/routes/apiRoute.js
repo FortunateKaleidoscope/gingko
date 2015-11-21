@@ -10,6 +10,7 @@ module.exports = function (app) {
   app.get('/users/:id', usersController.getUserById);
   app.get('/yelp', externalController.getYelpData);
   app.get('/googleMaps', externalController.getGoogleMaps);
+  app.post('/meals/search', mealsController.getMealsBySearch);
 
   //lauren's following routes below:
   // app.post('/users/:id/following', usersController.follow);
