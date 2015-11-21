@@ -103,5 +103,15 @@ module.exports = {
     .catch(function (err) {
       console.log("Error retrieving meal by Id ", err);
     });
-}
+  },
+  getMealsBySearch: function (searchObj) {
+    return Meals.findAll(searchObj).then(function (meals) {
+      return Promise.map(meals, function (meal) {
+        return buildMeal(meal);
+      });
+    })
+    .catch(function (err) {
+      console.log('Error retrieving all meals', err);
+    });
+  }
 };
