@@ -1,4 +1,6 @@
 var meals = require('../lib/mealsHelper');
+var users = require('../lib/usersHelper');
+var restaurants = require('../lib/restaurantHelper');
 var searchBy = require('../lib/util').searchBy;
 module.exports = {
   getMeals: function (req, res) {
@@ -13,14 +15,30 @@ module.exports = {
     });
   },
   postMeal: function (req, res) {
-    //Pass data from client to helper function to save to db
-    meals.addMeal(req).then(function () {
-      //On success
-      res.sendStatus(201);
+    var userObj = req.user;
+    var mealObj = req.body;
+    var restaurantObj = req.body.restaurant;
+
+    users.getUserById(userObj.id)
+    .then(function (user) {
+      console.log('got user');
+      return restaurants.findOrCreate(restaurantObj)
+      .then(function (restaurant) {
+        console.log('created restaurant');
+        meals.addMeal(user, restaurant, mealObj)
+        .then(function (meal) {
+          console.log('SENDING MEAL OUT SUCCESS!');
+          res.send(meal);
+        })
+        .catch(function (err) {
+          console.log('error in creating meal');
+          res.sendStatus(500);
+        });
+      });
     })
     .catch(function (err) {
-      // error handling
-      res.sendStatus(501, err);
+      console.log('Error in getUserById');
+      res.send(500);
     });
   },
   getMealById: function (req, res) {

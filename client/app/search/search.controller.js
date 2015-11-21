@@ -38,9 +38,11 @@
                 'rating': item.rating,
                 'name': item.name,
                 'url': item.url,
-                'categories': item.categories,
+                // 'categories': item.categories,
                 'phone': item.phone,
                 'display_address': item.location.display_address,
+                'city': item.location.city,
+                'zipCode': item.location.postal_code,
                 'coordinate': {
                   lat: item.location.coordinate.latitude,
                   lng: item.location.coordinate.longitude
