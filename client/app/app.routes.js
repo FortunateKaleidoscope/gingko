@@ -9,49 +9,36 @@
   config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
   function config($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('home');
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
-      .state('home', {
-        url: '/home',
+      .state('/', {
+        url: '/',
         views: {
           top: {
             templateUrl: 'app/nav/nav.html'
           },
           main: {
-            templateUrl: 'app/home/home.html',
-            controller: 'HomeCtrl'
+            templateUrl: 'app/landing/landing.html',
+            controller: 'LandingCtrl'
           }
         }
       })
-      .state('search', {
-        url: '/search',
+      .state('meals', {
+        url: '/meals?seachBy&searchTerm',
         views: {
           top: {
             templateUrl: 'app/nav/nav.html'
           },
           main: {
-            templateUrl: 'app/search/search.html',
-            controller: 'SearchCtrl'
+            templateUrl: 'app/meals/meals.html',
+            controller: 'MealsCtrl'
           }
         }
       })
       // TODO: perhaps use URL params '/:username' to grab account details
-      .state('user', {
-        url: '/user',
-        views: {
-          top: {
-            templateUrl: 'app/nav/nav.html'
-          },
-          main: {
-            templateUrl: 'app/user/user.html',
-            controller: 'UserCtrl'
-          }
-        }
-      })
-      // When you're linked to a unique id in a meal, we render the page
       .state('meal', {
-        url: '/meals/:id',
+        url: '/meals/:mealId',
         views: {
           top: {
             templateUrl: 'app/nav/nav.html'
@@ -59,6 +46,19 @@
           main: {
             templateUrl: 'app/meal/meal.html',
             controller: 'MealCtrl'
+          }
+        }
+      })
+      // When you're linked to a unique id in a meal, we render the page
+      .state('host', {
+        url: '/host',
+        views: {
+          top: {
+            templateUrl: 'app/nav/nav.html'
+          },
+          main: {
+            templateUrl: 'app/host/host.html',
+            controller: 'HostCtrl'
           }
         }
       });
