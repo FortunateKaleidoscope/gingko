@@ -1,15 +1,18 @@
-<div class="row" ng-controller="MealsCtrl">
-  <div class="col s6 dark-primary-color" id="meals-right">
-    <div class="col s12 light-primary-color" id="filters">
+<!-- <br> -->
+<div class="row meals">
+  <div class="col s6 default-primary-color" id="meals-right">
+    <div class="col s12 light-primary-color filters">
+      <h1>Filter</h1>
     </div>
-    <div class="col s12 accent-color" id="meal-cards">
-      <div class="col s6 dark-primary-color" id="meal-card" ng-repeat="meal in meals">
+    <div class="col s12" id="meal-cards">
+      <div ng-repeat="meal in meals" class="col s6 accent-color" id="meal-card">
         <h1>{{meal.meal.title}}</h1>
+        <p>{{meal.meal.description}}</p>
+        <a class="secondary-primary-color" href="{{meal.meal.Restaurant.url}}">{{meal.meal.Restaurant.name}}</a>
       </div>
     </div>
   </div>
-  <div class="col s6" id="meals-left">
-    <div class="col s12 default-primary-color" id="google-maps">
-    </div>
+  <div class="col s6 default-primary-color meals-left">
+    <h1>Map</h1>
   </div>
 </div>

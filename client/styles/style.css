@@ -1,82 +1,54 @@
-/*#user, #home, #meal {
-  padding-top: 20px;
-  text-align: center;
-  padding-right: 10%;
-  padding-left: 10%;
-}
 
-#search {
-  padding-right: 25%;
-  padding-left: 25%;
-  margin: 10px;
-}
-
-.headshot {
-  width: 20%;
-  height: 20%;
-}
-
-.validation-messages {
-  font-size: 11px;
-  color: darkred;
-  margin: 10px 0 0 25px;
-}
-
-#user .user-details {
-  padding-bottom: 10px;
-  text-align: left;
-
-.colour {
-  background-color: #F0F0F0;
-}
-
-.facebook-img {
-  max-height: 10px;
-}
-
-.map, #map {
-  position: relative;
-}
-
-/* Meals */
-
-#filters, #meal-cards, #google-maps {
+.filters, .meal-cards, .google-maps {
   margin:0;
-}
-
-#filters {
-
+  padding:0;
 }
 
 #meal-cards {
-  min-height:500px;
-  overflow-y: auto;
+  height:60%;
+  overflow: auto;
+  padding: 0;
 }
 
-#google-maps {
+#meal-card {
+  height: 300px;
+  border: 1px solid black;
+  margin:0;
+}
+
+.google-maps {
   min-height:800px;
+  padding:0;
+}
+.meals {
+  height: calc(100vh - 64px);
   padding:0;
 }
 
 #meals-right {
-  min-height:800px;
-  padding-left:0px;
-  padding-right:0px;
+  height: 100%;
+  padding: 0;
 }
 
-#meals-left {
-  min-height:800px;
+.meals-left {
+  height:100%;
   padding:0;
 }
 
-#filters {
-  min-height:300px;
+.meals-main {
 }
+
+.filters {
+  height:40%;
+}
+
+
 .input-field input[type=search] {
   display: block;
   line-height: inherit;
   padding-left: 4rem;
   width: calc(100% - 4rem);
+  margin: 0;
 }
 .input-field {
   position: relative;
