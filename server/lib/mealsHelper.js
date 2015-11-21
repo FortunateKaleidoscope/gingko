@@ -107,12 +107,15 @@ module.exports = {
   getMealsByCity: function (city) {
     console.log("My object is ", city );
     return db.Restaurants.findAll({
-      attributes: ['id'],
       where: {
-        id: '1'
-      }
+        city: city
+      },
+      include : [{
+        model: Meals,
+        include: [db.Users]
+      }]
     }).then(function (restaurants) {
-      console.log(restaurants);
+      return restaurants;
       // return Promise.map(meals, function (meal) {
       //   return buildMeal(meal);
       })
