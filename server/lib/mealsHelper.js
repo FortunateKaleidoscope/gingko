@@ -116,9 +116,7 @@ module.exports = {
       }]
     }).then(function (restaurants) {
       return restaurants;
-      // return Promise.map(meals, function (meal) {
-      //   return buildMeal(meal);
-      })
+    })
     .catch(function (err) {
       console.log('Error retrieving all meals', err);
     });
