@@ -39,7 +39,9 @@ var Meals = db.define("Meals", {
     allowNull: false
   }
 });
-//create Users Users foreign key for meal
+
+//users should hasmany meals ?
+//change this later
 Users.hasOne(Meals);
 Meals.belongsTo(Users);
 
@@ -69,6 +71,7 @@ var Restaurants = db.define("Restaurants", {
 });
 
 //this creates restaurant foreign key for meal
+//this is also wrong
 Restaurants.hasOne(Meals);
 Meals.belongsTo(Restaurants);
 /**
@@ -87,6 +90,11 @@ Users.belongsToMany(Meals, { through: 'Attendees' });
 Meals.belongsToMany(Users, { through: 'Attendees' });
 
 
+//LAUREN
+Users.hasMany(Users, {
+  as: 'Followers',
+  through: 'Followers_join'
+});
 
 db.sync();
 

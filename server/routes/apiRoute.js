@@ -10,4 +10,9 @@ module.exports = function (app) {
   app.get('/users/:id', usersController.getUserById);
   app.get('/yelp', externalController.getYelpData);
   app.get('/googleMaps', externalController.getGoogleMaps);
+
+  //lauren's following routes below:
+  // app.post('/users/:id/following', usersController.follow);
+  // app.delete('/users/:id/following', usersController.unfollow);
+  app.get('/users/:id/following', usersController.getAllFollowing);
 };
