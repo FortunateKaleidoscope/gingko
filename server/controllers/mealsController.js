@@ -18,26 +18,16 @@ module.exports = {
     var userObj = req.user;
     var mealObj = req.body;
     var restaurantObj = req.body.restaurant;
-
     users.getUserById(userObj.id)
     .then(function (user) {
-      console.log('got user');
       return restaurants.findOrCreate(restaurantObj)
       .then(function (restaurant) {
-        console.log('created restaurant');
-        meals.addMeal(user, restaurant, mealObj)
-        .then(function (meal) {
-          console.log('SENDING MEAL OUT SUCCESS!');
-          res.send(meal);
-        })
-        .catch(function (err) {
-          console.log('error in creating meal');
-          res.sendStatus(500);
+        meals.addMeal(user, restaurant, mealObj, function (meal) {
+          res.json(meal.toJSON());
         });
       });
     })
     .catch(function (err) {
-      console.log('Error in getUserById');
       res.send(500);
     });
   },

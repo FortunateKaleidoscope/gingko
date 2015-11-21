@@ -47,71 +47,23 @@ module.exports = {
       console.log('Error retrieving all meals', err);
     });
   },
-  addMeal: function (user, restaurant, mealObj) {
-    console.log(mealObj);
+  addMeal: function (user, restaurant, mealObj, cb) {
     Meals.create({
-      where: {
-        title: mealObj.title,
-        date: mealObj.date,
-        time: mealObj.time,
-        description: mealObj.description
-      }
+      title: mealObj.title,
+      date: mealObj.date,
+      time: mealObj.time,
+      description: mealObj.description,
+      UserId: user.toJSON().id,
+      RestaurantId: restaurant.toJSON().id
     })
     .then(function (meal) {
-      console.log('Made meal');
-      meal.addUsers(user);
-      meal.addRestaurants(restaurant);
-      return meal;
+      cb(meal);
     })
     .catch(function (err) {
-      console.log(err);
+      console.log('Error in addMeal', err);
     });
   },
-  // addMeal: function (user, restaurant, mealObj) {
-  //   //save meal to db
-  //   var meal = req.body;
-  //   var user = req.user;
-  //   console.log(user.username + " is trying to make a meal");
-  //   return db.Users.findOne({
-  //     where: {
-  //       username: user.username
-  //     }
-  //   })
-  //   .then(function (userObj) {
-  //     var restaurantObj = meal.restaurant;
-  //     console.log("At this restaurant, ", restaurantObj.name);
-  //     return db.Restaurants.findOrCreate({
-  //       where: {
-  //         name: restaurantObj.name,
-  //         address: restaurantObj.display_address,
-  //         contact: restaurantObj.phone,
-  //         lat: restaurantObj.coordinate.lat,
-  //         lng: restaurantObj.coordinate.lng
-  //       }
-  //     })
-  //     .spread(function (restaurant) {
-  //       console.log(restaurant.toJSON().name, " now exists in db");
-  //       console.log('Making meal now, ', meal.title);
-  //       console.log('this is the hosts id', userObj.toJSON().id);
-  //       return Meals.create({
-  //         title: meal.title,
-  //         date: meal.date,
-  //         time: meal.time,
-  //         description: meal.description,
-  //         UserId: userObj.toJSON().id,
-  //         RestaurantId: restaurant[0].toJSON().id
-  //       }).then(function (meal) {
-  //         console.log('Created Meal?', meal);
-  //         return meal;
-  //       })
-  //       .catch(function (err) {
-  //         console.log("Error saving meal to db ", err);
-  //       });
-  //     });
-  //   });
-  // },
   getMealById: function (mealId) {
-    //fetch meal by id
     return Meals.findOne({
       where: {
         id: mealId

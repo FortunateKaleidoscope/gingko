@@ -3,7 +3,6 @@ var db = require('../config/db.js');
 
 module.exports = {
   findOrCreate: function (restaurant) {
-    console.log(restaurant);
     return db.Restaurants.findOrCreate({
       where: {
         name: restaurant.name,
@@ -18,7 +17,6 @@ module.exports = {
       }
     })
     .spread(function (restaurant) {
-      console.log('made restaurant');
       return restaurant;
     })
     .catch(function (err) {
