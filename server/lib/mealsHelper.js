@@ -47,35 +47,41 @@ module.exports = {
       console.log('Error retrieving all meals', err);
     });
   },
-  postMeal: function (meal) {
+  addMeal: function (req) {
     //save meal to db
+    // console.log('INSIDE MEAL HELPER ', meal);
+    var meal = req.body;
+    var user = req.user;
     return db.Users.findOne({
       where: {
-        username: meal.username
+        username: user.username
       }
     })
-    .then(function (user) {
+    .then(function (userObj) {
+      var restaurantObj = meal.restaurant;
       return db.Restaurants.findOrCreate({
         where: {
-          name: meal.restaurant
+          contact: restaurantObj.phone
         },
         defaults: {
-          name: meal.restaurant,
-          address: meal.address,
-          contact: meal.contact,
-          lat: meal.latitude,
-          lng: meal.longitude
+          name: restaurantObj.name,
+          address: restaurantObj.display_address,
+          contact: restaurantObj.phone,
+          lat: restaurantObj.coordinate.lat,
+          lng: restaurantObj.coordinate.lng
         }
       })
-      .then(function (restaurant) {
+      .spread(function (restaurant) {
+        console.log(userObj);
         return Meals.create({
           title: meal.title,
           date: meal.date,
           time: meal.time,
           description: meal.description,
-          UserId: user.dataValues.id,
-          RestaurantId: restaurant[0].dataValues.id
+          UserId: userObj.toJSON().id,
+          RestaurantId: restaurant[0].toJSON().id
         }).then(function (meal) {
+          console.log('Created Meal?', meal);
           return meal;
         })
         .catch(function (err) {

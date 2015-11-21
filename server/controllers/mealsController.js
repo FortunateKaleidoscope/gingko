@@ -13,7 +13,7 @@ module.exports = {
   },
   postMeal: function (req, res) {
     //Pass data from client to helper function to save to db
-    meals.addMeal(req.body).then(function () {
+    meals.addMeal(req).then(function () {
       //On success
       res.sendStatus(201);
     })

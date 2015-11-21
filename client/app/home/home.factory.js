@@ -33,10 +33,11 @@
       })
       .then(function (response) {
         return response.data;
-      }).catch(function (err) {
-        return window.dummyMeals;
       });
-
+      // .catch(function (err) {
+      //
+      //   return window.dummyMeals;
+      // });
     }
   }
 })();
