@@ -52,10 +52,23 @@ var Restaurants = db.define("Restaurants", {
     type: Sequelize.STRING,
     allowNull: false
   },
+  url: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  rating: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
   address: {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: false
   },
+  // TODO: Create categories
+  // categories: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false
+  // },
   city: {
     type: Sequelize.STRING,
     allowNull: false
