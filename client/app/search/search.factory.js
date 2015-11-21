@@ -22,9 +22,10 @@
     }
 
     function postMeal (data) {
+      console.log(data);
       return $http({
         method: 'POST',
-        url: '/api/in/meals',
+        url: '/api/meals',
         data: data
       })
       .then(function (response) {

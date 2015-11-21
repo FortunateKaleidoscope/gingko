@@ -18,11 +18,7 @@
       console.log("id", id);
       return $http({
       method: 'GET',
-      //hard coded in number(id as the meal id) for the minute need to work out how to get this id
-      //number to be kept with the infor displayed on the events page
-      //so that when it is clicked on to show the whole event you know what event to query from the db
-      //this also wants moking to the meal view
-      url: '/api/in/meals/' + id
+      url: '/api/meals/' + id
       })
       .then(function (response) {
         console.log(response.data);
@@ -33,11 +29,15 @@
     function getMeals () {
       return $http({
       method: 'GET',
-      url: '/api/in/meals'
+      url: '/api/meals'
       })
       .then(function (response) {
         return response.data;
       });
+      // .catch(function (err) {
+      //
+      //   return window.dummyMeals;
+      // });
     }
   }
 })();
