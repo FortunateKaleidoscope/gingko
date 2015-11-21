@@ -14,25 +14,53 @@
     $stateProvider
       .state('home', {
         url: '/home',
-        templateUrl: 'app/home/home.html',
-        controller: 'HomeCtrl'
+        views: {
+          top: {
+            templateUrl: 'app/nav/nav.html'
+          },
+          main: {
+            templateUrl: 'app/home/home.html',
+            controller: 'HomeCtrl'
+          }
+        }
       })
       .state('search', {
         url: '/search',
-        templateUrl: 'app/search/search.html',
-        controller: 'SearchCtrl'
+        views: {
+          top: {
+            templateUrl: 'app/nav/nav.html'
+          },
+          main: {
+            templateUrl: 'app/search/search.html',
+            controller: 'SearchCtrl'
+          }
+        },
       })
       // TODO: perhaps use URL params '/:username' to grab account details
       .state('user', {
         url: '/user',
-        templateUrl: 'app/user/user.html',
-        controller: 'UserCtrl'
+        views: {
+          top: {
+            templateUrl: 'app/nav/nav.html'
+          },
+          main: {
+            templateUrl: 'app/user/user.html',
+            controller: 'UserCtrl'
+          }
+        }
       })
       // When you're linked to a unique id in a meal, we render the page
       .state('meal', {
         url: '/meals/:id',
-        templateUrl: 'app/meal/meal.html',
-        controller: 'MealCtrl'
+        views: {
+          top: {
+            templateUrl: 'app/nav/nav.html'
+          },
+          main: {
+            templateUrl: 'app/meal/meal.html',
+            controller: 'MealCtrl'
+          }
+        }
       });
       // TODO: remove above semicolon to add more routes
   }
