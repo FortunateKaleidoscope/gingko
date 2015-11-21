@@ -17,8 +17,11 @@ var Users = db.define("Users", {
   facebookId: {
     type: Sequelize.STRING,
     allowNull: true
+  },
+    userImage: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
-
 });
 
 var Meals = db.define("Meals", {
@@ -26,15 +29,15 @@ var Meals = db.define("Meals", {
     type: Sequelize.STRING,
     allowNull: false
   },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
   date: {
     type: Sequelize.STRING,
     allowNull: false
   },
   time: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  description: {
     type: Sequelize.STRING,
     allowNull: false
   }
@@ -57,6 +60,10 @@ var Restaurants = db.define("Restaurants", {
     allowNull: true
   },
   rating: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  price: {
     type: Sequelize.STRING,
     allowNull: true
   },
@@ -88,8 +95,11 @@ var Restaurants = db.define("Restaurants", {
   lng: {
     type: Sequelize.FLOAT,
     allowNull: false
+  },
+  restaurantImage: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
-
 });
 
 //this creates restaurant foreign key for meal
@@ -112,7 +122,7 @@ Users.belongsToMany(Meals, { through: 'Attendees' });
 Meals.belongsToMany(Users, { through: 'Attendees' });
 
 
-//LAUREN
+//Lauren's followers table
 Users.belongsToMany(Users, {
   as: 'Followers',
   through: 'Followers_join'
