@@ -10,8 +10,9 @@ module.exports = function (app) {
   app.get('/users/:id', usersController.getUserById);
   app.get('/yelp', externalController.getYelpData);
   app.get('/googleMaps', externalController.getGoogleMaps);
-  //lauren's friend routes below:
-  // app.post('/users/:id/friends', usersController.addFriend);
-  // app.delete('/users/:id/friends', usersController.deleteFriend);
-  app.get('/users/:id/friends', usersController.getAllFriends);
+
+  //lauren's following routes below:
+  // app.post('/users/:id/following', usersController.follow);
+  // app.delete('/users/:id/following', usersController.unfollow);
+  app.get('/users/:id/following', usersController.getAllFollowing);
 };
