@@ -18,7 +18,7 @@ var Users = db.define("Users", {
     type: Sequelize.STRING,
     allowNull: true
   },
-    userImage: {
+  userImage: {
     type: Sequelize.STRING,
     allowNull: true
   }
@@ -32,7 +32,7 @@ var Meals = db.define("Meals", {
   description: {
     type: Sequelize.STRING,
     allowNull: false
-  }
+  },
   date: {
     type: Sequelize.STRING,
     allowNull: false
@@ -60,10 +60,6 @@ var Restaurants = db.define("Restaurants", {
     allowNull: true
   },
   rating: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
-  price: {
     type: Sequelize.STRING,
     allowNull: true
   },
