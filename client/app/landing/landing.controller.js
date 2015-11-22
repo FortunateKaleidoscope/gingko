@@ -4,10 +4,13 @@
   angular.module('app')
   .controller('LandingCtrl', LandingCtrl);
 
-  LandingCtrl.$inject = [];
+  LandingCtrl.$inject = ['$state'];
 
-  function LandingCtrl () {
+  function LandingCtrl ($state) {
     var self = this;
+    self.search = function (searchTerm) {
+      $state.go('meals', {searchTerm: searchTerm});
+    };
   }
 
 })();

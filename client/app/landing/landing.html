@@ -1,9 +1,11 @@
-<div ng-controller='LandingCtrl'>
+<div ng-controller='LandingCtrl as lc'>
   <div class="landing valign-wrapper">
     <div class="row valign">
-      <div class="input-field searchBox center col s8 white">
-        <input type="text" placeholder="Search by City">
-      </div> 
+      <form ng-submit="lc.search(searchInput)">
+          <div class="input-field white">
+            <input type="text"  class="field" required maxlength="" placeholder="Search by City"ng-model="searchInput">
+          </div>
+        </form>
     </div>
   </div>
 </div>  

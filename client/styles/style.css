@@ -3,6 +3,7 @@
   line-height: inherit;
   width: calc(100% - 4rem);
   margin: 0;
+  text-align: left;
 }
 .input-field {
   position: relative;
