@@ -4,9 +4,12 @@
   height: 95%;
   position: fixed;
   background-color: teal;
-  background-image: url('/img/background.jpg'); 
+  background-image: url('/img/background.jpg');
+  background-size: 100%;
 }
-
+.fadefilter {
+  background-color: white
+}
 
 .input-field {
   border-radius: 50px;

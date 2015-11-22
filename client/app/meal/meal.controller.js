@@ -19,27 +19,25 @@
     };
 
     self.getMeal = function () {
-      var path = '/api/in';
+      var path = '/api';
       console.log('Getting users from DB, path is: ', path + $location.path());
       return $http({
         method: 'GET',
         url: path + $location.path()
       })
       .then(function (response) {
-        console.log(' ******** RESPONSE RETURNED **********');
-        console.log('Get users data is here, resp.data: ', response);
         self.data = response.data;
-        console.log(self.data);
+        console.log(self.data.restaurant);
 
         var mapCanvas = document.getElementById('map');
 
         var myLatLng = {
-          lat: self.data.meal.Restaurant.lat,
-          lng: self.data.meal.Restaurant.lng
+          lat: self.data.restaurant.lat,
+          lng: self.data.restaurant.lng
         };
 
         var mapOptions = {
-          center: new google.maps.LatLng(self.data.meal.Restaurant.lat, self.data.meal.Restaurant.lng),
+          center: new google.maps.LatLng(self.data.restaurant.lat, self.data.restaurant.lng),
           zoom: 12,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
