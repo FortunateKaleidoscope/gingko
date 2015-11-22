@@ -57,10 +57,7 @@
   line-height: inherit;
   width: calc(100% - 4rem);
   margin: 0;
-<<<<<<< HEAD
-=======
   text-align: left;
->>>>>>> master
 }
 .input-field {
   position: relative;
