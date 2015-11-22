@@ -55,7 +55,7 @@
     </div>
     <div class="col s12 grey-bg" id="meal-cards">
       <div ng-repeat="meal in meals track by $index" class="col s6" id="meal-card">
-        <a class="secondary-primary-color panel" ui-sref="/meals/{{meal.meal.id}}">
+        <a class="secondary-primary-color panel" ui-sref="meal({mealId: meal.meal.id})">
           <img height="250" width="100%" src="{{meal.meal.img}}" alt="meal">
         </a>
         <p>{{meal.meal.description}}</p>
