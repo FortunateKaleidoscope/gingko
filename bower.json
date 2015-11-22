@@ -26,6 +26,8 @@
     "angular-resource": "~1.4.7",
     "angular-sanitize": "~1.4.7",
     "angular-messages": "~1.4.7",
-    "Materialize": "materialize#~0.97.3"
+    "Materialize": "materialize#~0.97.3",
+    "angular-google-maps": "~2.2.1",
+    "angular-simple-logger": "~0.1.5"
   }
 }

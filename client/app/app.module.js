@@ -1,3 +1,6 @@
-// TODO: Please add 'app.services' once services have been created
-
-angular.module('app', ['app.nav','ui.router']);
+angular.module('app', ['app.nav', 'ui.router', 'uiGmapgoogle-maps'])
+       .config(function (uiGmapGoogleMapApiProvider) {
+         uiGmapGoogleMapApiProvider.configure({
+           v: '3.20'
+         });
+       });
