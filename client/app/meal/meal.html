@@ -1,15 +1,34 @@
 <div id="meal" ng-controller="MealCtrl as meal">
-  <h3> Meal Title:  {{meal.data.meal.title}}</h3>
 
   <!-- <h5> You are currently visiting meal: {{ meal.id }} </h5> -->
-
-  <div style="text-align:left">
-    <div><strong>Host Name: </strong>{{meal.data.meal.User.username}}</div><br>
-    <div><strong>Location: </strong>{{meal.data.meal.Restaurant.address}}</div><br>
-    <div><strong>Event Time: </strong>{{meal.data.meal.time}} </div><br>
-    <div><strong>Attendees: </strong>{{meal.data.attendees}} </div><br>
-    <div><strong>Description: </strong>{{meal.data.meal.description}}</div><br>
+  <div class="row">
+    <img class="foodimg" ng-src="img/tacos.jpg"/>
   </div>
-  <div id='map' style="height:350px"></div>
+
+  <div class="row mealinfo">
+    <div class="col s8"style="margin-right: 0px;">
+          <div class="section white"style="height: 390px;">
+              <div class="title white-text red lighten-2">{{meal.data.meal.title}}</div>
+              <div class="col s6">
+                <div><strong>Host Name: </strong>{{meal.data.user.username}}</div><br>
+                <div><strong>Event Time: </strong>{{meal.data.meal.time}} </div><br>
+                <div><strong>Description: </strong>{{meal.data.meal.description}}</div><br>
+                <div><strong>Attendees: </strong>{{meal.data.attendees}} </div><br>
+              </div>
+              <div class="col s6">
+                <div><strong>Restaurant name:<br> </strong>{{meal.data.restaurant.name}}</div><br>
+                <div><strong>Address:<br> </strong>{{meal.data.restaurant.address[0]}},<br> {{meal.data.restaurant.address[1]}} </div><br>
+                <div><strong>Phone Number:<br> </strong>{{meal.data.restaurant.contact}}</div><br>
+                <div><strong>Website:<br> </strong><a ng-href="{{meal.data.restaurant.url}}">{{meal.data.restaurant.url}}</a></div><br>
+
+                <img class="large"ng-src="img/star{{meal.data.restaurant.rating}}.png"/>
+              </div>
+          </div>
+    </div>
+    <div class="col s4 center" style="margin-left: 0px;">
+      <a ng-click="meal.joinMeal()" class="waves-effect waves-light red lighten-2 btn"><i class="material-icons left">supervisor_account</i>Join Table</a>
+      <div id='map' style="height:350px"></div>
+    </div>
+</div>
 
 </div>
