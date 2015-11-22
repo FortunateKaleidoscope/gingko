@@ -1,4 +1,3 @@
-
 .filters, .meal-cards, .google-maps {
   margin:0;
   padding:0;
@@ -53,19 +52,22 @@
   height:35%;
 }
 
-
 .input-field input[type=search] {
   display: block;
   line-height: inherit;
-  padding-left: 4rem;
   width: calc(100% - 4rem);
   margin: 0;
+<<<<<<< HEAD
+=======
+  text-align: left;
+>>>>>>> master
 }
 .input-field {
   position: relative;
   min-width: 300px;
   overflow: hidden;
   margin-top: 1rem;
+  margin-bottom: 0;
 }
 .input-field input[type=search] ~ .mdi-navigation-close {
   position: absolute;
