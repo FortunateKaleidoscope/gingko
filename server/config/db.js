@@ -65,10 +65,11 @@ var Restaurants = db.define("Restaurants", {
     allowNull: false
   },
   // TODO: Create categories
-  // categories: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false
-  // },
+  categories: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  imgUrl: Sequelize.STRING,
   city: {
     type: Sequelize.STRING,
     allowNull: false
