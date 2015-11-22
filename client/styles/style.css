@@ -1,53 +1,16 @@
-#user, #home, #meal {
-  padding-top: 20px;
-  text-align: center;
-  padding-right: 10%;
-  padding-left: 10%;
-}
-
-#search {
-  padding-right: 25%;
-  padding-left: 25%;
-  margin: 10px;
-}
-
-.headshot {
-  width: 20%;
-  height: 20%;
-}
-
-.validation-messages {
-  font-size: 11px;
-  color: darkred;
-  margin: 10px 0 0 25px;
-}
-
-#user .user-details {
-  padding-bottom: 10px;
-  text-align: left;
-
-.colour {
-  background-color: #F0F0F0;
-}
-
-.facebook-img {
-  max-height: 10px;
-}
-
-.map, #map {
-  position: relative;
-}
 .input-field input[type=search] {
   display: block;
   line-height: inherit;
-  padding-left: 4rem;
   width: calc(100% - 4rem);
+  margin: 0;
+  text-align: left;
 }
 .input-field {
   position: relative;
   min-width: 300px;
   overflow: hidden;
   margin-top: 1rem;
+  margin-bottom: 0;
 }
 .input-field input[type=search] ~ .mdi-navigation-close {
   position: absolute;
