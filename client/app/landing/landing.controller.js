@@ -2,12 +2,15 @@
   'use strict';
 
   angular.module('app')
-  .controller('UserCtrl', UserCtrl);
+  .controller('LandingCtrl', LandingCtrl);
 
-  UserCtrl.$inject = [];
+  LandingCtrl.$inject = ['$state'];
 
-  function UserCtrl () {
+  function LandingCtrl ($state) {
     var self = this;
+    self.search = function (searchTerm) {
+      $state.go('meals', {searchTerm: searchTerm});
+    };
   }
 
 })();
