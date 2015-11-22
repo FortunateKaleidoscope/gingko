@@ -1,3 +1,57 @@
+.filters, .meal-cards, .google-maps {
+  margin:0;
+  padding:0;
+}
+
+#meal-cards {
+  height:65%;
+  overflow: auto;
+  padding: 0;
+}
+
+.angular-google-map-container {
+  height: 100%;
+}
+
+#meal-card {
+  height: 300px;
+  /*border: 1px solid black;*/
+  padding:5px;
+}
+
+#meal-card .panel {
+  height: 75%;
+}
+#meal-card .panel .panel-image {
+  height: 200px;
+}
+
+.google-maps {
+  min-height:800px;
+  padding:0;
+}
+.meals {
+  height: calc(100vh - 64px);
+  padding:0;
+}
+
+#meals-right {
+  height: 100%;
+  padding: 0;
+}
+
+#map {
+  height:100%;
+  padding:0;
+}
+
+.meals-main {
+}
+
+.filters {
+  height:35%;
+}
+
 .input-field input[type=search] {
   display: block;
   line-height: inherit;

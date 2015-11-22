@@ -1,28 +1,69 @@
-<div id="home" ng-controller='HomeCtrl as home' ng-cloak>
-<!-- in order to use the self properties, you must specify controller as a variable   -->
-  <span>
-    <h3>Upcoming TableSurfers Meals in San Francisco, CA</h3>
-  </span>
-
-  <div ng-repeat="event in home.events">
-    <md-card class="colour">
-      <md-card-content>
-        <h2 class="md-title">{{event.title}}</h2>
-        <p>
-          {{event.description}}
-        </p>
-        <p>
-          {{event.date}}
-        </p>
-         <p>
-          {{event.time}}
-        </p>
-      </md-card-content>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="home.routeToEvent(event.id);">View More</md-button>
-      </md-card-actions>
-    </md-card>
-
+<!-- <br> -->
+<div class="row meals">
+  <div class="col s7" id="meals-right">
+    <div class="col s12 filters">
+      <div class="section">
+        <div class="row">
+          <div class="col s1">
+            <p>Dates</p>
+          </div>
+          <div class="col s4">
+            <input type="text" placeholder="Date">
+          </div>
+          <div class="col s4">
+            <input type="text" placeholder="Time">
+          </div>
+          <div class="col s3">
+            <input type="text" placeholder="Attendees">
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <div class="row">
+          <div class="col s1">
+            <p>Price</p>
+          </div>
+          <div class="col s4">
+            <input type="text" placeholder="Date">
+          </div>
+          <div class="col s4">
+            <input type="text" placeholder="Time">
+          </div>
+          <div class="col s3">
+            <input type="text" placeholder="Attendees">
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <div class="row">
+          <div class="col s1">
+            <p>Food Type</p>
+          </div>
+          <div class="col s4">
+            <input type="text" placeholder="Date">
+          </div>
+          <div class="col s4">
+            <input type="text" placeholder="Time">
+          </div>
+          <div class="col s3">
+            <input type="text" placeholder="Attendees">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 grey-bg" id="meal-cards">
+      <div ng-repeat="meal in meals track by $index" class="col s6" id="meal-card">
+        <a class="secondary-primary-color panel" ui-sref="meal({mealId: meal.meal.id})">
+          <img height="250" width="100%" src="{{meal.meal.img}}" alt="meal">
+        </a>
+        <!-- <img src="graph.facebook.com/v2.5/{{meal.user.facebookId}}/picture" alt=""> -->
+        <img src="/img/kylecho.jpeg" alt="">
+        <p>{{meal.meal.description}}</p>
+        <p>{{meal.meal.title}}</p>
+      </div>
+    </div>
   </div>
-
+  <div class="col s5" id="map"></div>
 </div>
