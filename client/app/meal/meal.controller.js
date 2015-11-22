@@ -15,7 +15,7 @@
     var map;
     self.joinMeal = function () {
       console.log("I Wanna Join");
-    }
+    };
     self.activate = function () {
       self.getMeal();
     };
