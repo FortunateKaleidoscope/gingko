@@ -2,7 +2,7 @@
 
   <!-- <h5> You are currently visiting meal: {{ meal.id }} </h5> -->
   <div class="row">
-    <img class="foodimg" src="img/tacos.jpg"/>
+    <img class="foodimg" ng-src="img/tacos.jpg"/>
   </div>
 
   <div class="row mealinfo">
@@ -19,6 +19,8 @@
                 <div><strong>Restaurant name:<br> </strong>{{meal.data.restaurant.name}}</div><br>
                 <div><strong>Address:<br> </strong>{{meal.data.restaurant.address[0]}},<br> {{meal.data.restaurant.address[1]}} </div><br>
                 <div><strong>Phone Number:<br> </strong>{{meal.data.restaurant.contact}}</div><br>
+                <div><strong>Website:<br> </strong><a ng-href="{{meal.data.restaurant.url}}">{{meal.data.restaurant.url}}</a></div><br>
+
                 <img class="large"ng-src="img/star{{meal.data.restaurant.rating}}.png"/>
               </div>
           </div>
