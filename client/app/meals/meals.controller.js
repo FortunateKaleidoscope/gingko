@@ -27,7 +27,7 @@
         zoom: 8
       };
       maps;
-    })
+    });
 
     self.getMeals = function () {
       MealsFactory.getMeals()
