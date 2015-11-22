@@ -4,10 +4,32 @@
   height: 95%;
   position: fixed;
   background-color: teal;
-  background-image: url('/img/background.jpg'); 
+  background-image: url('/img/background.jpg');
+  background-size: 100%;
+}
+.foodimg {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  float: left;
+  z-index: -1;
+  position: absolute;
+  -webkit-filter: blur(5px);
+}
+.mealinfo {
+  position: relative;
+  top: 250px;
 }
 
-
+.title {
+  padding: 15px;
+  text-align: center;
+  font-size: 30px;
+  background-color: #727272
+}
+.section {
+  padding-top: 0;
+}
 .input-field {
   border-radius: 50px;
 }

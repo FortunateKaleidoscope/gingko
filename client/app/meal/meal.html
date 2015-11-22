@@ -1,52 +1,31 @@
 <div id="meal" ng-controller="MealCtrl as meal">
-  <div class="parallax-container">
-    <div class="parallax"><img src="http://s3-media3.fl.yelpcdn.com/bphoto/Or8KFY-x_Vd5Ja30p5WJNg/o.jpg"></div>
+<!-- <h5> You are currently visiting meal: {{ meal.id }} </h5> -->
+  <div class="row">
+    <img class="foodimg" ng-src="img/tacos.jpg"/>
   </div>
-  <div class="section white">
-    <div class="row container">
-      <h2 class="header">Parallax</h2>
-      <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+
+  <div class="row mealinfo">
+    <div class="col s8"style="margin-right: 0px;">
+          <div class="section white"style="height: 390px;">
+              <div class="title white-text red lighten-2">{{meal.data.meal.title}}</div>
+              <div class="col s6">
+                <div><strong>Host Name: </strong>{{meal.data.user.username}}</div><br>
+                <div><strong>Event Time: </strong>{{meal.data.meal.time}} </div><br>
+                <div><strong>Description: </strong>{{meal.data.meal.description}}</div><br>
+                <div><strong>Attendees: </strong>{{meal.data.attendees}} </div><br>
+              </div>
+              <div class="col s6">
+                <div><strong>Restaurant name:<br> </strong>{{meal.data.restaurant.name}}</div><br>
+                <div><strong>Address:<br> </strong>{{meal.data.restaurant.address[0]}},<br> {{meal.data.restaurant.address[1]}} </div><br>
+                <div><strong>Phone Number:<br> </strong>{{meal.data.restaurant.contact}}</div><br>
+                <div><strong>Website:<br> </strong><a ng-href="{{meal.data.restaurant.url}}">{{meal.data.restaurant.url}}</a></div><br>
+
+                <img class="large"ng-src="img/star{{meal.data.restaurant.rating}}.png"/>
+              </div>
+          </div>
     </div>
-  </div>
-  <div class="parallax-container">
-    <div class="parallax"><img src="images/parallax2.jpg"></div>
-  </div>
+    <div class="col s4 center" style="margin-left: 0px;">
+      <a ng-click="meal.joinMeal()" class="waves-effect waves-light red lighten-2 btn"><i class="material-icons left">supervisor_account</i>Join Table</a>
+      <div id='map' style="height:350px"></div>
+    </div>
 </div>
-<!-- meal.data.description
-<div id='map' style="height:350px"></div>
-"meal": {
-      "id": 1,
-      "description": "lets go eat thai food",
-      "title": "fun thai party",
-      "date": "2015-11-19T08:00:00.000Z",
-      "time": "1970-01-01T08:10:00.000Z",
-      "createdAt": "2015-11-19T23:25:42.349Z",
-      "updatedAt": "2015-11-19T23:25:42.349Z",
-      "UserId": 2,
-      "RestaurantId": 4
-  }
-
-"User": {
-    "id": 3,
-    "username": "Lauren",
-    "facebookId": 12345,
-    "userImage": "http://i67.tinypic.com/4uz66p.png"
-    "createdAt": "2015-11-20T00:44:14.784Z",
-    "updatedAt": "2015-11-20T00:44:14.784Z"
-}
-
-"Restaurant": {
-    "id": 5,
-    "name": "Liholiho Yacht Club",
-    "url": "http://www.thisrestaurant.com",
-    "rating": "something",
-    "address": ["871 Sutter St", "Lower Nob Hill", "San Francisco, CA 94109"],
-    "city": "San Francisco",
-    "zipCode": "12345",
-    "contact": "4154405446",
-    "lat": 37.7883678084094,
-    "lng": -122.414625026286,
-    "restaurantImage": "http://www.thisrestaurantpicture.com",
-    "createdAt": "2015-11-20T00:44:14.808Z",
-    "updatedAt": "2015-11-20T00:44:14.808Z"
-} -->
