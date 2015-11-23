@@ -12,6 +12,7 @@
     self.meals = [];
     self.markers = [];
     self.loaded = false;
+    self.genre = '';
     self.map;
     self.range = 0;
     var getLocation = GoogleMapsFactory.getLocation;
@@ -20,13 +21,53 @@
     var clearMarkers = GoogleMapsFactory.clearMarkers;
     var showMarkers = GoogleMapsFactory.showMarkers;
 
-    self.mealMarkerBinder = function (meal) {
-      meal.show = false;
+    var mealMarkerBinder = function (meal) {
+      meal.show = true;
       _.find(self.markers, function (marker) {
-        return meal.id === marker.mealID;
-      }).setMap(null);
+        return meal.meal.id === marker.mealID;
+      }).setMap(self.map);
     };
 
+    var filters = function (filterObj) {
+      var re = new RegExp(filterObj.val, 'gi');
+      var filterFunc = {
+        attendees: function (meal) {
+          return meal.meal.maxAttendees >= filterObj.val;
+        },
+        genre: function (meal) {
+          console.log(meal.meal.Restaurant.categories.match(re));
+          return meal.meal.Restaurant.categories.match(re);
+        }
+      };
+      return filterFunc[filterObj.filterBy];
+    };
+
+    self.hideCards = function () {
+      self.meals.forEach(function (meal) {
+        meal.show = false;
+      });
+    };
+
+    self.showCards = function () {
+      self.meals.forEach(function (meal) {
+        meal.show = true;
+      });
+    };
+
+    self.filterBy = function (filterObj) {
+      self.hideCards();
+      clearMarkers(self.markers);
+      _.filter(self.meals, filters(filterObj)).forEach(function (meal) {
+        mealMarkerBinder(meal);
+      });
+    };
+
+    self.filterByGenre = function () {
+      self.filterBy({
+        filterBy: 'genre',
+        val: self.genre
+      });
+    };
 
     self.getMeals = function () {
       MealsFactory.getMealsByCity($state.params.searchTerm)
@@ -38,8 +79,6 @@
           meal.show = true;
           return meal;
         });
-        console.log('got meals');
-
         // pass getLocation the currentCity and a callback
         getLocation($state.params.searchTerm, function (result, status) {
           // create a map using initMap and set it to $scope.map
@@ -55,7 +94,8 @@
               meal.meal.Restaurant.lat,
               meal.meal.Restaurant.lng,
               meal.meal.title);
-            marker.mealID = meal.id;
+
+            marker.mealID = meal.meal.id;
             return marker;
           });
           // show the markers

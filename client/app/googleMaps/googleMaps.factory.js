@@ -24,6 +24,7 @@
     }
     // To show markers, pass each created marker the created map
     function showMarkers (markers, map) {
+      console.log(map);
       for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
       }
