@@ -7,7 +7,7 @@
 
   hostFactory.$inject = ['$http', '$window'];
 
-  function searchFactory ($http, $window) {
+  function hostFactory ($http, $window) {
     var services = {
 
       activate : activate,

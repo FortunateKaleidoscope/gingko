@@ -4,9 +4,9 @@
   angular.module('app')
   .controller('HostCtrl', HostCtrl);
 
-  HostCtrl.$inject = ['$http', '$q', '$log', '$window', 'HostFactory'];
+  HostCtrl.$inject = ['$http', '$q', '$log', '$window', 'hostFactory'];
 
-  function HostCtrl ($http, $q, $log, $window, searchFactory) {
+  function HostCtrl ($http, $q, $log, $window, hostFactory) {
     // TODO: Please verify that this matches the refactored style
     var self = this;
 
@@ -19,10 +19,12 @@
       maxAttendees: self.attendees
     };
 
-    self.attendees = [1,2,3,4,5,6,7,8,9];
+    self.attendees = null;
     self.selectedItem = undefined;
 
-    
+    self.search = function () {
+      self.querySearch(self.searchEntry)
+    };
 
     self.querySearch = function (query) {
       var path = '/api/yelp';
@@ -35,6 +37,7 @@
           self.status = response.status;
           self.iteratee = response.data;
           self.data = [];
+          console.log(response.data)
           _.each(self.iteratee, function (item) {
             if (!item.is_closed && item.rating && item.name && item.url && item.categories && item.phone && item.location) {
               self.data.push({
@@ -66,7 +69,7 @@
     };
 
     self.add = function () {
-      searchFactory.postMeal(self.meal)
+      hostFactory.postMeal(self.meal)
       .then(function (response) {
         $window.location = '/#/home';
       });

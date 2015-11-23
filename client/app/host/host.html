@@ -12,23 +12,27 @@
           <div class="col s12"> <strong>Table Description:</strong>
             <textarea id="textarea1" length="120" placeholder="Describe your Table" class="materialize-textarea"></textarea>
           </div>
+          <div class="col s12"> <strong>Restaurant:</strong>
+            <input ng-keyup="host.search()" placeholder="Find a place to Eat" type="text" ng-model="host.searchEntry">
+            <p ng-repeat="restaurant in host.data">{{restaurant}}</p>
+          </div>
         </div>
         <div class="col s4"> Choose a Date
-          <input placeholder="Enter your Table Date" type="date" class="datepicker card">
+          <input placeholder="Enter your Meal Date" type="date" class="datepicker card">
         </div>
-        <div class="col s4"> Choose a Date
-          <input placeholder="Enter your Table Date" type="text" class="timepicker card">
+        <div class="col s4"> Choose a Time
+          <input placeholder="Enter your Meal Time" type="date" class="timepicker card">
         </div>
-        <div class="col 12">
+        <div class="col 12" ng-model="host.attendees">
           <p>Seats Available at Table</p>
-          <a ng-click="host.toggleActive()" class="waves-effect waves-light btn col s3">1</a>
-          <a ng-click="host.toggleActive()" class="waves-effect waves-light btn col s3">2</a>
-          <a ng-click="host.toggleActive()" class="waves-effect waves-light btn col s3">3</a>
-          <a ng-click="host.toggleActive()" class="waves-effect waves-light btn col s3">4</a>
-          <a ng-click="host.toggleActive()" class="waves-effect waves-light btn col s3">5</a>
-          <a ng-click="host.toggleActive()" class="waves-effect waves-light btn col s3">6</a>
-          <a ng-click="host.toggleActive()" class="waves-effect waves-light btn col s3">7</a>
-          <a ng-click="host.toggleActive()" class="waves-effect waves-light btn col s3">+</a>
+          <a class="waves-effect waves-light btn col s3">1</a>
+          <a class="waves-effect waves-light btn col s3">2</a>
+          <a class="waves-effect waves-light btn col s3">3</a>
+          <a class="waves-effect waves-light btn col s3">4</a>
+          <a class="waves-effect waves-light btn col s3">5</a>
+          <a class="waves-effect waves-light btn col s3">6</a>
+          <a class="waves-effect waves-light btn col s3">7</a>
+          <a class="waves-effect waves-light btn col s3">+</a>
         </div>
       </div>
       <div class="row section orange">
