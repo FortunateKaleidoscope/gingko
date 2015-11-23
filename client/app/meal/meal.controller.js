@@ -16,7 +16,6 @@
     var map;
     self.joinMeal = function () {
       if (!self.joined) {
-        console.log("I Wanna Join");
         return $http({
           method: 'POST',
           url: '/api' + $location.path() + '/join',
@@ -48,7 +47,6 @@
         self.eventPassed = moment(self.data.meal.date).isBefore(moment());
         self.timeToMeal = moment(self.data.meal.date).fromNow();
         self.data.meal.date = moment(self.data.meal.date).calendar();
-        console.log(self.eventPassed);
         var mapCanvas = document.getElementById('map');
 
         var myLatLng = {
