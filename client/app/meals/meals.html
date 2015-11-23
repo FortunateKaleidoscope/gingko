@@ -2,7 +2,7 @@
 <div class="row meals">
   <div class="col s7" id="meals-right">
     <div class="col s12 filters">
-      <div class="section">
+      <div class="section filter">
         <div class="row">
           <div class="col s1">
             <p>Dates</p>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="divider"></div>
-      <div class="section">
+      <div class="section filter">
         <div class="row">
           <div class="col s1">
             <p>Price</p>
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="divider"></div>
-      <div class="section">
+      <div class="section filter">
         <div class="row">
           <div class="col s1">
             <p>Food Type</p>
@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="col s12 grey-bg" id="meal-cards">
-      <div ng-repeat="meal in meals track by $index"class="col s6" id="meal-card">
+      <div ng-repeat="meal in meals track by $index" ng-show="meal.show" class="col s6" id="meal-card">
         <a class="secondary-primary-color panel" ui-sref="meal({mealId: meal.Meals.id})">
           <img height="250" width="100%" src="{{meal.imgUrl}}" alt="meal">
         </a>
@@ -62,7 +62,7 @@
         <img src="/img/kylecho.jpeg" alt="">
         <p>{{meal.Meals.description}}</p>
         <p>{{meal.Meals.title}}</p>
-        <!-- <button ng-click='testFilter(meal)'> TEST </button> -->
+        <button ng-click='mealMarkerBinder(meal)'> TEST </button>
       </div>
     </div>
   </div>

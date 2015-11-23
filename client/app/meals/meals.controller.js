@@ -21,11 +21,11 @@
     var clearMarkers = GoogleMapsFactory.clearMarkers;
     var showMarkers = GoogleMapsFactory.showMarkers;
 
-    self.testFilter = function (meal) {
-      // self.meals.pop();
-      // self.markers.pop();
+    self.mealMarkerBinder = function (meal) {
       meal.show = false;
-      console.log(meal);
+      _.find(self.markers, function (marker) {
+        return meal.id === marker.mealID;
+      }).setMap(null);
     };
 
 

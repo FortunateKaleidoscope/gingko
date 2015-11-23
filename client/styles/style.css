@@ -39,6 +39,11 @@
   height: 100%;
   padding: 0;
 }
+.filter {
+  padding: 0;
+  height: 33.333%;
+}
+
 
 #map {
   height:100%;
