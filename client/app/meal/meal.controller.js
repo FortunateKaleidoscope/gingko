@@ -15,16 +15,18 @@
     self.joined = false;
     var map;
     self.joinMeal = function () {
-      console.log("I Wanna Join");
-      return $http({
-        method: 'POST',
-        url: '/api' + $location.path() + '/join',
-        data: {}
-      })
-      .then(function (response) {
-        self.joined = true;
-        self.getMeal();
-      });
+      if (!self.joined) {
+        console.log("I Wanna Join");
+        return $http({
+          method: 'POST',
+          url: '/api' + $location.path() + '/join',
+          data: {}
+        })
+        .then(function (response) {
+          self.joined = true;
+          self.getMeal();
+        });
+      }
     };
     self.activate = function () {
       self.getMeal();
@@ -39,12 +41,13 @@
       .then(function (response) {
         self.data = response.data;
         //Checks if there are any spots available at table
-        if (self.data.attending.length >= self.data.meal.maxAttendees || moment(self.data.meal.time).isBefore(moment())) {
+        if (self.data.attending.length >= self.data.meal.maxAttendees || moment(self.data.meal.date).isBefore(moment())) {
           //if so disable button
           self.joined = true;
         }
-        self.data.meal.time = moment(self.data.meal.time).calendar();
-        self.eventPassed = moment(self.data.meal.time).isBefore();
+        self.eventPassed = moment(self.data.meal.date).isBefore(moment());
+        self.timeToMeal = moment(self.data.meal.date).fromNow();
+        self.data.meal.date = moment(self.data.meal.date).calendar();
         console.log(self.eventPassed);
         var mapCanvas = document.getElementById('map');
 
