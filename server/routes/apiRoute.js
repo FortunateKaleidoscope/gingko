@@ -10,7 +10,10 @@ module.exports = function (app) {
   app.get('/users/:id', usersController.getUserById);
   app.get('/yelp', externalController.getYelpData);
   app.get('/googleMaps', externalController.getGoogleMaps);
-  app.post('/meals/search/city/', mealsController.getMealsByCity);
+  app.post('/meals/search/city/', function (req, res, next) {
+    console.log(req.body);
+    next();
+  }, mealsController.getMealsByCity);
   app.post('/meals/:id/join', mealsController.joinMeal);
   app.get('/meals/:id/attending', mealsController.getAttendees);
 

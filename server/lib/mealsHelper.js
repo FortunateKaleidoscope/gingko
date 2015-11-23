@@ -73,7 +73,9 @@ module.exports = {
     console.log("My object is ", city );
     return db.Restaurants.findAll({
       where: {
-        city: city
+        city: {
+          $iLike: city
+        }
       },
       include : [{
         model: Meals,
