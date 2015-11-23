@@ -117,6 +117,23 @@ module.exports = {
           console.log("Error joining meal ", err);
         });
       });
-  });
+    });
+  },
+  getAttendees: function (mealId) {
+    return db.Attendees.findAll({
+      where: {
+        MealId: mealId
+      }
+    })
+    .then(function (attendees) {
+      console.log(attendees);
+      return Promise.map(attendees, function (attendee) {
+        return db.Users.find({
+          where: {
+            id: attendee.toJSON().UserId
+          }
+        });
+      });
+    });
   }
 };
