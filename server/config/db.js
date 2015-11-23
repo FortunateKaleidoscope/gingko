@@ -27,11 +27,7 @@ var Meals = db.define("Meals", {
     allowNull: false
   },
   date: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  time: {
-    type: Sequelize.STRING,
+    type: Sequelize.DATE,
     allowNull: false
   },
   description: {

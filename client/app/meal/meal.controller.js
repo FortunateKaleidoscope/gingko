@@ -13,7 +13,6 @@
     self.id = $location.path();
     self.data = null;
     self.joined = false;
-
     var map;
     self.joinMeal = function () {
       console.log("I Wanna Join");
@@ -40,12 +39,13 @@
       .then(function (response) {
         self.data = response.data;
         //Checks if there are any spots available at table
-        if( self.data.attending.length >= self.data.meal.maxAttendees){
+        if (self.data.attending.length >= self.data.meal.maxAttendees || moment(self.data.meal.time).isBefore(moment())) {
           //if so disable button
           self.joined = true;
         }
-      console.log(self.data)
-
+        self.data.meal.time = moment(self.data.meal.time).calendar();
+        self.eventPassed = moment(self.data.meal.time).isBefore();
+        console.log(self.eventPassed);
         var mapCanvas = document.getElementById('map');
 
         var myLatLng = {
