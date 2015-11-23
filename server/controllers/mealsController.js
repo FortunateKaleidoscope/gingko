@@ -50,5 +50,11 @@ module.exports = {
       //error handling
       res.sendStatus(501, err);
     });
+  },
+  joinMeal: function (req, res) {
+    console.log(req.user);
+    meals.joinMeal(req.params.id, req.user.username).then(function (Attendees) {
+      res.sendStatus(201);
+    });
   }
 };

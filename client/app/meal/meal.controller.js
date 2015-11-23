@@ -11,15 +11,23 @@
   function MealCtrl ($http, $location, $window, Map) {
     var self = this;
     self.id = $location.path();
-    self.data;
+    self.data = null;
+    self.joined = false;
     var map;
     self.joinMeal = function () {
       console.log("I Wanna Join");
+      return $http({
+        method: 'POST',
+        url: '/api' + $location.path() + '/join',
+        data: {}
+      })
+      .then(function (response) {
+        self.joined = true;
+      });
     };
     self.activate = function () {
       self.getMeal();
     };
-
     self.getMeal = function () {
       var path = '/api';
       console.log('Getting users from DB, path is: ', path + $location.path());

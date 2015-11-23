@@ -84,7 +84,7 @@ module.exports = {
       },
       include : [{
         model: Meals,
-        include: [db.Users]
+        include: [db.Users, db.Attendees]
       }]
     }).then(function (restaurants) {
       return restaurants;
@@ -92,6 +92,31 @@ module.exports = {
     .catch(function (err) {
       console.log('Error retrieving all meals', err);
     });
+  },
+  joinMeal: function (id, username) {
+    return db.Users.findOne({
+      where: {
+        username: username
+      }
+    })
+    .then(function (user) {
+      return Meals.findOne({
+        where: {
+          id : id
+        }
+      })
+      .then(function (meal) {
+        return db.Attendees.create({
+          MealId: meal.id,
+          UserId: user.id
+        })
+        .then(function (result) {
+          return result;
+        })
+        .catch(function (err) {
+          console.log("Error joining meal ", err);
+        });
+      });
+  });
   }
-
 };
