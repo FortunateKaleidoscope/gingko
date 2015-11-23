@@ -8,13 +8,12 @@
   MealsCtrl.$inject = ["GoogleMapsFactory", 'MealsFactory', '$scope', '$state', "$location", "$window"];
 
   function MealsCtrl (GoogleMapsFactory, MealsFactory, $scope, $state) {
-    console.log('Hellos');
-    // var images = MealsFactory.dummyImages;
     var self = $scope;
     self.meals = [];
     self.markers = [];
     self.loaded = false;
     self.map;
+    self.range = 0;
     var getLocation = GoogleMapsFactory.getLocation;
     var initMap = GoogleMapsFactory.initMap;
     var makeMarker = GoogleMapsFactory.makeMarker;
@@ -33,8 +32,9 @@
       MealsFactory.getMealsByCity($state.params.searchTerm)
       .then(function (data) {
         // Filter out bad data
-        console.log('got data');
+        console.log(data);
         self.meals = data.map(function (meal) {
+          self.range = Math.max(self.range, parseInt(meal.meal.maxAttendees));
           meal.show = true;
           return meal;
         });
@@ -52,9 +52,9 @@
           // makeMarker the map, lat/lng, and the meal title
           self.markers = self.meals.map(function (meal) {
             var marker = makeMarker(self.map,
-              meal.lat,
-              meal.lng,
-              meal.Meals.title);
+              meal.meal.Restaurant.lat,
+              meal.meal.Restaurant.lng,
+              meal.meal.title);
             marker.mealID = meal.id;
             return marker;
           });

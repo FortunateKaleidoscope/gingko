@@ -44,6 +44,9 @@
   height: 33.333%;
 }
 
+.attendees {
+  width: 100px;
+}
 
 #map {
   height:100%;

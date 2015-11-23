@@ -70,22 +70,19 @@ module.exports = {
     });
   },
   getMealsByCity: function (city) {
-    console.log("My object is ", city );
-    return db.Restaurants.findAll({
-      where: {
-        city: {
-          $iLike: city
+    return db.Meals.findAll({
+      include: [{
+        model: db.Restaurants,
+        where: {
+          city: {
+            $iLike: city
+          }
         }
-      },
-      include : [{
-        model: Meals,
-        include: [db.Users]
       }]
-    }).then(function (restaurants) {
-      return restaurants;
-    })
-    .catch(function (err) {
-      console.log('Error retrieving all meals', err);
+    }).then(function (meals) {
+      return Promise.map(meals, function (meal) {
+        return buildMeal(meal);
+      });
     });
   },
   joinMeal: function (id, username) {
