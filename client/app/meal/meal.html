@@ -11,21 +11,24 @@
           <div class="section white"style="height: 390px;">
               <div class="title white-text red lighten-2">{{meal.data.meal.title}}</div>
               <div class="col s6">
-                <div><strong>Host Name: </strong>{{meal.data.user.username}}</div><br>
+                <div><strong>Host Name: </strong>{{meal.data.meal.User.username}}</div><br>
                 <div><strong>Event Time: </strong>{{meal.data.meal.time}} </div><br>
                 <div><strong>Description: </strong>{{meal.data.meal.description}}</div><br>
-                <div><strong>Attendees: </strong>{{meal.data.attendees}} </div><br>
+                <div><strong>Attendees: {{meal.data.attending.length}} / {{meal.data.meal.maxAttendees}}</strong> </div><br>
+                <div ng-repeat="attendee in meal.data.attending track by $index">
+                  <div> {{attendee.username}} </div>
+                </div>
               </div>
               <div class="col s6">
-                <div><strong>Restaurant name:<br> </strong>{{meal.data.restaurant.name}}<span class="right"><img class="large"ng-src="img/star{{meal.data.restaurant.rating}}.png"/></span></div><br>
-                <div><strong>Address:<br> </strong>{{meal.data.restaurant.address[0]}},<br> {{meal.data.restaurant.address[1]}} <span class="right"><img class="circle"ng-src="{{meal.data.restaurant.imgUrl}}"> </div><br>
-                <div><strong>Phone Number:<br> </strong>{{meal.data.restaurant.contact}}</div><br>
-                <div><strong>Website:<br> </strong><a ng-href="{{meal.data.restaurant.url}}">{{meal.data.restaurant.url}}</a></div><br>
+                <div><strong>Restaurant name:<br> </strong>{{meal.data.meal.Restaurant.name}}<span class="right"><img class="large"ng-src="img/star{{meal.data.meal.Restaurant.rating}}.png"/></span></div><br>
+                <div><strong>Address:<br> </strong>{{meal.data.meal.Restaurant.address[0]}},<br> {{meal.data.meal.Restaurant.address[2]}} <span class="right"><img class="circle"ng-src="{{meal.data.meal.Restaurant.imgUrl}}"> </div><br>
+                <div><strong>Phone Number:<br> </strong>{{meal.data.meal.Restaurant.contact}}</div><br>
+                <div><strong>Website:<br> </strong><a ng-href="{{meal.data.meal.Restaurant.url}}">{{meal.data.meal.Restaurant.url}}</a></div><br>
               </div>
           </div>
       </div>
       <div class="col s4 center" style="margin-left: 0px;">
-        <a ng-class="{disabled: meal.joined}" ng-click="meal.joinMeal()" style="width: 100%" class="waves-effect waves-light red lighten-2 btn"><i class="material-icons left">supervisor_account</i>Join Table</a>
+        <a ng-class="{disabled: meal.joined}" ng-disabled="meal.joined" ng-submit="meal.joinMeal()" style="width: 100%" class="waves-effect waves-light red lighten-2 btn"><i class="material-icons left">supervisor_account</i>Join Table</a>
         <div id='map' style="height:350px"></div>
       </div>
     </div>

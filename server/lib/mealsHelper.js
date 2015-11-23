@@ -3,28 +3,16 @@ var Promise = require('bluebird');
 var db = require('../config/db.js');
 
 var buildMeal = function (meal) {
-  return db.Users.findOne({
-        where: {
-          id: meal.UserId
-        }
+    return module.exports.getAttendees(meal.id)
+    .then(function (attendees) {
+        return {
+          meal: meal,
+          attending: attendees
+        };
       })
-      .then(function (user) {
-        return db.Restaurants.findOne({
-          where: {
-            id: meal.RestaurantId
-          }
-        })
-        .then(function (restaurant) {
-          return {
-            meal: meal,
-            user: user,
-            restaurant: restaurant
-          };
-        })
-        .catch(function (err) {
-          console.log("Error building a meal ", err);
-        });
-  });
+      .catch(function (err) {
+        console.log("Error building a meal ", err);
+      });
 };
 
 module.exports = {
@@ -53,6 +41,7 @@ module.exports = {
       date: mealObj.date,
       time: mealObj.time,
       description: mealObj.description,
+      maxAttendees: mealObj.maxAttendees,
       UserId: user.toJSON().id,
       RestaurantId: restaurant.toJSON().id
     })
@@ -67,7 +56,11 @@ module.exports = {
     return Meals.findOne({
       where: {
         id: mealId
-      }
+      },
+      include: [
+        db.Users,
+        db.Restaurants
+      ]
     })
     .then(function (meal) {
       return buildMeal(meal);
@@ -84,7 +77,7 @@ module.exports = {
       },
       include : [{
         model: Meals,
-        include: [db.Users, db.Attendees]
+        include: [db.Users]
       }]
     }).then(function (restaurants) {
       return restaurants;
@@ -126,7 +119,6 @@ module.exports = {
       }
     })
     .then(function (attendees) {
-      console.log(attendees);
       return Promise.map(attendees, function (attendee) {
         return db.Users.find({
           where: {

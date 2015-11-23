@@ -13,6 +13,7 @@
     self.id = $location.path();
     self.data = null;
     self.joined = false;
+
     var map;
     self.joinMeal = function () {
       console.log("I Wanna Join");
@@ -23,6 +24,7 @@
       })
       .then(function (response) {
         self.joined = true;
+        self.getMeal();
       });
     };
     self.activate = function () {
@@ -37,17 +39,22 @@
       })
       .then(function (response) {
         self.data = response.data;
-        console.log(self.data.restaurant);
+        //Checks if there are any spots available at table
+        if( self.data.attending.length >= self.data.meal.maxAttendees){
+          //if so disable button
+          self.joined = true;
+        }
+      console.log(self.data)
 
         var mapCanvas = document.getElementById('map');
 
         var myLatLng = {
-          lat: self.data.restaurant.lat,
-          lng: self.data.restaurant.lng
+          lat: self.data.meal.Restaurant.lat,
+          lng: self.data.meal.Restaurant.lng
         };
 
         var mapOptions = {
-          center: new google.maps.LatLng(self.data.restaurant.lat, self.data.restaurant.lng),
+          center: new google.maps.LatLng(self.data.meal.Restaurant.lat, self.data.meal.Restaurant.lng),
           zoom: 12,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };

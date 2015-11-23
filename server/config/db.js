@@ -37,6 +37,10 @@ var Meals = db.define("Meals", {
   description: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  maxAttendees: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 });
 
