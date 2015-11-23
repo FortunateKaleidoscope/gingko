@@ -3,9 +3,9 @@
   'use strict';
 
   angular.module('app')
-  .factory('searchFactory', searchFactory);
+  .factory('hostFactory', hostFactory);
 
-  searchFactory.$inject = ['$http', '$window'];
+  hostFactory.$inject = ['$http', '$window'];
 
   function searchFactory ($http, $window) {
     var services = {
