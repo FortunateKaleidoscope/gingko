@@ -50,5 +50,16 @@ module.exports = {
       //error handling
       res.sendStatus(501, err);
     });
+  },
+  joinMeal: function (req, res) {
+    meals.joinMeal(req.params.id, req.user.username).then(function (Attendees) {
+      res.sendStatus(201);
+    });
+  },
+  getAttendees: function (req, res) {
+    meals.getAttendees(req.params.id).then(function (Attendees) {
+      console.log(Attendees);
+      res.json(Attendees);
+    });
   }
 };

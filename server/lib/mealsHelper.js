@@ -3,28 +3,16 @@ var Promise = require('bluebird');
 var db = require('../config/db.js');
 
 var buildMeal = function (meal) {
-  return db.Users.findOne({
-        where: {
-          id: meal.UserId
-        }
+    return module.exports.getAttendees(meal.id)
+    .then(function (attendees) {
+        return {
+          meal: meal,
+          attending: attendees
+        };
       })
-      .then(function (user) {
-        return db.Restaurants.findOne({
-          where: {
-            id: meal.RestaurantId
-          }
-        })
-        .then(function (restaurant) {
-          return {
-            meal: meal,
-            user: user,
-            restaurant: restaurant
-          };
-        })
-        .catch(function (err) {
-          console.log("Error building a meal ", err);
-        });
-  });
+      .catch(function (err) {
+        console.log("Error building a meal ", err);
+      });
 };
 
 module.exports = {
@@ -53,6 +41,7 @@ module.exports = {
       date: mealObj.date,
       time: mealObj.time,
       description: mealObj.description,
+      maxAttendees: mealObj.maxAttendees,
       UserId: user.toJSON().id,
       RestaurantId: restaurant.toJSON().id
     })
@@ -67,7 +56,11 @@ module.exports = {
     return Meals.findOne({
       where: {
         id: mealId
-      }
+      },
+      include: [
+        db.Users,
+        db.Restaurants
+      ]
     })
     .then(function (meal) {
       return buildMeal(meal);
@@ -92,6 +85,47 @@ module.exports = {
     .catch(function (err) {
       console.log('Error retrieving all meals', err);
     });
+  },
+  joinMeal: function (id, username) {
+    return db.Users.findOne({
+      where: {
+        username: username
+      }
+    })
+    .then(function (user) {
+      return Meals.findOne({
+        where: {
+          id : id
+        }
+      })
+      .then(function (meal) {
+        return db.Attendees.create({
+          MealId: meal.id,
+          UserId: user.id
+        })
+        .then(function (result) {
+          return result;
+        })
+        .catch(function (err) {
+          console.log("Error joining meal ", err);
+        });
+      });
+    });
+  },
+  getAttendees: function (mealId) {
+    return db.Attendees.findAll({
+      where: {
+        MealId: mealId
+      }
+    })
+    .then(function (attendees) {
+      return Promise.map(attendees, function (attendee) {
+        return db.Users.find({
+          where: {
+            id: attendee.toJSON().UserId
+          }
+        });
+      });
+    });
   }
-
 };

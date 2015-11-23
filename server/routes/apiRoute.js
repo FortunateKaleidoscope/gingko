@@ -11,6 +11,8 @@ module.exports = function (app) {
   app.get('/yelp', externalController.getYelpData);
   app.get('/googleMaps', externalController.getGoogleMaps);
   app.post('/meals/search/city/', mealsController.getMealsByCity);
+  app.post('/meals/:id/join', mealsController.joinMeal);
+  app.get('/meals/:id/attending', mealsController.getAttendees);
 
   //lauren's following routes below:
   // app.post('/users/:id/following', usersController.follow);

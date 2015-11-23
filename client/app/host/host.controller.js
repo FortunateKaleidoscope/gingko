@@ -15,7 +15,8 @@
     self.isDisabled = false;
     // below is a hack for testing, we are struggling to access facebook auth username from client side
     self.meal = {
-      username: 'Cory'
+      username: 'Cory',
+      maxAttendees: self.attendees
     };
 
     self.attendees = [1,2,3,4,5,6,7,8,9];
