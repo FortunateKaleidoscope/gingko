@@ -39,6 +39,16 @@
   height: 100%;
   padding: 0;
 }
+.filter {
+  padding: 0;
+  height: 33.333%;
+}
+
+.attendees {
+  width: 100px;
+  height: 25px;
+  margin: 5px;
+}
 
 #map {
   height:100%;

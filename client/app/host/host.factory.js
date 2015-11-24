@@ -9,10 +9,8 @@
 
   function hostFactory ($http, $window) {
     var services = {
-
       activate : activate,
       postMeal : postMeal
-
     };
 
     return services;
