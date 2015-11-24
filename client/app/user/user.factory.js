@@ -6,7 +6,11 @@
 
   function UserFactory ($http) {
     var services = {
-      getUserInfo: getUserInfo
+      // makes call to /auth/user to get req.user
+      // stores it to localStorage
+      // also returns data as promise
+      getUserInfo: getUserInfo,
+      // returns object from localStorage
       getUser: getUser
     };
     return services;
