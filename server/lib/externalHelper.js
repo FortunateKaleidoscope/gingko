@@ -18,7 +18,6 @@ module.exports = {
       location: 'San+Francisco',
       sort: '0'
     };
-
     var required_parameters = {
       oauth_consumer_key : auth.oauth.consumer_key,
       oauth_token : auth.oauth.token,

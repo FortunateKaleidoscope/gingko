@@ -2,14 +2,14 @@
   'use strict';
 
   angular.module('app')
-  .controller('SearchCtrl', SearchCtrl);
+  .controller('HostCtrl', HostCtrl);
 
-  SearchCtrl.$inject = ['$http', '$q', '$log', '$window', 'searchFactory'];
+  HostCtrl.$inject = ['$http', '$q', '$log', '$window', 'hostFactory'];
 
-  function SearchCtrl ($http, $q, $log, $window, searchFactory) {
+  function HostCtrl ($http, $q, $log, $window, hostFactory) {
     // TODO: Please verify that this matches the refactored style
-
     var self = this;
+
     // below are settings for the md-autocomplete directive
     self.simulateQuery = false;
     self.isDisabled = false;
@@ -18,9 +18,18 @@
       username: 'Cory',
       maxAttendees: self.attendees
     };
-
-    self.attendees = [1,2,3,4,5,6,7,8,9];
+    self.itemSelected = false;
+    self.attendees = null;
     self.selectedItem = undefined;
+
+    self.search = function () {
+      if (self.searchEntry.length > 0) {
+        self.popout = true;
+        self.querySearch(self.searchEntry);
+      } else {
+        self.popout = false;
+      }
+    };
 
     self.querySearch = function (query) {
       var path = '/api/yelp';
@@ -64,7 +73,7 @@
     };
 
     self.add = function () {
-      searchFactory.postMeal(self.meal)
+      hostFactory.postMeal(self.meal)
       .then(function (response) {
         $window.location = '/#/home';
       });

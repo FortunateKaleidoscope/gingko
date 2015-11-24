@@ -3,11 +3,11 @@
   'use strict';
 
   angular.module('app')
-  .factory('searchFactory', searchFactory);
+  .factory('hostFactory', hostFactory);
 
-  searchFactory.$inject = ['$http', '$window'];
+  hostFactory.$inject = ['$http', '$window'];
 
-  function searchFactory ($http, $window) {
+  function hostFactory ($http, $window) {
     var services = {
       activate : activate,
       postMeal : postMeal
