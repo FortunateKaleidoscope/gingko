@@ -4,13 +4,13 @@ module.exports = {
     res.redirect("/");
   },
   loginCallback: function (req, res) {
-    // TODO: We can do JWT here dude.
     res.redirect('/');
   },
   login: function (req, res) {
     res.send("OK");
   },
   getUser: function (req, res) {
+    // TODO: We can do JWT here dude.
     if (req.user) {
       res.json(req.user);
     } else {

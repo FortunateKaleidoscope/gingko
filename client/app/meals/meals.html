@@ -1,5 +1,5 @@
 <!-- <br> -->
-<div class="row meals">
+<div class="row meals" ng-controller="MealsCtrl">
   <div class="col s7" id="meals-right">
     <div class="col s12 filters">
       <div class="section filter">
@@ -7,11 +7,11 @@
           <div class="col s2">
             <p>Dates</p>
           </div>
-          <div class="col s4">
-            <input type="text" placeholder="Date">
+          <div class="col s5">
+            <input ng-change="checkDates()" ng-model="fromDate" placeholder="From" type="date" class="datepicker card">
           </div>
-          <div class="col s4">
-            <input type="text" placeholder="Time">
+          <div class="col s5">
+            <input ng-change="checkDates()"ng-model="untilDate" placeholder="Until" type="date" class="datepicker card">
           </div>
         </div>
       </div>
@@ -21,12 +21,17 @@
           <div class="col s2">
             <p>Attendees</p>
           </div>
-          <div class="col s2" ng-repeat="n in [] | range:range">
-            <a ng-click="filterBy({filterBy: 'attendees', val:$index + 1})" class="btn attendees">{{$index + 1}}</a>
+          <div class="col s6">
+            <p>
+              <div ng-func="filterByAttendees" slider ng-from="from" ng-to="range" start=1 end=10 step=1></div>
+            </p>
+          </div>
+          <div class="col s4 center">
+            <p> From {{from}} to {{range}} attendees</p>
           </div>
         </div>
       </div>
-      
+
       <div class="divider"></div>
       <div class="section filter">
         <div class="row">
@@ -40,16 +45,47 @@
       </div>
     </div>
     <div class="col s12 grey-bg" id="meal-cards">
-      <div ng-repeat="meal in meals track by $index" ng-show="meal.show" class="col s6" id="meal-card">
-        <a class="secondary-primary-color panel" ui-sref="meal({mealId: meal.meal.id})">
-          <img height="250" width="100%" src="{{meal.meal.Restaurant.imgUrl}}" alt="meal">
-        </a>
-        <!-- <img src="graph.facebook.com/v2.5/{{meal.user.facebookId}}/picture" alt=""> -->
-        <img src="/img/kylecho.jpeg" alt="">
-        <p>{{meal.meal.description}}</p>
-        <p>{{meal.meal.title}}</p>
+      <div ng-repeat="meal in meals track by $index" ng-show="meal.show" class="col card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <a ui-sref="meal({mealId: meal.meal.id})">
+            <img src="{{meal.meal.Restaurant.imgUrl}}"/>
+          </a>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">
+            <a ui-sref="meal({mealId: meal.meal.id})">
+              {{meal.meal.title}}
+            </a>
+            <i class="material-icons right">more_vert</i>
+          </span>
+          <p><a href="{{meal.meal.Restaurant.url}}">{{meal.meal.Restaurant.name}}'s Website</a></p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">{{meal.meal.title}} at {{meal.meal.Restaurant.name}}<i class="material-icons right">close</i></span>
+          <p>From: {{meal.meal.date}}</p>
+          <p>Where: {{meal.meal.Restaurant.address.join(' ')}}</p>
+          <p>Number of Guests: {{meal.attending.length}}</p>
+        </div>
       </div>
     </div>
   </div>
   <div class="col s5" id="map"></div>
+  <script>
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+  $('.timepicker').pickatime();
+  $('input#input_text, textarea#textarea1').characterCounter();
+  $('.dropdown-button').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrain_width: true, // Does not change width of dropdown to that of the activator
+        hover: true, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: false, // Displays dropdown below the button
+        alignment: 'left' // Displays dropdown with edge aligned to the left of button
+      }
+    );
+  </script>
 </div>
