@@ -1,7 +1,6 @@
 var meals = require('../lib/mealsHelper');
 var users = require('../lib/usersHelper');
 var restaurants = require('../lib/restaurantHelper');
-var searchBy = require('../lib/util').searchBy;
 module.exports = {
   getMeals: function (req, res) {
     //call helper functions to get all meals
