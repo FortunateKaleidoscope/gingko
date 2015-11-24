@@ -9,5 +9,12 @@ module.exports = {
   },
   login: function (req, res) {
     res.send("OK");
+  },
+  getUser: function (req, res) {
+    if (req.user) {
+      res.json(req.user);
+    } else {
+      res.json({});
+    }
   }
 };

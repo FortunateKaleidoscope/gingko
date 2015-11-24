@@ -2,9 +2,9 @@
 <div class="row meals">
   <div class="col s7" id="meals-right">
     <div class="col s12 filters">
-      <div class="section">
+      <div class="section filter">
         <div class="row">
-          <div class="col s1">
+          <div class="col s2">
             <p>Dates</p>
           </div>
           <div class="col s4">
@@ -13,50 +13,36 @@
           <div class="col s4">
             <input type="text" placeholder="Time">
           </div>
-          <div class="col s3">
-            <input type="text" placeholder="Attendees">
-          </div>
         </div>
       </div>
       <div class="divider"></div>
-      <div class="section">
+      <div class="section filter">
         <div class="row">
-          <div class="col s1">
-            <p>Price</p>
+          <div class="col s2">
+            <p>Attendees</p>
           </div>
-          <div class="col s4">
-            <input type="text" placeholder="Date">
-          </div>
-          <div class="col s4">
-            <input type="text" placeholder="Time">
-          </div>
-          <div class="col s3">
-            <input type="text" placeholder="Attendees">
+          <div class="col s2" ng-repeat="n in [] | range:range">
+            <a ng-click="filterBy({filterBy: 'attendees', val:$index + 1})" class="btn attendees">{{$index + 1}}</a>
           </div>
         </div>
       </div>
+      
       <div class="divider"></div>
-      <div class="section">
+      <div class="section filter">
         <div class="row">
-          <div class="col s1">
+          <div class="col s2">
             <p>Food Type</p>
           </div>
-          <div class="col s4">
-            <input type="text" placeholder="Date">
-          </div>
-          <div class="col s4">
-            <input type="text" placeholder="Time">
-          </div>
-          <div class="col s3">
-            <input type="text" placeholder="Attendees">
+          <div class="col s10">
+            <input ng-keyup="filterByGenre()" ng-model="genre" type="text" placeholder="Genre">
           </div>
         </div>
       </div>
     </div>
     <div class="col s12 grey-bg" id="meal-cards">
-      <div ng-repeat="meal in meals track by $index" class="col s6" id="meal-card">
+      <div ng-repeat="meal in meals track by $index" ng-show="meal.show" class="col s6" id="meal-card">
         <a class="secondary-primary-color panel" ui-sref="meal({mealId: meal.meal.id})">
-          <img height="250" width="100%" src="{{meal.meal.img}}" alt="meal">
+          <img height="250" width="100%" src="{{meal.meal.Restaurant.imgUrl}}" alt="meal">
         </a>
         <!-- <img src="graph.facebook.com/v2.5/{{meal.user.facebookId}}/picture" alt=""> -->
         <img src="/img/kylecho.jpeg" alt="">

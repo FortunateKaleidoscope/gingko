@@ -11,4 +11,5 @@ module.exports = function ( app ) {
   }), authController.loginCallback);
 
   app.get('/logout', authController.logout);
+  app.get('/user', authController.getUser);
 };
