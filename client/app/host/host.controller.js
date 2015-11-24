@@ -26,10 +26,8 @@
     self.toggleMax = function (num) {
       self.maxSelected = num;
       self.meal.maxAttendees = num;
-      console.log("Toggled: ", self.maxSelected);
     };
 
-    self.itemSelected = false;
     self.attendees = null;
     self.selectedItem = undefined;
     self.selectRestaurant = function (restaurant) {
@@ -45,9 +43,8 @@
       }
     };
     self.formatTime = function (date, time) {
-      var result = moment(date, time);
-      console.log(result);
-      self.meal.date = new Date(result).toISOSTring();
+      var result = date + ',' + time;
+      self.meal.date = moment(result).toISOString();
     };
     self.querySearch = function (query) {
       var path = '/api/yelp';
@@ -91,7 +88,8 @@
     };
 
     self.add = function () {
-      console.log(self.meal);
+      self.meal.restaurant = self.selectedItem;
+      self.meal.user = UserFactory.getUser();
       self.formatTime(self.meal.date, self.time);
       hostFactory.postMeal(self.meal)
       .then(function (response) {

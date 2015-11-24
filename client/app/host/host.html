@@ -38,13 +38,13 @@
       <div class="col 12" ng-model="host.attendees">
         <p>Seats Available at Table</p>
         <div ng-repeat="num in host.maxAttendees">
-          <a ng-class="{'active': host.isSelected(num)}"ng-click="host.toggleMax(num)" class="waves-effect waves-light red lighten-2 white-text center col s3 offset-s2 btn-floating">{{num}} {{host.selected}}</a>
+          <a ng-class="{'toggled': host.isSelected(num)}"ng-click="host.toggleMax(num)" class="waves-effect waves-light red lighten-2 white-text center col s3 offset-s2 btn-floating">{{num}} {{host.selected}}</a>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="center col s12">
-        <button ng-click="host.add()"class="center btn waves-effect waves-light red lighten-2 white-text" type="submit" name="action">Host a Table!
+        <button class="center btn waves-effect waves-light red lighten-2 white-text" type="submit" name="action">Host a Table!
         <i class="material-icons right">send</i>
         </button>
       </div>

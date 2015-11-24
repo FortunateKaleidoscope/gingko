@@ -11,7 +11,7 @@
 .smalltext {
   font-size: 15px;
 }
-.active {
+.toggled {
   border: solid 2px black;
 }
 .foodimg {

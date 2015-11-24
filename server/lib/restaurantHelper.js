@@ -13,7 +13,9 @@ module.exports = {
         rating: restaurant.rating.toString(),
         lat: restaurant.coordinate.lat,
         lng: restaurant.coordinate.lng,
-        url: restaurant.url
+        url: restaurant.url,
+        imgUrl: restaurant.imgUrl,
+        categories: restaurant.categories
       }
     })
     .spread(function (restaurant) {
