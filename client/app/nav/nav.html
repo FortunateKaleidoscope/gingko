@@ -1,12 +1,12 @@
-<div ng-controller="navCtrl">
+<div ng-controller="navCtrl as nav">
   <nav class="accent-primary-color">
     <div class="nav-wrapper">
       <a ui-sref="/" class="center brand-logo">TableSurfer</a>
       <a href="#" data-activates="mobile-nav" class="right button-collapse"><i class=""></i></a>
       <ul class="right hide-on-small-and-down">
-        <li><a ui-sref='host'>Host</a></li>
-        <li><a href="/auth/login">Login</a></li>
-        <li><a href="/auth/logout">Logout</a></li>
+        <li><a ng-show="nav.isLoggedIn()" ui-sref='host'>Host</a></li>
+        <li><a ng-hide="nav.isLoggedIn()" href="/auth/login">Login</a></li>
+        <li><a ng-show="nav.isLoggedIn()" href="/auth/logout">Logout</a></li>
       </ul>
       <div class="left">
         <form ng-submit="search(searchInput)">

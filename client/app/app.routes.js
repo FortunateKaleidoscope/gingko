@@ -16,7 +16,8 @@
         url: '/',
         views: {
           top: {
-            templateUrl: 'app/nav/nav.html'
+            templateUrl: 'app/nav/nav.html',
+            controller: 'navCtrl'
           },
           main: {
             templateUrl: 'app/landing/landing.html',
@@ -28,7 +29,8 @@
         url: '/meals?seachBy&searchTerm',
         views: {
           top: {
-            templateUrl: 'app/nav/nav.html'
+            templateUrl: 'app/nav/nav.html',
+            controller: 'navCtrl'
           },
           main: {
             templateUrl: 'app/meals/meals.html',
@@ -41,7 +43,8 @@
         url: '/meals/:mealId',
         views: {
           top: {
-            templateUrl: 'app/nav/nav.html'
+            templateUrl: 'app/nav/nav.html',
+            controller: 'navCtrl'
           },
           main: {
             templateUrl: 'app/meal/meal.html',
@@ -54,7 +57,8 @@
         url: '/host',
         views: {
           top: {
-            templateUrl: 'app/nav/nav.html'
+            templateUrl: 'app/nav/nav.html',
+            controller: 'navCtrl'
           },
           main: {
             templateUrl: 'app/host/host.html',
