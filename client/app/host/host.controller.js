@@ -13,19 +13,28 @@
     // below are settings for the md-autocomplete directive
     self.simulateQuery = false;
     self.isDisabled = false;
-
+    self.maxAttendees = [1,2,3,4,5,6,7,8];
     self.user = UserFactory.getUser().username;
-    //
     self.meal = {
-      username: self.user,
-      maxAttendees: self.attendees
+        username: self.user
     };
+    self.maxSelected = false;
+    self.isSelected = function (num) {
+      return self.maxSelected === num;
+    };
+    //
+    self.toggleMax = function (num) {
+      self.maxSelected = num;
+      self.meal.maxAttendees = num;
+      console.log("Toggled: ", self.maxSelected);
+    };
+
     self.itemSelected = false;
     self.attendees = null;
     self.selectedItem = undefined;
     self.selectRestaurant = function (restaurant) {
         self.selectedItem = restaurant;
-      self.popout = false;
+        self.popout = false;
     };
     self.search = function () {
       if (self.searchEntry.length > 0) {
@@ -35,7 +44,11 @@
         self.popout = false;
       }
     };
-
+    self.formatTime = function (date, time) {
+      var result = moment(date, time);
+      console.log(result);
+      self.meal.date = new Date(result).toISOSTring();
+    };
     self.querySearch = function (query) {
       var path = '/api/yelp';
 
@@ -78,6 +91,8 @@
     };
 
     self.add = function () {
+      console.log(self.meal);
+      self.formatTime(self.meal.date, self.time);
       hostFactory.postMeal(self.meal)
       .then(function (response) {
         $window.location = '/#/home';

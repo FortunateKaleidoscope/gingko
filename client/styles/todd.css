@@ -11,6 +11,9 @@
 .smalltext {
   font-size: 15px;
 }
+.active {
+  border: solid 2px black;
+}
 .foodimg {
   width: 100%;
   height: auto;

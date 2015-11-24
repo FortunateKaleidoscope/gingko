@@ -1,11 +1,11 @@
 <div ng-controller="HostCtrl as host" class="landing valign-wrapper">
-  <form class="container valign">
+  <form ng-submit="host.add()" class="container valign">
     <div class="row section white ">
-      <div class="center red lighten-2 white-text title col s12">HostName Here</div>
+      <div class="center red lighten-2 white-text title col s12">Host: {{host.user}}</div>
       <div class="col s8">
         
         <div class="col s6"> <strong>Table Title:</strong>
-          <input placeholder="Give your Table a Title" type="text">
+          <input ng-model="host.meal.title" placeholder="Give your Table a Title" type="text">
         </div>
         
         <div class="col s6"> <strong>Table City:</strong>
@@ -13,11 +13,11 @@
         </div>
         
         <div class="col s12"> <strong>Table Description:</strong>
-          <textarea id="textarea1" length="120" placeholder="Describe your Table" class="materialize-textarea"></textarea>
+          <textarea ng-model="host.meal.description" id="textarea1" length="120" placeholder="Describe your Table" class="materialize-textarea"></textarea>
         </div>
 
-        <div ng-hide="host.itemSelected" class="col s12"> <strong>Restaurant:</strong>
-          <a data-activates='dropdown1'   class="waves-effect waves-light btn  dropdown-button col s12">Find Your Restaurant </a>
+        <div ng-hide="host.selectedItem" class="col s12"> <strong>Restaurant:</strong>
+          <a data-activates='dropdown1'   class="waves-effect waves-light btn red lighten-2 white-text dropdown-button col s12">Find Your Restaurant </a>
           <ul id="dropdown1" class="dropdown-content">
             <input ng-keyup="host.search()" placeholder="Find a place to Eat" type="text"  ng-model="host.searchEntry">
             <li>
@@ -25,31 +25,26 @@
             </li>
           </ul>
         </div>
-        <div ng-show="host.itemSelected" class="col s12"><strong>Restaurant:</strong>
-          <div class="center">{{host.itemSelected.name}} AWESOME</div>
+        <div ng-show="host.selectedItem" class="col s12"><strong>Restaurant:</strong>
+          <div class="left-align"><strong>{{host.selectedItem.name}}</strong> <span ng-click="host.selectedItem=false" class="right"><a class="waves-effect waves-light btn-flat red lighten-2 white-text center"><i class="material-icons left">search</i>Find New</a></span></div>
           </div>
       </div>
       <div class="col s4"> Choose a Date
-        <input placeholder="Enter your Meal Date" type="date" class="datepicker card">
+        <input ng-model="host.meal.date" placeholder="Enter your Meal Date" type="date" class="datepicker card" required>
       </div>
       <div class="col s4"> Choose a Time
-        <input placeholder="Enter your Meal Time" type="date" class="timepicker card">
+        <input ng-model="host.time" placeholder="Enter your Meal Time" type="date" class="timepicker card" required>
       </div>
       <div class="col 12" ng-model="host.attendees">
         <p>Seats Available at Table</p>
-        <a class="waves-effect waves-light btn col s3">1</a>
-        <a class="waves-effect waves-light btn col s3">2</a>
-        <a class="waves-effect waves-light btn col s3">3</a>
-        <a class="waves-effect waves-light btn col s3">4</a>
-        <a class="waves-effect waves-light btn col s3">5</a>
-        <a class="waves-effect waves-light btn col s3">6</a>
-        <a class="waves-effect waves-light btn col s3">7</a>
-        <a class="waves-effect waves-light btn col s3">+</a>
+        <div ng-repeat="num in host.maxAttendees">
+          <a ng-class="{'active': host.isSelected(num)}"ng-click="host.toggleMax(num)" class="waves-effect waves-light red lighten-2 white-text center col s3 offset-s2 btn-floating">{{num}} {{host.selected}}</a>
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="center col s12">
-        <button class="center btn waves-effect waves-light" type="submit" name="action">Host a Table!
+        <button ng-click="host.add()"class="center btn waves-effect waves-light red lighten-2 white-text" type="submit" name="action">Host a Table!
         <i class="material-icons right">send</i>
         </button>
       </div>
