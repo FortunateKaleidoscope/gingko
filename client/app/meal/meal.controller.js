@@ -6,9 +6,9 @@
   angular.module('app')
   .controller('MealCtrl', MealCtrl);
 
-  MealCtrl.$inject = ['$http', '$location', '$window', 'UserFactory'];
+  MealCtrl.$inject = ['$http', '$location', '$window', 'UserFactory', 'MealFactory'];
 
-  function MealCtrl ($http, $location, $window, UserFactory) {
+  function MealCtrl ($http, $location, $window, UserFactory, MealFactory) {
     var self = this;
     self.id = $location.path();
     self.data = null;
@@ -16,14 +16,10 @@
     self.joinText = "Join Table";
     self.user = UserFactory.getUser().username;
     var map;
-    self.joinMeal = function () {
+    self.joinMeal = function (id) {
       if (!self.joined) {
-        return $http({
-          method: 'POST',
-          url: '/api' + $location.path() + '/join',
-          data: {}
-        })
-        .then(function (response) {
+        MealFactory.joinMeal(id)
+        .then(function () {
           self.joined = true;
           self.getMeal();
         });

@@ -4,9 +4,9 @@
   angular.module('app')
   .controller('HostCtrl', HostCtrl);
 
-  HostCtrl.$inject = ['$http', '$q', '$log', '$window', 'hostFactory', 'UserFactory'];
+  HostCtrl.$inject = ['$http', '$q', '$log', '$window', 'hostFactory', 'UserFactory', 'MealFactory'];
 
-  function HostCtrl ($http, $q, $log, $window, hostFactory, UserFactory) {
+  function HostCtrl ($http, $q, $log, $window, hostFactory, UserFactory, MealFactory) {
     // TODO: Please verify that this matches the refactored style
     var self = this;
 
@@ -93,7 +93,8 @@
       self.formatTime(self.meal.date, self.time);
       hostFactory.postMeal(self.meal)
       .then(function (response) {
-        $window.location = '/#/home';
+        MealFactory.joinMeal(response.id);
+        $window.location = '/#/meals/' + response.id;
       });
     };
 }
