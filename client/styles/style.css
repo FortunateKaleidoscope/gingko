@@ -6,17 +6,21 @@
 #meal-cards {
   height:65%;
   overflow: auto;
-  padding: 0;
+  padding: 20px 5px 10px 5px;
 }
 
 .angular-google-map-container {
   height: 100%;
 }
 
-#meal-card {
-  height: 300px;
-  /*border: 1px solid black;*/
-  padding:5px;
+.card {
+  height: 350px;
+  margin: 0px 20px 20px 0px;
+  width: 47%
+}
+
+.slider {
+  margin-top: 20px;
 }
 
 #meal-card .panel {
