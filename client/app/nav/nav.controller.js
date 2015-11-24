@@ -2,10 +2,14 @@
   angular.module('app')
   .controller('navCtrl', navCtrl);
 
-  navCtrl.$inject = ["$scope", "$state", "$stateParams", "$window", 'UserFactory'];
+  navCtrl.$inject = ["$state", "$stateParams", "$window", 'UserFactory'];
 
-  function navCtrl ($scope, $state, $stateParams, $window, UserFactory) {
-    var self = $scope;
+  function navCtrl ( $state, $stateParams, $window, UserFactory) {
+    var self = this;
+    self.isLoggedIn = function () {
+      return UserFactory.getUser().username !== undefined;
+    };
+
     self.search = function (searchTerm) {
       $state.go('meals', {searchTerm: searchTerm});
     };

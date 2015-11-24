@@ -23,7 +23,6 @@
       return $http({
         url: '/auth/user'
       }).then(function (data) {
-        console.log(data);
         localStorage.setItem('user', JSON.stringify(data.data));
         return data;
       });
