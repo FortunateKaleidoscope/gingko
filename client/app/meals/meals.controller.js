@@ -37,6 +37,11 @@
         genre: function (meal) {
           console.log(meal.meal.Restaurant.categories.match(re));
           return meal.meal.Restaurant.categories.match(re);
+        },
+        date: function (meal) {
+          var date = meal.meal.date;
+          return moment(date).isBefore(self.untilDate) &&
+                 moment(date).isAfter(self.fromDate);
         }
       };
       return filterFunc[filterObj.filterBy];
@@ -69,11 +74,19 @@
       });
     };
 
+    self.checkDates = function () {
+      if (self.fromDate && self.untilDate) {
+        self.filterBy({
+          filterBy: 'date',
+          val: null
+        });
+      }
+    };
+
     self.getMeals = function () {
       MealsFactory.getMealsByCity($state.params.searchTerm)
       .then(function (data) {
-        // Filter out bad data
-        console.log(data);
+        // Init each card as show true
         self.meals = data.map(function (meal) {
           self.range = Math.max(self.range, parseInt(meal.meal.maxAttendees));
           meal.show = true;
