@@ -11,6 +11,7 @@
     };
 
     self.search = function (searchTerm) {
+      console.log(searchTerm);
       $state.go('meals', {searchTerm: searchTerm});
     };
     UserFactory.getUserInfo();

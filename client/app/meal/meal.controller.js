@@ -13,7 +13,7 @@
     self.id = $location.path();
     self.data = null;
     self.joined = false;
-    self.joinText = "Join Table"
+    self.joinText = "Join Table";
     self.user = UserFactory.getUser().username;
     var map;
     self.joinMeal = function () {
@@ -44,7 +44,7 @@
         //check if user is already attending
         self.data.attending.forEach(function (attendee) {
           if ( attendee.username === self.user ) {
-            self.joinText = "You Have Already Joined"
+            self.joinText = "You Have Already Joined";
             self.joined = true;
           }
         });
@@ -64,6 +64,9 @@
         self.timeToMeal = moment(self.data.meal.date).fromNow(); //display time to meal in understandable language
         self.data.meal.date = moment(self.data.meal.date).calendar(); //display time of meal
 
+        if (self.eventPassed) {
+          self.joinText = "Table Already Happened";
+        }
         var mapCanvas = document.getElementById('map');
 
         var myLatLng = {
