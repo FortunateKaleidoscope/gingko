@@ -7,7 +7,7 @@
   function navCtrl ( $state, $stateParams, $window, UserFactory) {
     var self = this;
     self.isLoggedIn = function () {
-      return UserFactory.getUser().username !== undefined;
+      return UserFactory.isLoggedIn();
     };
 
     self.search = function (searchTerm) {

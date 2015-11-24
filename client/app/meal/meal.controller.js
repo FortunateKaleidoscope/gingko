@@ -6,13 +6,15 @@
   angular.module('app')
   .controller('MealCtrl', MealCtrl);
 
-  MealCtrl.$inject = ['$http', '$location', '$window'];
+  MealCtrl.$inject = ['$http', '$location', '$window', 'UserFactory'];
 
-  function MealCtrl ($http, $location, $window, Map) {
+  function MealCtrl ($http, $location, $window, UserFactory) {
     var self = this;
     self.id = $location.path();
     self.data = null;
     self.joined = false;
+    self.joinText = "Join Table";
+    self.user = UserFactory.getUser().username;
     var map;
     self.joinMeal = function () {
       if (!self.joined) {
@@ -39,14 +41,32 @@
       })
       .then(function (response) {
         self.data = response.data;
+        //check if user is already attending
+        self.data.attending.forEach(function (attendee) {
+          if ( attendee.username === self.user ) {
+            self.joinText = "You Have Already Joined";
+            self.joined = true;
+          }
+        });
+        // If not logged in, cannot join table
+        if ( !UserFactory.isLoggedIn() ) {
+          self.joinText = "Log In to Join Table";
+          self.joined = true;
+        }
+
         //Checks if there are any spots available at table
         if (self.data.attending.length >= self.data.meal.maxAttendees || moment(self.data.meal.date).isBefore(moment())) {
           //if so disable button
           self.joined = true;
         }
-        self.eventPassed = moment(self.data.meal.date).isBefore(moment());
-        self.timeToMeal = moment(self.data.meal.date).fromNow();
-        self.data.meal.date = moment(self.data.meal.date).calendar();
+        // Time formating
+        self.eventPassed = moment(self.data.meal.date).isBefore(moment()); //If meal already happened, set to true
+        self.timeToMeal = moment(self.data.meal.date).fromNow(); //display time to meal in understandable language
+        self.data.meal.date = moment(self.data.meal.date).calendar(); //display time of meal
+
+        if (self.eventPassed) {
+          self.joinText = "Table Already Happened";
+        }
         var mapCanvas = document.getElementById('map');
 
         var myLatLng = {

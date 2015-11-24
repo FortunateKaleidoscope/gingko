@@ -14,7 +14,7 @@ module.exports = {
     });
   },
   postMeal: function (req, res) {
-    var userObj = req.user;
+    var userObj = req.body.user;
     var mealObj = req.body;
     var restaurantObj = req.body.restaurant;
     users.getUserById(userObj.id)

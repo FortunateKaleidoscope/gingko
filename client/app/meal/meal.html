@@ -28,7 +28,7 @@
           </div>
       </div>
       <div class="col s4 center" style="margin-left: 0px;">
-        <a ng-class="{disabled: meal.joined}" ng-disabled="meal.joined" ng-click="meal.joinMeal()" style="width: 100%" class="waves-effect waves-light red lighten-2 btn"><i class="material-icons left">supervisor_account</i>Join Table</a>
+        <a ng-class="{disabled: meal.joined}" ng-disabled="meal.joined" ng-click="meal.joinMeal()" style="width: 100%" class="waves-effect waves-light red lighten-2 btn"><i class="material-icons left">supervisor_account</i>{{meal.joinText}}</a>
         <div id='map' style="height:350px"></div>
       </div>
     </div>

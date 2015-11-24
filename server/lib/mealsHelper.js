@@ -39,7 +39,6 @@ module.exports = {
     Meals.create({
       title: mealObj.title,
       date: mealObj.date,
-      time: mealObj.time,
       description: mealObj.description,
       maxAttendees: mealObj.maxAttendees,
       UserId: user.toJSON().id,
