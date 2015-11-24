@@ -11,10 +11,14 @@
       // also returns data as promise
       getUserInfo: getUserInfo,
       // returns object from localStorage
-      getUser: getUser
+      getUser: getUser,
+      // returns boolean on log in status
+      isLoggedIn: isLoggedIn
     };
     return services;
-
+    function isLoggedIn () {
+      return getUser().username !== undefined;
+    }
     function getUser () {
       return JSON.parse(localStorage.getItem('user'));
     }
