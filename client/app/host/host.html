@@ -21,7 +21,7 @@
           <ul id="dropdown1" class="dropdown-content">
             <input ng-keyup="host.search()" placeholder="Find a place to Eat" type="text"  ng-model="host.searchEntry">
             <li>
-              <div class="collapsible-header" ng-show="host.popout" ng-repeat="restaurant in host.data"><strong>Name:</strong> {{restaurant.name}}</div>
+              <div ng-click="host.selectRestaurant(restaurant)"class="collapsible-header" ng-show="host.popout" ng-repeat="restaurant in host.data"><strong>{{restaurant.name}}</strong> <span class="right">{{restaurant.city}}</div>
             </li>
           </ul>
         </div>

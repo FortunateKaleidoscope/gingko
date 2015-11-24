@@ -4,24 +4,29 @@
   angular.module('app')
   .controller('HostCtrl', HostCtrl);
 
-  HostCtrl.$inject = ['$http', '$q', '$log', '$window', 'hostFactory'];
+  HostCtrl.$inject = ['$http', '$q', '$log', '$window', 'hostFactory', 'UserFactory'];
 
-  function HostCtrl ($http, $q, $log, $window, hostFactory) {
+  function HostCtrl ($http, $q, $log, $window, hostFactory, UserFactory) {
     // TODO: Please verify that this matches the refactored style
     var self = this;
 
     // below are settings for the md-autocomplete directive
     self.simulateQuery = false;
     self.isDisabled = false;
-    // below is a hack for testing, we are struggling to access facebook auth username from client side
+
+    self.user = UserFactory.getUser().username;
+    //
     self.meal = {
-      username: 'Cory',
+      username: self.user,
       maxAttendees: self.attendees
     };
     self.itemSelected = false;
     self.attendees = null;
     self.selectedItem = undefined;
-
+    self.selectRestaurant = function (restaurant) {
+        self.selectedItem = restaurant;
+      self.popout = false;
+    };
     self.search = function () {
       if (self.searchEntry.length > 0) {
         self.popout = true;
