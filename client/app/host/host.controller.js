@@ -18,12 +18,17 @@
       username: 'Cory',
       maxAttendees: self.attendees
     };
-
+    self.itemSelected = false;
     self.attendees = null;
     self.selectedItem = undefined;
 
     self.search = function () {
-      self.querySearch(self.searchEntry)
+      if (self.searchEntry.length > 0) {
+        self.popout = true;
+        self.querySearch(self.searchEntry);
+      } else {
+        self.popout = false;
+      }
     };
 
     self.querySearch = function (query) {
@@ -37,7 +42,6 @@
           self.status = response.status;
           self.iteratee = response.data;
           self.data = [];
-          console.log(response.data)
           _.each(self.iteratee, function (item) {
             if (!item.is_closed && item.rating && item.name && item.url && item.categories && item.phone && item.location) {
               self.data.push({

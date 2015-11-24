@@ -1,58 +1,76 @@
 <div ng-controller="HostCtrl as host" class="landing valign-wrapper">
   <form class="container valign">
-      <div class="row section white ">
-        <div class="center red lighten-2 white-text title col s12">HostName Here</div>
-        <div class="col s8">
-          <div class="col s6"> <strong>Table Title:</strong>
-            <input placeholder="Give your Table a Title" type="text">
-          </div>
-          <div class="col s6"> <strong>Table City:</strong>
-            <input placeholder="Enter a City" type="text">
-          </div>
-          <div class="col s12"> <strong>Table Description:</strong>
-            <textarea id="textarea1" length="120" placeholder="Describe your Table" class="materialize-textarea"></textarea>
-          </div>
-          <div class="col s12"> <strong>Restaurant:</strong>
-            <input ng-keyup="host.search()" placeholder="Find a place to Eat" type="text" ng-model="host.searchEntry">
-            <p ng-repeat="restaurant in host.data">{{restaurant}}</p>
-          </div>
+    <div class="row section white ">
+      <div class="center red lighten-2 white-text title col s12">HostName Here</div>
+      <div class="col s8">
+        
+        <div class="col s6"> <strong>Table Title:</strong>
+          <input placeholder="Give your Table a Title" type="text">
         </div>
-        <div class="col s4"> Choose a Date
-          <input placeholder="Enter your Meal Date" type="date" class="datepicker card">
+        
+        <div class="col s6"> <strong>Table City:</strong>
+          <input placeholder="Enter a City" type="text">
         </div>
-        <div class="col s4"> Choose a Time
-          <input placeholder="Enter your Meal Time" type="date" class="timepicker card">
+        
+        <div class="col s12"> <strong>Table Description:</strong>
+          <textarea id="textarea1" length="120" placeholder="Describe your Table" class="materialize-textarea"></textarea>
         </div>
-        <div class="col 12" ng-model="host.attendees">
-          <p>Seats Available at Table</p>
-          <a class="waves-effect waves-light btn col s3">1</a>
-          <a class="waves-effect waves-light btn col s3">2</a>
-          <a class="waves-effect waves-light btn col s3">3</a>
-          <a class="waves-effect waves-light btn col s3">4</a>
-          <a class="waves-effect waves-light btn col s3">5</a>
-          <a class="waves-effect waves-light btn col s3">6</a>
-          <a class="waves-effect waves-light btn col s3">7</a>
-          <a class="waves-effect waves-light btn col s3">+</a>
+
+        <div ng-hide="host.itemSelected" class="col s12"> <strong>Restaurant:</strong>
+          <a data-activates='dropdown1'   class="waves-effect waves-light btn  dropdown-button col s12">Find Your Restaurant </a>
+          <ul id="dropdown1" class="dropdown-content">
+            <input ng-keyup="host.search()" placeholder="Find a place to Eat" type="text"  ng-model="host.searchEntry">
+            <li>
+              <div class="collapsible-header" ng-show="host.popout" ng-repeat="restaurant in host.data"><strong>Name:</strong> {{restaurant.name}}</div>
+            </li>
+          </ul>
         </div>
+        <div ng-show="host.itemSelected" class="col s12"><strong>Restaurant:</strong>
+          <div class="center">{{host.itemSelected.name}} AWESOME</div>
+          </div>
       </div>
-      <div class="row section orange">
-        <div class="col s4">Find A Restaurant button here</div>
+      <div class="col s4"> Choose a Date
+        <input placeholder="Enter your Meal Date" type="date" class="datepicker card">
       </div>
+      <div class="col s4"> Choose a Time
+        <input placeholder="Enter your Meal Time" type="date" class="timepicker card">
+      </div>
+      <div class="col 12" ng-model="host.attendees">
+        <p>Seats Available at Table</p>
+        <a class="waves-effect waves-light btn col s3">1</a>
+        <a class="waves-effect waves-light btn col s3">2</a>
+        <a class="waves-effect waves-light btn col s3">3</a>
+        <a class="waves-effect waves-light btn col s3">4</a>
+        <a class="waves-effect waves-light btn col s3">5</a>
+        <a class="waves-effect waves-light btn col s3">6</a>
+        <a class="waves-effect waves-light btn col s3">7</a>
+        <a class="waves-effect waves-light btn col s3">+</a>
+      </div>
+    </div>
     <div class="row">
       <div class="center col s12">
         <button class="center btn waves-effect waves-light" type="submit" name="action">Host a Table!
-          <i class="material-icons right">send</i>
+        <i class="material-icons right">send</i>
         </button>
       </div>
     </div>
   </form>
-
 </div>
 <script>
 $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-  })
+selectMonths: true, // Creates a dropdown to control month
+selectYears: 15 // Creates a dropdown of 15 years to control year
+})
 $('.timepicker').pickatime();
 $('input#input_text, textarea#textarea1').characterCounter();
+$('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: true, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left' // Displays dropdown with edge aligned to the left of button
+    }
+  );
 </script>
