@@ -15,6 +15,7 @@
     self.genre = '';
     self.map;
     self.range = 0;
+    self.from = 1;
     var getLocation = GoogleMapsFactory.getLocation;
     var initMap = GoogleMapsFactory.initMap;
     var makeMarker = GoogleMapsFactory.makeMarker;
@@ -32,7 +33,8 @@
       var re = new RegExp(filterObj.val, 'gi');
       var filterFunc = {
         attendees: function (meal) {
-          return meal.meal.maxAttendees >= filterObj.val;
+          return meal.meal.maxAttendees >= filterObj.val.from &&
+                 meal.meal.maxAttendees <= filterObj.val.to;
         },
         genre: function (meal) {
           console.log(meal.meal.Restaurant.categories.match(re));
@@ -71,6 +73,17 @@
       self.filterBy({
         filterBy: 'genre',
         val: self.genre
+      });
+    };
+
+    self.filterByAttendees = function (from, until) {
+      console.log(from, until);
+      self.filterBy({
+        filterBy: 'attendees',
+        val: {
+          from: from,
+          to: until
+        }
       });
     };
 
