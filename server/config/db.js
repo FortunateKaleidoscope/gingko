@@ -1,12 +1,23 @@
 var Sequelize = require("sequelize");
 
 //Unsure if we need password, come back to this
-
-var db = new Sequelize("tablesurfer", "admin", "admin", {
-  dialect: "postgres", // or 'sqlite', mysql', 'mariadb'
-  port: 5432,
-  logging: false //(for postgres)
-});
+if ( process.env['DATABASE_URL'] !== undefined ) {
+  //Heroku settings
+  var match = process.env.DATABASE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
+  var db = new Sequelize(match[5], match[1], match[2], {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    port: match[4],
+    host: match[3],
+    logging: false
+  });
+} else {
+  var db = new Sequelize("tablesurfer", "admin", "admin", {
+    dialect: "postgres", // or 'sqlite', mysql', 'mariadb'
+    port: 5432,
+    logging: false //(for postgres)
+  });
+}
 
 var Users = db.define("Users", {
   //here we will have to figure out the data from facebook on authentication
