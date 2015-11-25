@@ -44,7 +44,7 @@
     </div>
     <div class="row">
       <div class="center col s12">
-        <button class="center btn waves-effect waves-light red lighten-2 white-text" type="submit" name="action">Host a Table!
+        <button ng-class="{'disabled': host.isValidMeal()}"class="center btn waves-effect waves-light red lighten-2 white-text" ng-disable="host.isValidMeal()" type="submit" name="action">Host a Table!
         <i class="material-icons right">send</i>
         </button>
       </div>

@@ -7,44 +7,57 @@
   HostCtrl.$inject = ['$http', '$q', '$log', '$window', 'hostFactory', 'UserFactory', 'MealFactory'];
 
   function HostCtrl ($http, $q, $log, $window, hostFactory, UserFactory, MealFactory) {
-    // TODO: Please verify that this matches the refactored style
     var self = this;
 
-    // below are settings for the md-autocomplete directive
-    self.simulateQuery = false;
-    self.isDisabled = false;
+    // Range of max attendees for ng-repeat
     self.maxAttendees = [1,2,3,4,5,6,7,8];
-    self.user = UserFactory.getUser().username;
-    self.meal = {
-        username: self.user
-    };
+
+    // Initializing max selected to false
     self.maxSelected = false;
+
+    // Checks to see if number provided matches max selected
     self.isSelected = function (num) {
       return self.maxSelected === num;
     };
-    //
+
+    // Sets max attendees for meal, used to put toggled class on element
     self.toggleMax = function (num) {
       self.maxSelected = num;
       self.meal.maxAttendees = num;
     };
+    // Reads user from local storage
+    self.user = UserFactory.getUser().username;
 
-    self.attendees = null;
+    // Initialization of meal object
+    self.meal = {
+        username: self.user
+    };
+    // Checks to see if all required fields are filled out, returns boolean
+    self.isValidMeal = function () {
+      return ( !self.maxSelected || self.selectedItem === undefined || self.meal.title === '' || self.meal.description === '' || self.meal.date === '' || self.time === '');
+    };
+
+    // self.attendees = null;
+    // Initialize selected item to undefined
     self.selectedItem = undefined;
+
+    // Sets selected item to restaurant object
     self.selectRestaurant = function (restaurant) {
         self.selectedItem = restaurant;
+        // closes dropdown
         self.popout = false;
     };
     self.search = function () {
+      //Only does search if search box has more than 0 characters
       if (self.searchEntry.length > 0) {
+        // opens dropdown
         self.popout = true;
+        // runs search query
         self.querySearch(self.searchEntry);
       } else {
+        // closes dropdown
         self.popout = false;
       }
-    };
-    self.formatTime = function (date, time) {
-      var result = date + ',' + time;
-      self.meal.date = moment(result).toISOString();
     };
     self.querySearch = function (query) {
       var path = '/api/yelp';
@@ -86,16 +99,24 @@
         });
 
     };
+    // Converts time from picker to ISO string
+    self.formatTime = function (date, time) {
+      var result = date + ',' + time;
+      //saves it into meal object
+      self.meal.date = moment(result).toISOString();
+    };
 
     self.add = function () {
-      self.meal.restaurant = self.selectedItem;
-      self.meal.user = UserFactory.getUser();
-      self.formatTime(self.meal.date, self.time);
-      hostFactory.postMeal(self.meal)
-      .then(function (response) {
-        MealFactory.joinMeal(response.id);
-        $window.location = '/#/meals/' + response.id;
-      });
+      if (!self.isValidMeal()) {
+        self.meal.restaurant = self.selectedItem;
+        self.meal.user = UserFactory.getUser();
+        self.formatTime(self.meal.date, self.time);
+        hostFactory.postMeal(self.meal)
+        .then(function (response) {
+          MealFactory.joinMeal(response.id);
+          $window.location = '/#/meals/' + response.id;
+        });
+      }
     };
 }
 })();
