@@ -16,6 +16,8 @@
       isLoggedIn: isLoggedIn
     };
     return services;
+
+    // Returns boolean of logged in status of user
     function isLoggedIn () {
       return getUser().username !== undefined;
     }
@@ -27,6 +29,7 @@
       return $http({
         url: '/auth/user'
       }).then(function (data) {
+        // Saves user object from server to local storage for reference
         localStorage.setItem('user', JSON.stringify(data.data));
         return data;
       });

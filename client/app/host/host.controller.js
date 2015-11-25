@@ -107,13 +107,20 @@
     };
 
     self.add = function () {
+      // Checks if all fields are provided
       if (!self.isValidMeal()) {
+        //sets the restaurant onto meal object
         self.meal.restaurant = self.selectedItem;
+        //includes user object
         self.meal.user = UserFactory.getUser();
+        //formats time into ISO string
         self.formatTime(self.meal.date, self.time);
+
         hostFactory.postMeal(self.meal)
         .then(function (response) {
+          // Has host attend meal automatically
           MealFactory.joinMeal(response.id);
+          // Redirects to meal detail page of new meal
           $window.location = '/#/meals/' + response.id;
         });
       }

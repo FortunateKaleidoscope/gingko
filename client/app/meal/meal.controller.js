@@ -12,14 +12,21 @@
     var self = this;
     self.id = $location.path();
     self.data = null;
+
+    //initialiazes join flag and join button text
     self.joined = false;
     self.joinText = "Join Table";
+
     self.user = UserFactory.getUser().username;
+
     var map;
+
     self.joinMeal = function (id) {
+      // Only joins meal if flag is false
       if (!self.joined) {
         MealFactory.joinMeal(id)
         .then(function () {
+          // toggle flag and reload view
           self.joined = true;
           self.getMeal();
         });
@@ -40,6 +47,7 @@
         //check if user is already attending
         self.data.attending.forEach(function (attendee) {
           if ( attendee.username === self.user ) {
+            //prevents user from joining
             self.joinText = "You Have Already Joined";
             self.joined = true;
           }
@@ -52,7 +60,7 @@
 
         //Checks if there are any spots available at table
         if (self.data.attending.length >= self.data.meal.maxAttendees || moment(self.data.meal.date).isBefore(moment())) {
-          //if so disable button
+          //if not, disables button
           self.joined = true;
         }
         // Time formating
@@ -63,6 +71,8 @@
         if (self.eventPassed) {
           self.joinText = "Table Already Happened";
         }
+
+        // Google map drawing and placing of marker based on lat and lng from Yelp
         var mapCanvas = document.getElementById('map');
 
         var myLatLng = {
