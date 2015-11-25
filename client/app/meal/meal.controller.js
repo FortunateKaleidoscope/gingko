@@ -17,7 +17,7 @@
     self.joined = false;
     self.joinText = "Join Table";
 
-    self.user = UserFactory.getUser().username;
+    self.user = UserFactory.getUser();
 
     var map;
 
@@ -46,7 +46,7 @@
         self.data = response.data;
         //check if user is already attending
         self.data.attending.forEach(function (attendee) {
-          if ( attendee.username === self.user ) {
+          if ( attendee.username === self.user.username ) {
             //prevents user from joining
             self.joinText = "You Have Already Joined";
             self.joined = true;

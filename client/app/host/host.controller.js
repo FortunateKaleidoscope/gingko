@@ -26,11 +26,11 @@
       self.meal.maxAttendees = num;
     };
     // Reads user from local storage
-    self.user = UserFactory.getUser().username;
+    self.user = UserFactory.getUser();
 
     // Initialization of meal object
     self.meal = {
-        username: self.user
+        username: self.user.username
     };
     // Checks to see if all required fields are filled out, returns boolean
     self.isValidMeal = function () {

@@ -16,7 +16,7 @@
                 <div><strong>Description: </strong>{{meal.data.meal.description}}</div><br>
                 <div><strong>Attendees: {{meal.data.attending.length}} / {{meal.data.meal.maxAttendees}}</strong> </div><br>
                 <div ng-repeat="attendee in meal.data.attending track by $index">
-                  <div> {{attendee.username}} </div>
+                  <div class="chip"> {{attendee.username}} <img class="circle" ng-src="http://graph.facebook.com/v2.5/{{attendee.facebookId}}/picture?type=small"> </div>
                 </div>
               </div>
               <div class="col s6">
