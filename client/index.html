@@ -2,49 +2,55 @@
 <html>
   <head>
     <title>TableSurfers</title>
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="lib/Materialize/dist/css/materialize.css" />
-    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="lib/pickadate/lib/themes/default.css" />
+    <link rel="stylesheet" type="text/css" href="lib/pickadate/lib/themes/default.date.css" />
+    <link rel="stylesheet" type="text/css" href="lib/pickadate/lib/themes/default.time.css" />
     <link rel="stylesheet" type="text/css" href="styles/todd.css" />
     <link rel="stylesheet" href="styles/colors.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <link rel="stylesheet" href="lib/nouislider/jquery.nouislider.css" />
     <meta charset="utf-8" />
   </head>
   <body ng-app="app">
-
     <!-- adding site and application content here -->
     <div ui-view="top"></div>
     <div ui-view="main"></div>
 
-
     <!-- bower start -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
     <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/pickadate/lib/picker.js"></script>
+    <script src="lib/pickadate/lib/picker.date.js"></script>
+    <script src="lib/pickadate/lib/picker.time.js"></script>
+    <script src="lib/moment/moment.js"></script>
+    <script src="lib/Materialize/dist/js/materialize.js"></script>
     <script src="lib/lodash/lodash.min.js"></script>
     <script src="lib/angular/angular.js"></script>
-    <script src="lib/Materialize/dist/js/materialize.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="lib/angular-aria/angular-aria.js"></script>
-    <script src="lib/angular-animate/angular-animate.js"></script>
-    <script src="lib/angular-messages/angular-messages.js"></script>
-    <script src="lib/angular-material/angular-material.js"></script>
-    <script src="lib/angular-cookies/angular-cookies.js"></script>
-    <script src="lib/angular-resource/angular-resource.js"></script>
-    <script src="lib/angular-sanitize/angular-sanitize.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="lib/nouislider/jquery.nouislider.js"></script>
+    <script src="lib/nouislider/Link.js"></script>
+    <script src="app/directives/nouislider.js"></script>
     <!-- bower end -->
 
     <!-- js inject start -->
     <script src="app/app.module.js" charset="utf-8"></script>
-    <script src="app/app.routes.js" charset="utf-8"></script>
+    <script src="app/user/user.factory.js" charset="utf-8"></script>
     <script src="app/landing/landing.controller.js" charset="utf-8"></script>
     <script src="app/nav/nav.controller.js" charset="utf-8"></script>
-    <script src="app/landing/landing.factory.js" charset="utf-8"></script>
     <script src="app/meal/meal.controller.js" charset="utf-8"></script>
     <script src="app/meal/meal.factory.js" charset="utf-8"></script>
     <script src="app/host/host.controller.js" charset="utf-8"></script>
     <script src="app/host/host.factory.js" charset="utf-8"></script>
+    <script src="app/googleMaps/googleMaps.factory.js"></script>
+    <script src="app/filters/range.filter.js" charset="utf-8"></script>
     <script src="app/meals/meals.controller.js" charset="utf-8"></script>
     <script src="app/meals/meals.factory.js" charset="utf-8"></script>
+    <script src="app/app.routes.js" charset="utf-8"></script>
     <!-- js inject end -->
+
 
   </body>
 </html>

@@ -2,7 +2,7 @@ var external = require('../lib/externalHelper');
 var qs = require('querystring');
 
 module.exports = {
-  getYelpData: function (req,res) {
+  requestYelp: function (req,res) {
     var params = {
       term: req.query.term,
       limit: "10"

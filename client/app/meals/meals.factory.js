@@ -2,20 +2,19 @@
   'use strict';
 
   angular.module('app')
-  .factory('homeFactory', homeFactory);
+  .factory('MealsFactory', MealsFactory);
 
-  homeFactory.$inject = ['$http'];
+  MealsFactory.$inject = ['$http'];
 
-  function homeFactory ($http) {
+  function MealsFactory ($http) {
     var services = {
-      getMeals : getMeals,
+      getMealsByCity : getMealsByCity,
       getEvent : getEvent
     };
 
     return services;
 
     function getEvent (id) {
-      console.log("id", id);
       return $http({
       method: 'GET',
       url: '/api/meals/' + id
@@ -26,18 +25,15 @@
       });
     }
 
-    function getMeals () {
+    function getMealsByCity (city) {
       return $http({
-      method: 'GET',
-      url: '/api/meals'
+      method: 'POST',
+      url: '/api/meals/search/city',
+      data: {searchTerm: city}
       })
       .then(function (response) {
         return response.data;
       });
-      // .catch(function (err) {
-      //
-      //   return window.dummyMeals;
-      // });
     }
   }
 })();

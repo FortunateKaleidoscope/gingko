@@ -2,25 +2,63 @@
   'use strict';
 
   angular.module('app')
-  .controller('SearchCtrl', SearchCtrl);
+  .controller('HostCtrl', HostCtrl);
 
-  SearchCtrl.$inject = ['$http', '$q', '$log', '$window', 'searchFactory'];
+  HostCtrl.$inject = ['$http', '$q', '$log', '$window', 'hostFactory', 'UserFactory', 'MealFactory'];
 
-  function SearchCtrl ($http, $q, $log, $window, searchFactory) {
-    // TODO: Please verify that this matches the refactored style
-
+  function HostCtrl ($http, $q, $log, $window, hostFactory, UserFactory, MealFactory) {
     var self = this;
-    // below are settings for the md-autocomplete directive
-    self.simulateQuery = false;
-    self.isDisabled = false;
-    // below is a hack for testing, we are struggling to access facebook auth username from client side
-    self.meal = {
-      username: 'Cory'
+
+    // Range of max attendees for ng-repeat
+    self.maxAttendees = [1,2,3,4,5,6,7,8];
+
+    // Initializing max selected to false
+    self.maxSelected = false;
+
+    // Checks to see if number provided matches max selected
+    self.isSelected = function (num) {
+      return self.maxSelected === num;
     };
 
-    self.attendees = [1,2,3,4,5,6,7,8,9];
+    // Sets max attendees for meal, used to put toggled class on element
+    self.toggleMax = function (num) {
+      self.maxSelected = num;
+      self.meal.maxAttendees = num;
+    };
+    // Reads user from local storage
+    self.user = UserFactory.getUser();
+
+    // Initialization of meal object
+    self.meal = {
+        username: self.user.username
+    };
+    // Checks to see if all required fields are filled out, returns boolean
+    self.isValidMeal = function () {
+      return ( !self.maxSelected || self.selectedItem === undefined || self.meal.title === '' || self.meal.description === '' || self.meal.date === '' || self.time === '');
+    };
+
+    // self.attendees = null;
+    // Initialize selected item to undefined
     self.selectedItem = undefined;
 
+    // Sets selected item to restaurant object
+    self.selectRestaurant = function (restaurant) {
+        self.selectedItem = restaurant;
+        // closes dropdown
+        self.popout = false;
+    };
+    self.search = function () {
+      //Only does search if search box has more than 0 characters
+      if (self.searchEntry.length > 0) {
+        // opens dropdown
+        self.popout = true;
+        // runs search query
+        self.querySearch(self.searchEntry);
+      } else {
+        // closes dropdown
+        self.popout = false;
+      }
+    };
     self.querySearch = function (query) {
       var path = '/api/yelp';
 
@@ -61,12 +99,31 @@
         });
 
     };
+    // Converts time from picker to ISO string
+    self.formatTime = function (date, time) {
+      var result = date + ',' + time;
+      //saves it into meal object
+      self.meal.date = moment(result).toISOString();
+    };
 
     self.add = function () {
-      searchFactory.postMeal(self.meal)
-      .then(function (response) {
-        $window.location = '/#/home';
-      });
+      // Checks if all fields are provided
+      if (!self.isValidMeal()) {
+        //sets the restaurant onto meal object
+        self.meal.restaurant = self.selectedItem;
+        //includes user object
+        self.meal.user = UserFactory.getUser();
+        //formats time into ISO string
+        self.formatTime(self.meal.date, self.time);
+
+        hostFactory.postMeal(self.meal)
+        .then(function (response) {
+          // Has host attend meal automatically
+          MealFactory.joinMeal(response.id);
+          // Redirects to meal detail page of new meal
+          $window.location = '/#/meals/' + response.id;
+        });
+      }
     };
 }
 })();

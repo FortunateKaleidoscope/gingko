@@ -8,9 +8,11 @@ module.exports = function (app) {
   app.get('/meals/:id', mealsController.getMealById);
   app.get('/users', usersController.getUsers);
   app.get('/users/:id', usersController.getUserById);
-  app.get('/yelp', externalController.getYelpData);
+  app.get('/yelp', externalController.requestYelp);
   app.get('/googleMaps', externalController.getGoogleMaps);
   app.post('/meals/search/city/', mealsController.getMealsByCity);
+  app.post('/meals/:id/join', mealsController.joinMeal);
+  app.get('/meals/:id/attending', mealsController.getAttendees);
 
   //lauren's following routes below:
   // app.post('/users/:id/following', usersController.follow);

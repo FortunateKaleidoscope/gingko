@@ -1,7 +1,6 @@
 var meals = require('../lib/mealsHelper');
 var users = require('../lib/usersHelper');
 var restaurants = require('../lib/restaurantHelper');
-var searchBy = require('../lib/util').searchBy;
 module.exports = {
   getMeals: function (req, res) {
     //call helper functions to get all meals
@@ -15,7 +14,7 @@ module.exports = {
     });
   },
   postMeal: function (req, res) {
-    var userObj = req.user;
+    var userObj = req.body.user;
     var mealObj = req.body;
     var restaurantObj = req.body.restaurant;
     users.getUserById(userObj.id)
@@ -49,6 +48,17 @@ module.exports = {
     .catch(function (err) {
       //error handling
       res.sendStatus(501, err);
+    });
+  },
+  joinMeal: function (req, res) {
+    meals.joinMeal(req.params.id, req.user.username).then(function (Attendees) {
+      res.sendStatus(201);
+    });
+  },
+  getAttendees: function (req, res) {
+    meals.getAttendees(req.params.id).then(function (Attendees) {
+      console.log(Attendees);
+      res.json(Attendees);
     });
   }
 };

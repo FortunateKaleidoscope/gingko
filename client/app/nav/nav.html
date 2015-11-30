@@ -1,17 +1,18 @@
-<div ng-controller="navCtrl">
+<div ng-controller="navCtrl as nav">
   <nav class="accent-primary-color">
     <div class="nav-wrapper">
       <a ui-sref="/" class="center brand-logo">TableSurfer</a>
-      <a href="#" data-activates="mobile-nav" class="right button-collapse"><i class="mdi-navigation-more-vert"></i></a>
-      <ul class="right hide-on-small-and-down">
-        <li><a ui-sref='host'>Host</a></li>
-        <li><a href="/auth/login">Login</a></li>
-        <li><a href="/auth/logout">Logout</a></li>
+      <a href="#" data-activates="mobile-nav" class="right button-collapse"><i class="mdi-view_headline"></i></a>
+      <img ng-show="nav.isLoggedIn()" class="circle right profilePic" ng-src="http://graph.facebook.com/v2.5/{{nav.user.facebookId}}/picture?type=small">
+      <ul class="right hide-on-small-and-down marginFix">
+        <li><a ng-show="nav.isLoggedIn()" ui-sref='host'>Host</a></li>
+        <li><a ng-hide="nav.isLoggedIn()" href="/auth/login">Login</a></li>
+        <li><a ng-show="nav.isLoggedIn()" href="/auth/logout">Logout</a></li>
       </ul>
       <div class="left">
-        <form ng-submit="search(searchInput)">
+        <form ng-submit="nav.search(searchInput)">
           <div class="input-field">
-            <input type="search" id="search-field" class="field" required maxlength="" placeholder="Search By City"ng-model="searchInput">
+            <input type="search" id="search-field" class="field" required placeholder="Search By City"ng-model="searchInput">
             <label for="search-field"><i class="mdi-action-search"></i></label>
             <i class="mdi-navigation-close close"></i>
           </div>
@@ -20,3 +21,7 @@
     </div>
   </nav>
 </div>
+
+<script>
+$(".button-collapse").sideNav();
+</script>

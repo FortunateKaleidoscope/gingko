@@ -1,77 +1,71 @@
-<div id="search">
-  <div ng-controller="SearchCtrl as vm" layout="column" ng-cloak class="md-inline-form">
-    <md-content layout-padding layout="column">
-      <form ng-submit="vm.add()">
-        <md-card class="search-card">
-          <!-- user event details start -->
-            <md-input-container flex>
-              <label>Your TableSurfers Event Name</label>
-              <textarea ng-model="vm.meal.title" columns="1" rows="1"></textarea>
-            </md-input-container>
+<div ng-controller="HostCtrl as host" class="landing valign-wrapper">
+  <form ng-submit="host.add()" class="container valign">
+    <div class="row section white ">
+      <div class="center red lighten-2 white-text title col s12">Host: {{host.user.username}} <img class="right circle" ng-src="http://graph.facebook.com/v2.5/{{host.user.facebookId}}/picture?type=small"></div>
+      <div class="col s8">
+        
+        <div class="col s6"> <strong>Table Title:</strong>
+          <input ng-model="host.meal.title" placeholder="Give your Table a Title" type="text">
+        </div>
+        
+        <div class="col s6"> <strong>Table City:</strong>
+          <input placeholder="Enter a City" type="text">
+        </div>
+        
+        <div class="col s12"> <strong>Table Description:</strong>
+          <textarea ng-model="host.meal.description" id="textarea1" length="120" placeholder="Describe your Table" class="materialize-textarea"></textarea>
+        </div>
 
-            <!-- md autocomplete settings + start -->
-            <md-autocomplete
-                md-selected-item="vm.meal.restaurant"
-                md-search-text="vm.searchText"
-                md-items="item in vm.querySearch(vm.searchText)"
-                md-item-text="item.name"
-                md-min-length="1"
-                md-floating-label="Where do you want to eat? Search Yelp."
-                md-menu-class="autocomplete-search">
-              <span md-highlight-text="vm.searchText">{{item.name}}</span>
-              <!-- autocomplete display start -->
-              <md-item-template>
-                <span class="item-name">
-                  <span><strong> {{item.name}} </strong></span>
-                </span>
-                <span class="item-metadata">
-                  <span class="item-metastat">
-                    <span>phone {{item.phone}}</span>
-                  </span>
-                </span>
-              </md-item-template>
-              <md-not-found>
-                <span>Sorry, no resturaunts found! Please try again!</span>
-              </md-not-found>
-              <!-- autcomplete display end -->
-            </md-autocomplete>
-            <!-- md autocomplete settings end -->
-
-            <!-- md-datepicker, span required to prevent rolling off edge -->
-            <span>
-              <md-datepicker
-                ng-model="vm.meal.date"
-                ng-required="true"
-                md-placeholder="Enter Date"
-                aria-haspopup="true">
-              </md-datepicker>
-            </span>
-
-            <!-- time input -->
-            <md-input-container flex>
-              <input type="time" ng-model="vm.meal.time" placeholder="What time do you want to host?">
-            </md-input-container>
-
-            <!-- num of attendess -->
-            <md-select ng-model="vm.meal.attendees" placeholder="How many other Surfers can join?">
-              <md-option ng-value="number" ng-repeat="number in vm.attendees">{{ number }}</md-option>
-            </md-select>
-
-
-            <!-- event desc. -->
-            <md-input-container flex>
-              <label>Please describe your TS meal:</label>
-              <textarea ng-model="vm.meal.description" columns="1" md-maxlength="300" rows="5"></textarea>
-            </md-input-container>
-
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-            <md-button type="submit" class="md-raised md-primary" ng-disabled="!vm.meal.title || !vm.meal.restaurant || !vm.meal.date || !vm.meal.time || !vm.meal.attendees || !vm.meal.description">Add</md-button>
-          </section>
-        </md-card>
-        <!-- user submission end -->
-
-      </form>
-    </md-content>
-  </div>
-
+        <div ng-hide="host.selectedItem" class="col s12"> <strong>Restaurant:</strong>
+          <a data-activates='dropdown1'   class="waves-effect waves-light btn red lighten-2 white-text dropdown-button col s12">Find Your Restaurant </a>
+          <ul id="dropdown1" class="dropdown-content">
+            <input ng-keyup="host.search()" placeholder="Find a place to Eat" type="text"  ng-model="host.searchEntry">
+            <li>
+              <div ng-click="host.selectRestaurant(restaurant)"class="collapsible-header" ng-show="host.popout" ng-repeat="restaurant in host.data"><strong>{{restaurant.name}}</strong> <span class="right">{{restaurant.city}}</div>
+            </li>
+          </ul>
+        </div>
+        <div ng-show="host.selectedItem" class="col s12"><strong>Restaurant:</strong>
+          <div class="left-align"><strong>{{host.selectedItem.name}}</strong> <span ng-click="host.selectedItem=false" class="right"><a class="waves-effect waves-light btn-flat red lighten-2 white-text center"><i class="material-icons left">search</i>Find New</a></span></div>
+          </div>
+      </div>
+      <div class="col s4"> Choose a Date
+        <input ng-model="host.meal.date" placeholder="Enter your Meal Date" type="date" class="datepicker card" required>
+      </div>
+      <div class="col s4"> Choose a Time
+        <input ng-model="host.time" placeholder="Enter your Meal Time" type="date" class="timepicker card" required>
+      </div>
+      <div class="col 12" ng-model="host.attendees">
+        <p>Seats Available at Table</p>
+        <div ng-repeat="num in host.maxAttendees">
+          <a ng-class="{'toggled': host.isSelected(num)}"ng-click="host.toggleMax(num)" class="waves-effect waves-light red lighten-2 white-text center col s3 offset-s2 btn-floating">{{num}} {{host.selected}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="center col s12">
+        <button ng-class="{'disabled': host.isValidMeal()}"class="center btn waves-effect waves-light red lighten-2 white-text" ng-disable="host.isValidMeal()" type="submit" name="action">Host a Table!
+        <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+  </form>
 </div>
+<script>
+$('.datepicker').pickadate({
+selectMonths: true, // Creates a dropdown to control month
+selectYears: 15 // Creates a dropdown of 15 years to control year
+})
+$('.timepicker').pickatime();
+$('input#input_text, textarea#textarea1').characterCounter();
+$('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: true, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left' // Displays dropdown with edge aligned to the left of button
+    }
+  );
+</script>

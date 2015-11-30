@@ -3,28 +3,16 @@ var Promise = require('bluebird');
 var db = require('../config/db.js');
 
 var buildMeal = function (meal) {
-  return db.Users.findOne({
-        where: {
-          id: meal.UserId
-        }
+    return module.exports.getAttendees(meal.id)
+    .then(function (attendees) {
+        return {
+          meal: meal,
+          attending: attendees
+        };
       })
-      .then(function (user) {
-        return db.Restaurants.findOne({
-          where: {
-            id: meal.RestaurantId
-          }
-        })
-        .then(function (restaurant) {
-          return {
-            meal: meal,
-            user: user,
-            restaurant: restaurant
-          };
-        })
-        .catch(function (err) {
-          console.log("Error building a meal ", err);
-        });
-  });
+      .catch(function (err) {
+        console.log("Error building a meal ", err);
+      });
 };
 
 module.exports = {
@@ -51,8 +39,8 @@ module.exports = {
     Meals.create({
       title: mealObj.title,
       date: mealObj.date,
-      time: mealObj.time,
       description: mealObj.description,
+      maxAttendees: mealObj.maxAttendees,
       UserId: user.toJSON().id,
       RestaurantId: restaurant.toJSON().id
     })
@@ -67,7 +55,11 @@ module.exports = {
     return Meals.findOne({
       where: {
         id: mealId
-      }
+      },
+      include: [
+        db.Users,
+        db.Restaurants
+      ]
     })
     .then(function (meal) {
       return buildMeal(meal);
@@ -77,21 +69,61 @@ module.exports = {
     });
   },
   getMealsByCity: function (city) {
-    console.log("My object is ", city );
-    return db.Restaurants.findAll({
-      where: {
-        city: city
-      },
-      include : [{
-        model: Meals,
-        include: [db.Users]
+    return db.Meals.findAll({
+      include: [{
+        model: db.Restaurants,
+        where: {
+          city: {
+            $iLike: city
+          }
+        }
       }]
-    }).then(function (restaurants) {
-      return restaurants;
+    }).then(function (meals) {
+      return Promise.map(meals, function (meal) {
+        return buildMeal(meal);
+      });
+    });
+  },
+  joinMeal: function (id, username) {
+    return db.Users.findOne({
+      where: {
+        username: username
+      }
     })
-    .catch(function (err) {
-      console.log('Error retrieving all meals', err);
+    .then(function (user) {
+      return Meals.findOne({
+        where: {
+          id : id
+        }
+      })
+      .then(function (meal) {
+        return db.Attendees.create({
+          MealId: meal.id,
+          UserId: user.id
+        })
+        .then(function (result) {
+          return result;
+        })
+        .catch(function (err) {
+          console.log("Error joining meal ", err);
+        });
+      });
+    });
+  },
+  getAttendees: function (mealId) {
+    return db.Attendees.findAll({
+      where: {
+        MealId: mealId
+      }
+    })
+    .then(function (attendees) {
+      return Promise.map(attendees, function (attendee) {
+        return db.Users.find({
+          where: {
+            id: attendee.toJSON().UserId
+          }
+        });
+      });
     });
   }
-
 };
