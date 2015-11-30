@@ -1,7 +1,7 @@
 <div id="meal" ng-controller="MealCtrl as meal">
 <!-- <h5> You are currently visiting meal: {{ meal.id }} </h5> -->
   <div class="row">
-    <img class="foodimg" ng-src="img/meal.jpg"/> 
+    <img class="foodimg" ng-src="{{meal.data.meal.Restaurant.imgUrl}}o.jpg"/> 
     <!-- ^ change this to refer to rasturant.image -->
   </div>
 
