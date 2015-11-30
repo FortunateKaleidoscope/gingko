@@ -1,7 +1,8 @@
 <div id="meal" ng-controller="MealCtrl as meal">
 <!-- <h5> You are currently visiting meal: {{ meal.id }} </h5> -->
   <div class="row">
-    <img class="foodimg" ng-src="img/meal.jpg"/>
+    <img class="foodimg" ng-src="img/meal.jpg"/> 
+    <!-- ^ change this to refer to rasturant.image -->
   </div>
 
   <div class="row mealinfo">
@@ -20,7 +21,7 @@
               </div>
               <div class="col s6">
                 <div><strong>Restaurant name:<br> </strong>{{meal.data.meal.Restaurant.name}}<span class="right"><img class="large"ng-src="img/star{{meal.data.meal.Restaurant.rating}}.png"/></span></div><br>
-                <div><strong>Address:<br> </strong>{{meal.data.meal.Restaurant.address[0]}},<br> {{meal.data.meal.Restaurant.address[2]}} <span class="right"><img class="circle"ng-src="{{meal.data.meal.Restaurant.imgUrl}}"> </div><br>
+                <div><strong>Address:<br> </strong>{{meal.data.meal.Restaurant.address[0]}},<br> {{meal.data.meal.Restaurant.address[2]}} <span class="right"><img class="circle"ng-src="{{meal.data.meal.Restaurant.imgUrl}}o.jpg"> </div><br>
                 <div><strong>Phone Number:<br> </strong>{{meal.data.meal.Restaurant.contact}}</div><br>
                 <div><strong>Website:<br> </strong><a ng-href="{{meal.data.meal.Restaurant.url}}">{{meal.data.meal.Restaurant.url}}</a></div><br>
               </div>
@@ -31,13 +32,5 @@
         <div id='map' style="height:350px"></div>
       </div>
     </div>
-<<<<<<< HEAD
-    <div class="col s4 center" style="margin-left: 0px;">
-      <a ng-click="meal.joinMeal()" class="waves-effect waves-light red lighten-2 btn"><i class="material-icons left">supervisor_account</i>Join Table</a>
-      <div id='map' style="height:350px"></div>
-    </div>
-=======
   </div>
-
->>>>>>> master
 </div>
