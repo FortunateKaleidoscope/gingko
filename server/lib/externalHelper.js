@@ -14,7 +14,6 @@ module.exports = {
     var httpMethod = 'GET';
     var url = 'http://api.yelp.com/v2/search';
 
-    // TODO: set location to whatever city is specified
     var default_parameters = {
       location: 'San+Francisco',
       sort: '0'

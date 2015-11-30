@@ -3,15 +3,15 @@
     <div class="row section white ">
       <div class="center red lighten-2 white-text title col s12">Host: {{host.user.username}} <img class="right circle" ng-src="http://graph.facebook.com/v2.5/{{host.user.facebookId}}/picture?type=small"></div>
       <div class="col s8">
-        
+
         <div class="col s6"> <strong>Table Title:</strong>
           <input ng-model="host.meal.title" placeholder="Give your Table a Title" type="text">
         </div>
-        
+
         <div class="col s6"> <strong>Table City:</strong>
-          <input placeholder="Enter a City" type="text">
+          <input ng-model="host.city" placeholder="Enter a City" type="text">
         </div>
-        
+
         <div class="col s12"> <strong>Table Description:</strong>
           <textarea ng-model="host.meal.description" id="textarea1" length="120" placeholder="Describe your Table" class="materialize-textarea"></textarea>
         </div>

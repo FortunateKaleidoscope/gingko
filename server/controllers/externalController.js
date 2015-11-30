@@ -2,11 +2,12 @@ var external = require('../lib/externalHelper');
 var qs = require('querystring');
 
 module.exports = {
-  requestYelp: function (req,res) {
+  requestYelp: function (req, res) {
     // Builds paramater object to pass to yelp
     var params = {
       term: req.query.term,
-      limit: "10"
+      limit: "10",
+      location: req.query.city.replace(' ', '+')
     };
     // Calls helper and feeds in param object
     external.requestYelp(params).then(function (data) {
