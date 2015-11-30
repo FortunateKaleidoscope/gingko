@@ -6,10 +6,7 @@ module.exports = {
   getMeals: function (req, res) {
     //call helper functions to get all meals
     meals.getAll().then(function (meals) {
-      //on success, respond with all meals
-      res.json(meals.filter(function (meal) {
-        return moment(meal.meal.date).isAfter(Date.now());
-      }));
+      res.json(meals);
     })
     .catch(function (err) {
       // error handling
@@ -53,7 +50,10 @@ module.exports = {
     // Sends search term to helper function for db query
     meals.getMealsByCity(req.body.searchTerm).then(function (meals) {
       // Sends any meals that match search function
-      res.json(meals);
+      var currentMeals = meals.filter(function (meal) {
+        return moment(meal.meal.date).isAfter(Date.now());
+      });
+      res.json(currentMeals);
     })
     .catch(function (err) {
       // Error handling
