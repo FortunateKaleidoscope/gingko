@@ -29,7 +29,6 @@ var Users = db.define("Users", {
     type: Sequelize.STRING,
     allowNull: true
   }
-
 });
 
 var Meals = db.define("Meals", {
@@ -101,7 +100,6 @@ var Restaurants = db.define("Restaurants", {
     type: Sequelize.FLOAT,
     allowNull: false
   }
-
 });
 
 //this creates restaurant foreign key for meal
@@ -124,7 +122,7 @@ Users.belongsToMany(Meals, { through: 'Attendees' });
 Meals.belongsToMany(Users, { through: 'Attendees' });
 
 
-//LAUREN
+//Lauren's followers table
 Users.belongsToMany(Users, {
   as: 'Followers',
   through: 'Followers_join'
