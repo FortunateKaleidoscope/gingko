@@ -51,11 +51,19 @@ server
     // db schema
     // middleware setup
     // passport setup for facebook auth
-  --- controllers
+  --- controllers (message handling)
     // Auth
-    // external api's
-  --- lib
+    // external api
+    // Meals
+    // Users
+  --- lib (utility functions)
+    // external api
+    // Meals
+    // Restaurant
+    // Users
   --- routes
+    // Api routes
+    // Auth routes
   --- server-config.js
   --- server.js
 ```
