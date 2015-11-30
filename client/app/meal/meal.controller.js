@@ -21,7 +21,6 @@
     var map;
 
     self.joinMeal = function (id) {
-      console.log(id);
       // Only joins meal if flag is false
       if (!self.joined) {
         MealFactory.joinMeal(id)
