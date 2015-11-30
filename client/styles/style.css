@@ -13,12 +13,6 @@
   height: 100%;
 }
 
-.host-chip {
-  position: relative;
-  top: 180px;
-  z-index: 1;
-}
-
 .card-header {
   padding: 5px;
 }
