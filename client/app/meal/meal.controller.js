@@ -6,24 +6,27 @@
   angular.module('app')
   .controller('MealCtrl', MealCtrl);
 
-  MealCtrl.$inject = ['$http', '$location', '$window', 'UserFactory'];
+  MealCtrl.$inject = ['$http', '$location', '$window', 'UserFactory', 'MealFactory'];
 
-  function MealCtrl ($http, $location, $window, UserFactory) {
+  function MealCtrl ($http, $location, $window, UserFactory, MealFactory) {
     var self = this;
     self.id = $location.path();
     self.data = null;
+
+    //initialiazes join flag and join button text
     self.joined = false;
     self.joinText = "Join Table";
-    self.user = UserFactory.getUser().username;
+
+    self.user = UserFactory.getUser();
+
     var map;
-    self.joinMeal = function () {
+
+    self.joinMeal = function (id) {
+      // Only joins meal if flag is false
       if (!self.joined) {
-        return $http({
-          method: 'POST',
-          url: '/api' + $location.path() + '/join',
-          data: {}
-        })
-        .then(function (response) {
+        MealFactory.joinMeal(id)
+        .then(function () {
+          // toggle flag and reload view
           self.joined = true;
           self.getMeal();
         });
@@ -43,7 +46,8 @@
         self.data = response.data;
         //check if user is already attending
         self.data.attending.forEach(function (attendee) {
-          if ( attendee.username === self.user ) {
+          if ( attendee.username === self.user.username ) {
+            //prevents user from joining
             self.joinText = "You Have Already Joined";
             self.joined = true;
           }
@@ -56,7 +60,7 @@
 
         //Checks if there are any spots available at table
         if (self.data.attending.length >= self.data.meal.maxAttendees || moment(self.data.meal.date).isBefore(moment())) {
-          //if so disable button
+          //if not, disables button
           self.joined = true;
         }
         // Time formating
@@ -67,6 +71,8 @@
         if (self.eventPassed) {
           self.joinText = "Table Already Happened";
         }
+
+        // Google map drawing and placing of marker based on lat and lng from Yelp
         var mapCanvas = document.getElementById('map');
 
         var myLatLng = {

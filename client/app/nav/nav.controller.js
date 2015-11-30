@@ -6,7 +6,10 @@
 
   function navCtrl ( $state, $stateParams, $window, UserFactory) {
     var self = this;
+
+    // Returns boolean concerning user logged status, used in conditional formatting
     self.isLoggedIn = function () {
+      self.user = UserFactory.getUser();
       return UserFactory.isLoggedIn();
     };
 

@@ -16,7 +16,7 @@
                 <div><strong>Description: </strong>{{meal.data.meal.description}}</div><br>
                 <div><strong>Attendees: {{meal.data.attending.length}} / {{meal.data.meal.maxAttendees}}</strong> </div><br>
                 <div ng-repeat="attendee in meal.data.attending track by $index">
-                  <div> {{attendee.username}} </div>
+                  <div class="chip"> {{attendee.username}} <img class="circle" ng-src="http://graph.facebook.com/v2.5/{{attendee.facebookId}}/picture?type=small"> </div>
                 </div>
               </div>
               <div class="col s6">
@@ -28,7 +28,7 @@
           </div>
       </div>
       <div class="col s4 center" style="margin-left: 0px;">
-        <a ng-class="{disabled: meal.joined}" ng-disabled="meal.joined" ng-click="meal.joinMeal()" style="width: 100%" class="waves-effect waves-light red lighten-2 btn"><i class="material-icons left">supervisor_account</i>{{meal.joinText}}</a>
+        <a ng-class="{disabled: meal.joined}" ng-disabled="meal.joined" ng-click="meal.joinMeal(meal.id)" style="width: 100%" class="waves-effect waves-light red lighten-2 btn"><i class="material-icons left">supervisor_account</i>{{meal.joinText}}</a>
         <div id='map' style="height:350px"></div>
       </div>
     </div>
