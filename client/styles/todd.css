@@ -14,6 +14,13 @@
 .toggled {
   border: solid 2px black;
 }
+.marginFix {
+  margin: 0;
+  height: 50px;
+}
+.profilePic {
+  margin: 7px 3px 0 0;
+}
 .foodimg {
   width: 100%;
   height: auto;

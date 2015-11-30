@@ -1,7 +1,7 @@
 <div ng-controller="HostCtrl as host" class="landing valign-wrapper">
   <form ng-submit="host.add()" class="container valign">
     <div class="row section white ">
-      <div class="center red lighten-2 white-text title col s12">Host: {{host.user}}</div>
+      <div class="center red lighten-2 white-text title col s12">Host: {{host.user.username}} <img class="right circle" ng-src="http://graph.facebook.com/v2.5/{{host.user.facebookId}}/picture?type=small"></div>
       <div class="col s8">
         
         <div class="col s6"> <strong>Table Title:</strong>
@@ -44,7 +44,7 @@
     </div>
     <div class="row">
       <div class="center col s12">
-        <button class="center btn waves-effect waves-light red lighten-2 white-text" type="submit" name="action">Host a Table!
+        <button ng-class="{'disabled': host.isValidMeal()}"class="center btn waves-effect waves-light red lighten-2 white-text" ng-disable="host.isValidMeal()" type="submit" name="action">Host a Table!
         <i class="material-icons right">send</i>
         </button>
       </div>
