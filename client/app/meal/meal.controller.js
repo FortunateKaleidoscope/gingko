@@ -10,7 +10,6 @@
 
   function MealCtrl ($http, $location, $window, UserFactory, MealFactory) {
     var self = this;
-    self.id = $location.path();
     self.data = null;
 
     //initialiazes join flag and join button text
@@ -22,6 +21,7 @@
     var map;
 
     self.joinMeal = function (id) {
+      console.log(id);
       // Only joins meal if flag is false
       if (!self.joined) {
         MealFactory.joinMeal(id)
