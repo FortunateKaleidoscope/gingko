@@ -4,13 +4,13 @@
       <div class="center red lighten-2 white-text title col s12">Host: {{host.user.username}} <img class="right circle" ng-src="http://graph.facebook.com/v2.5/{{host.user.facebookId}}/picture?type=small"></div>
       <div class="col s8">
         
-        <div class="col s6"> <strong>Table Title:</strong>
+        <div class="col s12"> <strong>Table Title:</strong>
           <input ng-model="host.meal.title" placeholder="Give your Table a Title" type="text">
         </div>
         
-        <div class="col s6"> <strong>Table City:</strong>
+<!--         <div class="col s6"> <strong>Table City:</strong>
           <input placeholder="Enter a City" type="text">
-        </div>
+        </div> -->
         
         <div class="col s12"> <strong>Table Description:</strong>
           <textarea ng-model="host.meal.description" id="textarea1" length="120" placeholder="Describe your Table" class="materialize-textarea"></textarea>
@@ -35,7 +35,8 @@
       <div class="col s4"> Choose a Time
         <input ng-model="host.time" placeholder="Enter your Meal Time" type="date" class="timepicker card" required>
       </div>
-      <div class="col 12" ng-model="host.attendees">
+
+      <div class="col s4" ng-model="host.attendees">
         <p>Seats Available at Table</p>
         <div ng-repeat="num in host.maxAttendees">
           <a ng-class="{'toggled': host.isSelected(num)}"ng-click="host.toggleMax(num)" class="waves-effect waves-light red lighten-2 white-text center col s3 offset-s2 btn-floating">{{num}} {{host.selected}}</a>
