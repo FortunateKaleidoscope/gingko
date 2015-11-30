@@ -1,12 +1,15 @@
 var meals = require('../lib/mealsHelper');
 var users = require('../lib/usersHelper');
 var restaurants = require('../lib/restaurantHelper');
+var moment = require('moment');
 module.exports = {
   getMeals: function (req, res) {
     //call helper functions to get all meals
     meals.getAll().then(function (meals) {
       //on success, respond with all meals
-      res.json(meals);
+      res.json(meals.filter(function (meal) {
+        return moment(meal.meal.date).isAfter(Date.now());
+      }));
     })
     .catch(function (err) {
       // error handling
