@@ -15,7 +15,8 @@ if (process.env['facebookAuth.callbackURL'] !== undefined) {
     yelp: {
       consumerSecret: process.env['yelp.consumerSecret'],
       tokenSecret: process.env['yelp.tokenSecret']
-    }
+    },
+    SESSION_SECRET: process.env['SESSION_SECRET']
   };
 
 } else {

@@ -2,6 +2,7 @@ var Promise = require('bluebird');
 var db = require('../config/db.js');
 
 module.exports = {
+  // Takes a restaurant object and does a findOrCreate
   findOrCreate: function (restaurant) {
     return db.Restaurants.findOrCreate({
       where: {
@@ -14,6 +15,9 @@ module.exports = {
         lat: restaurant.coordinate.lat,
         lng: restaurant.coordinate.lng,
         url: restaurant.url,
+        // yelp hands back a url for a small picture
+        // by slicing off ms.jpg, we can specify what size image we want
+        // on the client side
         imgUrl: restaurant.imgUrl.replace('ms.jpg', ''),
         categories: restaurant.categories
       }

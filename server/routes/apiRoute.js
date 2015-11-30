@@ -13,9 +13,4 @@ module.exports = function (app) {
   app.post('/meals/search/city/', mealsController.getMealsByCity);
   app.post('/meals/:id/join', mealsController.joinMeal);
   app.get('/meals/:id/attending', mealsController.getAttendees);
-
-  //lauren's following routes below:
-  // app.post('/users/:id/following', usersController.follow);
-  // app.delete('/users/:id/following', usersController.unfollow);
-  app.get('/users/:id/following', usersController.getAllFollowing);
 };
