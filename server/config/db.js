@@ -28,10 +28,6 @@ var Users = db.define("Users", {
   facebookId: {
     type: Sequelize.STRING,
     allowNull: true
-  },
-  userImage: {
-    type: Sequelize.STRING,
-    allowNull: true
   }
 });
 
@@ -102,10 +98,6 @@ var Restaurants = db.define("Restaurants", {
   },
   lng: {
     type: Sequelize.FLOAT,
-    allowNull: false
-  },
-  restaurantImage: {
-    type: Sequelize.STRING,
     allowNull: false
   }
 });
