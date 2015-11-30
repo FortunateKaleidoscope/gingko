@@ -87,7 +87,7 @@ module.exports = {
             $iLike: city
           }
         }
-      }]
+      }, db.Users]
     }).then(function (meals) {
       return Promise.map(meals, function (meal) {
         return buildMeal(meal);
