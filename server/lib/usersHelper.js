@@ -2,6 +2,7 @@ var db = require('../config/db');
 var Promise = require('bluebird');
 
 module.exports = {
+  // finds user by id
   getUserById: function (userId) {
     return db.Users.findOne({
       where: {
@@ -15,17 +16,8 @@ module.exports = {
       console.log("Error retrieving user by Id ", err);
     });
   },
-  getUsers: function () {
-    return db.Users.findAll()
-    .then(function (users) {
-      return users;
-    })
-    .catch(function (err) {
-      console.log("Error retrieving all users ", err);
-    });
-  },
+  // finds or creates a new user
   findOrCreateUser: function (user) {
-    console.log(user);
     return db.Users.findOrCreate({
       where: {
         username: user.displayName,

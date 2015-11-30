@@ -3,7 +3,6 @@ var passport = require('passport');
 var configAuth = require('./auth.js');
 var usersHelper = require('../lib/usersHelper');
 
-// TODO: Serialize/deserialize user
 passport.serializeUser(function (user, done) {
   done(null, user);
 });
@@ -18,9 +17,10 @@ passport.use(new FacebookStrategy({
   callbackURL: configAuth.facebookAuth.callbackURL
 }, function (token, refreshToken, profile, done) {
   process.nextTick(function () {
+    // Passport sends us the facebook profile as an object
+    // we then do a findOrCreate on the user
     usersHelper.findOrCreateUser(profile)
       .then( function (user) {
-        console.log('added user to db, ', user.toJSON());
         done(null, user.toJSON());
       });
   });

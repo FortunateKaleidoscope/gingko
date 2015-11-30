@@ -12,15 +12,15 @@ if ( process.env['DATABASE_URL'] !== undefined ) {
     logging: false
   });
 } else {
-  var db = new Sequelize("tablesurfer", "admin", "admin", {
+  var db = new Sequelize("tablesurfer", 'admin', 'admin', {
     dialect: "postgres", // or 'sqlite', mysql', 'mariadb'
     port: 5432,
     logging: false //(for postgres)
   });
 }
 
+// Stores data from facebook
 var Users = db.define("Users", {
-  //here we will have to figure out the data from facebook on authentication
   username: {
     type: Sequelize.STRING,
     allowNull: false
@@ -50,13 +50,12 @@ var Meals = db.define("Meals", {
   }
 });
 
-//users should hasmany meals ?
-//change this later
-// Player.belongsTo(Team); // Will add a TeamId attribute to Player to hold the primary key value for Team
+// A user can have many meals
+// a meal can only have one host
 Users.hasMany(Meals);
 Meals.belongsTo(Users);
 
-
+// Stores the restaurant data in db
 var Restaurants = db.define("Restaurants", {
   name: {
     type: Sequelize.STRING,
@@ -74,7 +73,6 @@ var Restaurants = db.define("Restaurants", {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: false
   },
-  // TODO: Create categories
   categories: {
     type: Sequelize.STRING,
     allowNull: false
@@ -102,31 +100,20 @@ var Restaurants = db.define("Restaurants", {
   }
 });
 
-//this creates restaurant foreign key for meal
-//this is also wrong
+// A restaurant can have many Meals
+// A meal can only have one Restaurant
 Restaurants.hasMany(Meals);
 Meals.belongsTo(Restaurants);
-/**
-  *
-  *
-  *  ¯\_(ツ)_/¯ - Is this the correct way to do associations?
-  *
-  *
-  */
-// Meals.hasOne(Restaurants);
 
+// Join table
 var Attendees = db.define("Attendees", {
 });
 
+// Users can have many meals
+// Meals can have many users
+// Connects it through attendees
 Users.belongsToMany(Meals, { through: 'Attendees' });
 Meals.belongsToMany(Users, { through: 'Attendees' });
-
-
-//Lauren's followers table
-Users.belongsToMany(Users, {
-  as: 'Followers',
-  through: 'Followers_join'
-});
 
 db.sync();
 
