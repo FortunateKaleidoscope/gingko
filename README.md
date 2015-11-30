@@ -3,14 +3,13 @@
 ## Team
 
 * **Product Owner**
-  * [David Tsai](https://github.com/tsaiDavid)
+  * [Todd Levin](https://github.com/tlevin)
 * **Scrum Master**
-  * [Bjarke Staun](https://github.com/bjarkestaun)
+  * [Lauren Mendoza](https://github.com/loorinm)
 * **Development Team**
-  * [Anna Rogers](https://github.com/muddybarefeet)
-  * [Aaron Ackerman](https://github.com/aackerman050)
-  * [Bjarke Staun](https://github.com/bjarkestaun)
-  * [David Tsai](https://github.com/tsaiDavid)
+  * [Yilen Pan](https://github.com/yilenpan)
+  * [Todd Levin](https://github.com/tlevin)
+  * [Lauren Mendoza](https://github.com/loorinm)
 
 ## Tech Overview
 
@@ -20,7 +19,7 @@ Simplified overview of project's tech stack:
   * Grunt
 * **Client Side**
   * Angular
-  * Angular Material
+  * MaterializeCss
 * **Server Side**
   * Node
   * Express
@@ -47,8 +46,24 @@ client
   --- index.html
 
 server
+  --- config
+    // auth / authKeys.js
+    // db schema
+    // middleware setup
+    // passport setup for facebook auth
+  --- controllers (message handling)
+    // Auth
+    // external api
+    // Meals
+    // Users
+  --- lib (utility functions)
+    // external api
+    // Meals
+    // Restaurant
+    // Users
   --- routes
-  --- server-spec
+    // Api routes
+    // Auth routes
   --- server-config.js
   --- server.js
 ```
