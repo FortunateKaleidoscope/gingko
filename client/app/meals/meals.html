@@ -46,22 +46,40 @@
     </div>
     <div class="col s12 grey-bg" id="meal-cards">
       <div ng-repeat="meal in meals track by $index" ng-show="meal.show" class="col card s6">
+        <div class="card-header center">
+          <h5>
+            <strong>
+              <a class="red-text lighten-2" ui-sref="meal({mealId: meal.meal.id})">
+                {{meal.meal.title}}
+              </a>
+            </strong>
+          </h5>
+          <div class="chip">
+            {{meal.meal.User.username}}
+            <img class="circle" ng-src="http://graph.facebook.com/v2.5/{{meal.meal.User.facebookId}}/picture?type=small">
+          </div>
+        </div>
         <div class="card-image waves-effect waves-block waves-light">
-          <div class="center"><strong>Hosted By:</strong> {{meal.meal.User.username}}</div>
           <a ui-sref="meal({mealId: meal.meal.id})">
             <img height="200" width="200" src="{{meal.meal.Restaurant.imgUrl}}l.jpg"/>
           </a>
         </div>
         <div class="card-content">
-
-          <span class="card-title activator grey-text text-darken-4">
-            <a ui-sref="meal({mealId: meal.meal.id})">
-              {{meal.meal.title}}
-            </a>
-            <i class="material-icons right">more_vert</i>
-          </span>
-          <p><a href="{{meal.meal.Restaurant.url}}">{{meal.meal.Restaurant.name}}'s Website</a><span class="right"><img class="large"ng-src="img/star{{meal.meal.Restaurant.rating}}.png"/></span></p> 
-       
+          <div class='row'>
+            <div class="col s8">
+              <p>
+                <a class="secondary-text-color" href="{{meal.meal.Restaurant.url}}">{{meal.meal.Restaurant.name}}'s Website</a>
+              </p>
+              <p>
+                <img class="large" ng-src="img/star{{meal.meal.Restaurant.rating}}.png"/>
+              </p>
+            </div>
+            <div class="col s4">
+              <span class="card-title activator grey-text text-darken-4">
+                <i class="material-icons right">more_vert</i>
+              </span>
+            </div>
+          </div>
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">{{meal.meal.title}} at {{meal.meal.Restaurant.name}}<i class="material-icons right">close</i></span>
