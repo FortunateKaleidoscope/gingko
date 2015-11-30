@@ -9,7 +9,7 @@ Promise.promisifyAll(request);
 
 module.exports = {
   requestYelp: function (params) {
-      // params: object with params to search
+    // params: object with params to search
     // callback: callback(error, response, body)
     var httpMethod = 'GET';
     var url = 'http://api.yelp.com/v2/search';
