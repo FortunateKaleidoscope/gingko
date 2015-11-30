@@ -24,7 +24,6 @@
     }
     // To show markers, pass each created marker the created map
     function showMarkers (markers, map) {
-      console.log(map);
       for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
       }
@@ -58,8 +57,6 @@
         address: address
       }, function (results, status) {
         // results is an array of objects
-          // results[0].geometry.location.lat() i think
-        // TODO: Error handle with status
         cb(results, status);
       });
     }

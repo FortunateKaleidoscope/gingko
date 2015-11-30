@@ -9,17 +9,22 @@
   padding: 20px 5px 10px 5px;
 }
 
-.angular-google-map-container {
-  height: 100%;
+.card-header {
+  padding: 5px;
 }
 
 .card {
-  height: 350px;
+  height: 400px;
   margin: 0px 0px 5px 0px;
 }
 
 .slider {
   margin-top: 20px;
+}
+
+.card-content {
+  margin: 0;
+  padding: 0;
 }
 
 #meal-card .panel {
@@ -143,15 +148,15 @@
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   text-align: center;  
+   text-align: center;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   text-align: center;  
+   text-align: center;
 }
 
-:-ms-input-placeholder {  
-   text-align: center; 
+:-ms-input-placeholder {
+   text-align: center;
 }
 
 input {
