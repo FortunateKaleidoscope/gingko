@@ -14,7 +14,7 @@ module.exports = {
         lat: restaurant.coordinate.lat,
         lng: restaurant.coordinate.lng,
         url: restaurant.url,
-        imgUrl: restaurant.imgUrl,
+        imgUrl: restaurant.imgUrl.replace('ms.jpg', ''),
         categories: restaurant.categories
       }
     })
