@@ -63,7 +63,7 @@
       var path = '/api/yelp';
 
       return $http({
-        url: path + '?term=' + query,
+        url: path + '?term=' + query + "&city=" + self.city,
         method: 'GET'
       }).
         then(function (response) {

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>passport.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="auth.html">
+                  auth.js
+                </a>
+              
+                
+                <a class="source" href="authKeys.html">
+                  authKeys.js
+                </a>
+              
+                
+                <a class="source" href="db.html">
+                  db.js
+                </a>
+              
+                
+                <a class="source" href="middleware.html">
+                  middleware.js
+                </a>
+              
+                
+                <a class="source" href="passport.html">
+                  passport.js
+                </a>
+              
+                
+                <a class="source" href="authController.html">
+                  authController.js
+                </a>
+              
+                
+                <a class="source" href="externalController.html">
+                  externalController.js
+                </a>
+              
+                
+                <a class="source" href="mealsController.html">
+                  mealsController.js
+                </a>
+              
+                
+                <a class="source" href="usersController.html">
+                  usersController.js
+                </a>
+              
+                
+                <a class="source" href="externalHelper.html">
+                  externalHelper.js
+                </a>
+              
+                
+                <a class="source" href="mealsHelper.html">
+                  mealsHelper.js
+                </a>
+              
+                
+                <a class="source" href="restaurantHelper.html">
+                  restaurantHelper.js
+                </a>
+              
+                
+                <a class="source" href="usersHelper.html">
+                  usersHelper.js
+                </a>
+              
+                
+                <a class="source" href="apiRoute.html">
+                  apiRoute.js
+                </a>
+              
+                
+                <a class="source" href="authRoute.html">
+                  authRoute.js
+                </a>
+              
+                
+                <a class="source" href="server-config.html">
+                  server-config.js
+                </a>
+              
+                
+                <a class="source" href="server.html">
+                  server.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>passport.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> FacebookStrategy = <span class="hljs-built_in">require</span>(<span class="hljs-string">'passport-facebook'</span>).Strategy;
+<span class="hljs-keyword">var</span> passport = <span class="hljs-built_in">require</span>(<span class="hljs-string">'passport'</span>);
+<span class="hljs-keyword">var</span> configAuth = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./auth.js'</span>);
+<span class="hljs-keyword">var</span> usersHelper = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../lib/usersHelper'</span>);
+
+passport.serializeUser(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">user, done</span>) </span>{
+  done(<span class="hljs-literal">null</span>, user);
+});
+
+passport.deserializeUser(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">user, done</span>) </span>{
+  done(<span class="hljs-literal">null</span>, user);
+});
+
+passport.use(<span class="hljs-keyword">new</span> FacebookStrategy({
+  clientID: configAuth.facebookAuth.clientID,
+  clientSecret: configAuth.facebookAuth.clientSecret,
+  callbackURL: configAuth.facebookAuth.callbackURL
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">token, refreshToken, profile, done</span>) </span>{
+  process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Passport sends us the facebook profile as an object
+we then do a findOrCreate on the user</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    usersHelper.findOrCreateUser(profile)
+      .then( <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">user</span>) </span>{
+        done(<span class="hljs-literal">null</span>, user.toJSON());
+      });
+  });
+
+}));
+
+<span class="hljs-built_in">module</span>.exports = passport;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

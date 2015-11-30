@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>db.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="auth.html">
+                  auth.js
+                </a>
+              
+                
+                <a class="source" href="authKeys.html">
+                  authKeys.js
+                </a>
+              
+                
+                <a class="source" href="db.html">
+                  db.js
+                </a>
+              
+                
+                <a class="source" href="middleware.html">
+                  middleware.js
+                </a>
+              
+                
+                <a class="source" href="passport.html">
+                  passport.js
+                </a>
+              
+                
+                <a class="source" href="authController.html">
+                  authController.js
+                </a>
+              
+                
+                <a class="source" href="externalController.html">
+                  externalController.js
+                </a>
+              
+                
+                <a class="source" href="mealsController.html">
+                  mealsController.js
+                </a>
+              
+                
+                <a class="source" href="usersController.html">
+                  usersController.js
+                </a>
+              
+                
+                <a class="source" href="externalHelper.html">
+                  externalHelper.js
+                </a>
+              
+                
+                <a class="source" href="mealsHelper.html">
+                  mealsHelper.js
+                </a>
+              
+                
+                <a class="source" href="restaurantHelper.html">
+                  restaurantHelper.js
+                </a>
+              
+                
+                <a class="source" href="usersHelper.html">
+                  usersHelper.js
+                </a>
+              
+                
+                <a class="source" href="apiRoute.html">
+                  apiRoute.js
+                </a>
+              
+                
+                <a class="source" href="authRoute.html">
+                  authRoute.js
+                </a>
+              
+                
+                <a class="source" href="server-config.html">
+                  server-config.js
+                </a>
+              
+                
+                <a class="source" href="server.html">
+                  server.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>db.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> Sequelize = <span class="hljs-built_in">require</span>(<span class="hljs-string">"sequelize"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Unsure if we need password, come back to this</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> ( process.env[<span class="hljs-string">'DATABASE_URL'</span>] !== <span class="hljs-literal">undefined</span> ) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Heroku settings</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> match = process.env.DATABASE_URL.match(<span class="hljs-regexp">/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/</span>);
+  <span class="hljs-keyword">var</span> db = <span class="hljs-keyword">new</span> Sequelize(match[<span class="hljs-number">5</span>], match[<span class="hljs-number">1</span>], match[<span class="hljs-number">2</span>], {
+    dialect: <span class="hljs-string">'postgres'</span>,
+    protocol: <span class="hljs-string">'postgres'</span>,
+    port: match[<span class="hljs-number">4</span>],
+    host: match[<span class="hljs-number">3</span>],
+    logging: <span class="hljs-literal">false</span>
+  });
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-keyword">var</span> db = <span class="hljs-keyword">new</span> Sequelize(<span class="hljs-string">"tablesurfer"</span>, <span class="hljs-string">'admin'</span>, <span class="hljs-string">'admin'</span>, {
+    dialect: <span class="hljs-string">"postgres"</span>, <span class="hljs-comment">// or 'sqlite', mysql', 'mariadb'</span>
+    port: <span class="hljs-number">5432</span>,
+    logging: <span class="hljs-literal">false</span> <span class="hljs-comment">//(for postgres)</span>
+  });
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Stores data from facebook</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> Users = db.define(<span class="hljs-string">"Users"</span>, {
+  username: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  facebookId: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">true</span>
+  }
+});
+
+<span class="hljs-keyword">var</span> Meals = db.define(<span class="hljs-string">"Meals"</span>, {
+  title: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  date: {
+    type: Sequelize.DATE,
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  maxAttendees: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">false</span>
+  }
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>A user can have many meals
+a meal can only have one host</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Users.hasMany(Meals);
+Meals.belongsTo(Users);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Stores the restaurant data in db</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> Restaurants = db.define(<span class="hljs-string">"Restaurants"</span>, {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  url: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">true</span>
+  },
+  rating: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">true</span>
+  },
+  address: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  categories: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  imgUrl: Sequelize.STRING,
+  city: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  zipCode: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  contact: {
+    type: Sequelize.STRING,
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  lat: {
+    type: Sequelize.FLOAT,
+    allowNull: <span class="hljs-literal">false</span>
+  },
+  lng: {
+    type: Sequelize.FLOAT,
+    allowNull: <span class="hljs-literal">false</span>
+  }
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>A restaurant can have many Meals
+A meal can only have one Restaurant</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Restaurants.hasMany(Meals);
+Meals.belongsTo(Restaurants);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Join table</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> Attendees = db.define(<span class="hljs-string">"Attendees"</span>, {
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Users can have many meals
+Meals can have many users
+Connects it through attendees</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Users.belongsToMany(Meals, { through: <span class="hljs-string">'Attendees'</span> });
+Meals.belongsToMany(Users, { through: <span class="hljs-string">'Attendees'</span> });
+
+db.sync();
+
+exports.Meals = Meals;
+exports.Users = Users;
+exports.Restaurants = Restaurants;
+exports.Attendees = Attendees;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
