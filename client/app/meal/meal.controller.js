@@ -10,7 +10,6 @@
 
   function MealCtrl ($http, $location, $window, UserFactory, MealFactory) {
     var self = this;
-    self.id = $location.path();
     self.data = null;
 
     //initialiazes join flag and join button text
