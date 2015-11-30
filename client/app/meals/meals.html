@@ -62,9 +62,9 @@
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">{{meal.meal.title}} at {{meal.meal.Restaurant.name}}<i class="material-icons right">close</i></span>
-          <p>From: {{meal.meal.date}}</p>
+          <p>From: {{meal.formatDate(meal.meal.date)}}</p>
           <p>Where: {{meal.meal.Restaurant.address.join(' ')}}</p>
-          <p>Number of Guests: {{meal.attending.length}}</p>
+          <p>Number of Guests: {{meal.attending.length}} / {{meal.meal.maxAttendees}}</p>
         </div>
       </div>
     </div>

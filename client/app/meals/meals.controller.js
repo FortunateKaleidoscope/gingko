@@ -21,7 +21,9 @@
     var makeMarker = GoogleMapsFactory.makeMarker;
     var clearMarkers = GoogleMapsFactory.clearMarkers;
     var showMarkers = GoogleMapsFactory.showMarkers;
-
+    self.formatDate = function (date) {
+      return moment(date).calendar();
+    };
     var mealMarkerBinder = function (meal) {
       meal.show = true;
       _.find(self.markers, function (marker) {
