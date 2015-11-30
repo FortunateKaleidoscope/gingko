@@ -47,22 +47,25 @@
     <div class="col s12 grey-bg" id="meal-cards">
       <div ng-repeat="meal in meals track by $index" ng-show="meal.show" class="col card s6">
         <div class="card-image waves-effect waves-block waves-light">
+          <div class="center"><strong>Hosted By:</strong> {{meal.meal.User.username}}</div>
           <a ui-sref="meal({mealId: meal.meal.id})">
             <img height="200" width="200" src="{{meal.meal.Restaurant.imgUrl}}l.jpg"/>
           </a>
         </div>
         <div class="card-content">
+
           <span class="card-title activator grey-text text-darken-4">
             <a ui-sref="meal({mealId: meal.meal.id})">
               {{meal.meal.title}}
             </a>
             <i class="material-icons right">more_vert</i>
           </span>
-          <p><a href="{{meal.meal.Restaurant.url}}">{{meal.meal.Restaurant.name}}'s Website</a></p>
+          <p><a href="{{meal.meal.Restaurant.url}}">{{meal.meal.Restaurant.name}}'s Website</a><span class="right"><img class="large"ng-src="img/star{{meal.meal.Restaurant.rating}}.png"/></span></p> 
+       
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">{{meal.meal.title}} at {{meal.meal.Restaurant.name}}<i class="material-icons right">close</i></span>
-          <p>From: {{meal.formatDate(meal.meal.date)}}</p>
+          <p>From: {{formatDate(meal.meal.date)}}</p>
           <p>Where: {{meal.meal.Restaurant.address.join(' ')}}</p>
           <p>Number of Guests: {{meal.attending.length}} / {{meal.meal.maxAttendees}}</p>
         </div>
