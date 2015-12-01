@@ -39,7 +39,6 @@
                  meal.meal.maxAttendees <= filterObj.val.to;
         },
         genre: function (meal) {
-          console.log(meal.meal.Restaurant.categories.match(re));
           return meal.meal.Restaurant.categories.match(re);
         },
         date: function (meal) {
