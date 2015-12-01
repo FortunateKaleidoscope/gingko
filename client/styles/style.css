@@ -162,3 +162,7 @@
 input {
 text-align: center;
 }
+
+.landingSearch {
+  opacity: 0.95;
+}
